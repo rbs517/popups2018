@@ -27,7 +27,7 @@ app.get("*", function(req, res){
 var server = http.createServer(app);
 console.log("App is served on localhost: " + PORT);
 
-var io = require('socket.io').listen(server);
+var io = require('socket.io')(http);
 var userCount = 0;
 
 
