@@ -1,0 +1,25 @@
+{
+  "name": "fluto",
+  "version": "1.0.0",
+  "description": "Pop-up windows displays class, Fall 2018.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rbs517/popups2018.git"
+  },
+  "author": "Rebecca Skurnik",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rbs517/popups2018/issues"
+  },
+  "homepage": "https://github.com/rbs517/popups2018#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  },
+  "engines": {
+    "node": "8.12.0"
+  }
+}
