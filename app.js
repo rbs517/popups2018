@@ -6,10 +6,10 @@ var Request = require('request');
 var http = require('http').Server(app);
 
 
-app.use(express.static(path.join(__dirname, 'public')))
-app.set('views', path.join(__dirname, 'views'))
-app.set('view engine', 'ejs')
-app.listen(PORT, () => console.log(`Listening on ${ PORT }`))
+app.use(express.static(path.join(__dirname, 'public')));
+app.set('views', path.join(__dirname, 'views'));
+// app.set('view engine', 'ejs');
+app.listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
 app.get('/', function(req, res){
   console.log('user enters..');
