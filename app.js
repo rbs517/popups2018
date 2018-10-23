@@ -13,14 +13,14 @@ app.use(express.static( __dirname + '/public' ));
 app.set('port', PORT);
 app.listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
-app.get('/', function(req, res){
-  console.log('user enters..');
-  res.render('index');
-});
+// app.get('/', function(req, res){
+//   console.log('user enters..');
+//   res.render('index');
+// });
 
-app.get("*", function(req, res){
-	res.send('Ooops.. nothing here.');
-});
+// app.get("*", function(req, res){
+// 	res.send('Ooops.. nothing here.');
+// });
 
 
 // var server = app.listen(PORT);
