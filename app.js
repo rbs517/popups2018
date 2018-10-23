@@ -1,11 +1,51 @@
-const express = require('express')
-const path = require('path')
-const PORT = process.env.PORT || 5000
+var express = require('express');
+var app = express ();
+var path = require('path');
+var PORT = process.env.PORT || 5000;
+var Request = require('request');
+var http = require('http').Server(app);
 
-express()
-  .use(express.static(path.join(__dirname, 'public')))
-  .set('views', path.join(__dirname, 'views'))
-  .set('view engine', 'ejs')
-  .get('/', (req, res) => res.render('pages/index'))
-  .listen(PORT, () => console.log(`Listening on ${ PORT }`))
 
+app.use(express.static(path.join(__dirname, 'public')))
+app.set('views', path.join(__dirname, 'views'))
+app.set('view engine', 'ejs')
+app.listen(PORT, () => console.log(`Listening on ${ PORT }`))
+
+app.get('/', function(req, res){
+  console.log('user enters..');
+  res.render('index');
+});
+
+app.get("*", function(req, res){
+	res.send('Ooops.. nothing here.');
+});
+
+
+var server = app.listen(port);
+console.log("App is served on localhost: " + port);
+
+var io = require('socket.io').listen(server);
+var userCount = 0;
+
+
+io.on('connection', function(socket){
+  userCount = userCount + 1;
+  console.log('a user connected');
+  console.log('number of connected users: ' + userCount);
+  io.sockets.emit('userCount', userCount);
+  // socket.emit('dimensions', {h: h, w: w, limit: limit, restartInterval: restartInterval, final: final});
+
+  socket.on('disconnect', function(){
+    userCount = userCount - 1;
+    console.log('user disconnected');
+    console.log('number of connected users: ' + userCount);
+    io.sockets.emit('userCount', userCount);
+  });
+
+  function restart (){
+    final = 0;
+    console.log('restarting...');
+    // io.sockets.emit('dimensions', {h: h, w: w, limit: limit, restartInterval: restartInterval, final: final});
+  }
+
+});
