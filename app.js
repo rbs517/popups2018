@@ -21,29 +21,29 @@ app.get("*", function(req, res){
 });
 
 
-var server = app.listen(PORT);
-console.log("App is served on localhost: " + PORT);
+// var server = app.listen(PORT);
+// console.log("App is served on localhost: " + PORT);
 
-var io = require('socket.io').listen(server);
-var userCount = 0;
+// var io = require('socket.io').listen(server);
+// var userCount = 0;
 
 
-io.on('connection', function(socket){
-  userCount = userCount + 1;
-  console.log('a user connected');
-  console.log('number of connected users: ' + userCount);
-  io.sockets.emit('userCount', userCount);
+// io.on('connection', function(socket){
+//   userCount = userCount + 1;
+//   console.log('a user connected');
+//   console.log('number of connected users: ' + userCount);
+//   io.sockets.emit('userCount', userCount);
 
-  socket.on('disconnect', function(){
-    userCount = userCount - 1;
-    console.log('user disconnected');
-    console.log('number of connected users: ' + userCount);
-    io.sockets.emit('userCount', userCount);
-  });
+//   socket.on('disconnect', function(){
+//     userCount = userCount - 1;
+//     console.log('user disconnected');
+//     console.log('number of connected users: ' + userCount);
+//     io.sockets.emit('userCount', userCount);
+//   });
 
-  function restart (){
-    final = 0;
-    console.log('restarting...');
-  }
+//   function restart (){
+//     final = 0;
+//     console.log('restarting...');
+//   }
 
-});
+// });

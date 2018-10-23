@@ -13,29 +13,16 @@
     <p>This is an example paragraph. Anything in the <strong>body</strong> tag will appear on the page, just like this <strong>p</strong> tag and its contents.</p>
 
     <script>
-	  // var socket = io('http://localhost/');
-	  // socket.on('connect', function () {
-	  //   socket.send('hi');
 
-	  //   socket.on('message', function (msg) {
-	  //     // my msg
-	  //   });
-	  // });
+	 //  var socket = io();
+		// socket.emit('user', 'new user is connected');
+		// socket.on('userCount', function(userCount){
+		//   console.log('total number of users online is: ' + userCount);
+		// });
 
-	  var socket = io();
-		socket.emit('user', 'new user is connected');
-		socket.on('userCount', function(userCount){
-		  console.log('total number of users online is: ' + userCount);
-		});
-
-		socket.on('dimensions', function(data){
-		  // w = data.w;
-		  // h = data.h;
-		  // limit = data.limit;
-		  // restartInterval = data.restartInterval;
-		  // final = data.final;
-		  console.log('new data came to light...');
-		});
+		// socket.on('dimensions', function(data){
+		//   console.log('new data came to light...');
+		// });
 
 	</script>
 
