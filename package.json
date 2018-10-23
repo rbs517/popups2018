@@ -17,7 +17,9 @@
   },
   "homepage": "https://github.com/rbs517/popups2018#readme",
   "dependencies": {
-    "express": "^4.16.4"
+    "engine": "^0.1.12",
+    "express": "^4.16.4",
+    "path": "^0.12.7"
   },
   "engines": {
     "node": "8.12.0"
