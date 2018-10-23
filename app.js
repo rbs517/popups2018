@@ -1,12 +1,13 @@
 var express = require('express');
 var app = express ();
-var path = require('path');
+// var path = require('path');
 var PORT = process.env.PORT || 5000;
 var Request = require('request');
 // var http = require('http').Server(app);
 var http = require('http');
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static( __dirname + '/public' ));
+// app.use(express.static(path.join(__dirname, 'public')));
 // app.set('views', path.join(__dirname, 'views'));
 // app.set('view engine', 'ejs');
 app.set('port', PORT);
