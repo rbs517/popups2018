@@ -2,7 +2,7 @@
   "name": "fluto",
   "version": "1.0.0",
   "description": "Pop-up windows displays class, Fall 2018.",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
