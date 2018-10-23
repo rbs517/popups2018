@@ -21,8 +21,8 @@ app.get("*", function(req, res){
 });
 
 
-var server = app.listen(port);
-console.log("App is served on localhost: " + port);
+var server = app.listen(PORT);
+console.log("App is served on localhost: " + PORT);
 
 var io = require('socket.io').listen(server);
 var userCount = 0;
@@ -33,7 +33,6 @@ io.on('connection', function(socket){
   console.log('a user connected');
   console.log('number of connected users: ' + userCount);
   io.sockets.emit('userCount', userCount);
-  // socket.emit('dimensions', {h: h, w: w, limit: limit, restartInterval: restartInterval, final: final});
 
   socket.on('disconnect', function(){
     userCount = userCount - 1;
@@ -45,7 +44,6 @@ io.on('connection', function(socket){
   function restart (){
     final = 0;
     console.log('restarting...');
-    // io.sockets.emit('dimensions', {h: h, w: w, limit: limit, restartInterval: restartInterval, final: final});
   }
 
 });
