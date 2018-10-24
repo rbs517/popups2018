@@ -56,8 +56,10 @@
         function tapholdHandler( event ){
           $( event.target ).addClass( "taphold" );
           value = 1;
-          socket.emit(value);
-          console.log(value);
+          socket.emit('newData', (value) =>{
+          	console.log(value);
+          });
+  
         }
       });
 
@@ -77,7 +79,7 @@
 	  var socket = io();
 		socket.emit('user', 'new user is connected');
 		socket.on('userCount', function(userCount){
-		  console.log('total number of users online is: ' + userCount);
+		  // console.log('total number of users online is: ' + userCount);
 		});
 
 		// socket.on('tapholdData', function(colorTap){
