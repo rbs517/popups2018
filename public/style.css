@@ -43,7 +43,7 @@ section.download h2{
   overflow: auto;
 }
 
-div.circle {
+div.circleContainer {
   width: 3em;
   height: 3em;
   border-radius: 50%;
@@ -51,7 +51,7 @@ div.circle {
   -webkit-touch-callout: none !important;
 }
   
-div.circle.taphold {
+div.circleContainer.taphold {
     background-color: #7ACEF4;
     -webkit-user-select: none !important;
 }

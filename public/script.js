@@ -58,18 +58,19 @@ socket.on('dimensions', function(data) {
 // ********************************************************** 
 // STARTING JS FILE
 
+
 //Disable longpress on mobile devices
 function longClickHandler(e) {
   e.preventDefault();
   // $("body").append("<p>You longclicked. Nice!</p>");
 }
 
-$("div.circle").longclick(250, longClickHandler);
+$("div.circleContainer").longclick(250, longClickHandler);
 
 
 // On tap hold change color
 $(function() {
-  $("div.circle").bind("taphold", tapholdHandler);
+  $("div.circleContainer").bind("taphold", tapholdHandler);
 
   function tapholdHandler(event) {
     $(event.target).addClass("taphold");
