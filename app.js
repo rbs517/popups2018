@@ -52,8 +52,8 @@ io.on('connection', function(socket){
     io.sockets.emit('userCount', userCount);
   });
 
-  socket.on('newData', function(touchValue) {
-      console.log('im the server and i see ur: ' + touchValue);
+  socket.on('newData', function(data) {
+      console.log('im the server and i see ur: ' + data);
       // io.emit('message', msg);
   });
 
