@@ -45,7 +45,7 @@
       }
 
       // Value of Pressed or not 0 = off, 1 = on
-      var value = 0;
+      var touchValue = 0;
 
       $("div.circle").longclick(250, longClickHandler);
 
@@ -55,9 +55,11 @@
        
         function tapholdHandler( event ){
           $( event.target ).addClass( "taphold" );
-          value = 1;
-          socket.emit('newData', (value) =>{
-          	console.log(value);
+          console.log("i touched the but");
+          touchValue = 1;
+          socket.emit('newData', (touchValue) =>{
+          	console.log(touchValue);
+          	console.log(touchValue +4);
           });
   
         }
