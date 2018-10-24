@@ -19,7 +19,7 @@ app.get('/', function(req, res){
 });
 
 // Get request
-app.get('/data.txt', function(req, res){
+app.get('/data.html', function(req, res){
   console.log('arduino is asking for data');
   res.render('data');
 });
