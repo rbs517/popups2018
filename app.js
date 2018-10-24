@@ -18,6 +18,18 @@ app.get('/', function(req, res){
   res.render('index');
 });
 
+// Get request
+app.get('/data.txt', function(req, res){
+  console.log('arduino is asking for data');
+  res.render('data');
+});
+
+// // Post request
+// app.post('/', function(req, res){
+//   console.log('user enters..');
+//   res.render('index');
+// });
+
 console.log("App is served on localhost: " + PORT);
 
 

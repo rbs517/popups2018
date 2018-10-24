@@ -44,6 +44,9 @@
           // $("body").append("<p>You longclicked. Nice!</p>");
       }
 
+      // Value of Pressed or not 0 = off, 1 = on
+      var value = 0;
+
       $("div.circle").longclick(250, longClickHandler);
 
       // On tap hold change color
@@ -52,6 +55,9 @@
        
         function tapholdHandler( event ){
           $( event.target ).addClass( "taphold" );
+          value = 1;
+          socket.emit(value);
+          console.log(value);
         }
       });
 
@@ -73,6 +79,10 @@
 		socket.on('userCount', function(userCount){
 		  console.log('total number of users online is: ' + userCount);
 		});
+
+		// socket.on('tapholdData', function(colorTap){
+		//   console.log('Color: ' + color);
+		// });
 
 		socket.on('dimensions', function(data){
 		  console.log('new data came to light...');
