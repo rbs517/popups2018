@@ -61,8 +61,8 @@ div.circleContainer {
 }
   
 div.circleContainer.taphold {
-    background-color: #7ACEF4;
-    -webkit-user-select: none !important;
+  background-color: #7ACEF4;
+  -webkit-user-select: none !important;
 }
 
 .btn-outline.active,.btn-outline:active,.btn-outline:focus,.btn-outline:hover{
