@@ -9,6 +9,13 @@ a:focus,a:hover{
 color:#fcbd20;
 }
 
+section.masthead {
+  position: relative;
+  width: 100%;
+  padding-top: 150px;
+  padding-bottom: 100px;
+}
+
 section{
 padding:100px;
 }
@@ -32,6 +39,8 @@ section.download h2{
   margin-top:0;
   color:#ffffff;
 }
+
+
 
 .flex-center {
   margin: 90px auto;
