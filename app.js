@@ -4,19 +4,18 @@ var app = express ();
 var PORT = process.env.PORT || 5000;
 var Request = require('request');
 // var http = require('http').Server(app);
-var http = require('http');
+var http = require('http').Server(app);
 
 app.use(express.static( __dirname + '/public' ));
 // app.use(express.static(path.join(__dirname, 'public')));
 // app.set('views', path.join(__dirname, 'views'));
 // app.set('view engine', 'ejs');
 app.set('port', PORT);
-app.listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
-// app.get('/', function(req, res){
-//   console.log('user enters..');
-//   res.render('index');
-// });
+app.get('/', function(req, res){
+  console.log('user enters..');
+  res.render('index');
+});
 
 // app.get("*", function(req, res){
 // 	res.send('Ooops.. nothing here.');
@@ -25,7 +24,7 @@ app.listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
 // var server = app.listen(PORT);
 
-var server = http.createServer(app);
+// var server = http.createServer(app);
 console.log("App is served on localhost: " + PORT);
 
 var io = require('socket.io')(http);
@@ -51,3 +50,6 @@ io.on('connection', function(socket){
   }
 
 });
+
+
+http.listen(PORT, () => console.log(`Listening on ${ PORT }`));
