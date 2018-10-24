@@ -58,7 +58,7 @@
           console.log("i touched the but");
           touchValue = 1;
           var data = 1;
-          socket.emit('newData', (touchValue) =>{
+          socket.emit('data', (touchValue) =>{
           	console.log(touchValue);
           	console.log(touchValue +4);
           });

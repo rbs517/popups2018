@@ -54,7 +54,7 @@ io.on('connection', function(socket){
 
   socket.on('newData', function(data) {
       console.log('im the server and i see ur: ' + data);
-      // io.emit('message', msg);
+      io.sockets.emit('data', data);
   });
 
   // socket.on('newData', function(data) {
