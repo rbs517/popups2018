@@ -56,12 +56,11 @@
         function tapholdHandler( event ){
           $( event.target ).addClass( "taphold" );
           console.log("i touched the but");
-          // touchValue = 1;
+          touchValue = 1;
           var data = 1;
-          socket.emit('newData', {my: 'data'
-          	// (touchValue) =>{
-          	// console.log(touchValue);
-          	// console.log(touchValue +4);
+          socket.emit('newData', (touchValue) =>{
+          	console.log(touchValue);
+          	console.log(touchValue +4);
           });
   
         }
