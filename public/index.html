@@ -9,13 +9,13 @@
   <script language="javascript" type="text/javascript" src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
   <!-- jQuery mobile  -->
   <script src="https://code.jquery.com/mobile/1.5.0-alpha.1/jquery.mobile-1.5.0-alpha.1.min.js"></script>
-  <!-- Plugin JavaScript -->
+  <!-- scroll Jump js plugin -->
    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-  <!-- longclick.js -->
+  <!-- longclick js plugin -->
   <script type="text/javascript" src="longclick.js"></script>
   <!-- Socket.io -->
   <script language="javascript" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
-  <!-- Custom styles for this template -->
+  <!-- stylesheet -->
   <link href="style.css" rel="stylesheet">
 </head>
 
@@ -24,7 +24,74 @@
   </div>
   <p>This is an example paragraph. Anything in the <strong>body</strong> tag will appear on the page, just like this <strong>p</strong> tag and its contents.</p>
 
-  <!-- Our personal script -->
+
+   <!-- Landing Page -->
+    <section class="flex-center">
+              <h2 class="section-heading">Fluto</h2>
+              <div class= "circle" id="c1"></div>
+              <div class= "circle" id="c2"></div>
+              <script type="text/javascript">
+                var circle1 = document.getElementById('c1');
+                var circle2 = document.getElementById('c2');
+                circle1.style.position= "50";
+                circle2.style.right = "59";
+
+
+              </script>
+              <p>Use your phone to interact with our window display</p>
+              <div class="flex-center"><p><a href="#download" class="btn btn-outline btn-xl js-scroll-trigger">Begin</a></p>
+              </div>  
+        </div>
+      </div>
+    </section>
+
+    <!-- Instructions Page -->
+    <section class="flex-center" id="download">
+            <h2 class="section-heading flex-center">Fluto</h2>
+            <div class= "flex-center">
+              <p>Pick a color</p>
+            </div>
+            <div class="circle flex-center">
+            </div>
+            <div class= "flex-center">
+              <p>Blow into your phone's microphone below</p>
+            </div>
+          	</div>
+    </section>
+
+
+<!--     <section class="contact bg-primary" id="contact">
+      <div class="container">
+        <h2>We
+          <i class="fas fa-heart"></i>
+          new friends!</h2>
+        <ul class="list-inline list-social">
+          <li class="list-inline-item social-twitter">
+            <a href="#">
+              <i class="fab fa-twitter"></i>
+            </a>
+          </li>
+          <li class="list-inline-item social-facebook">
+            <a href="#">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+          </li>
+          <li class="list-inline-item social-google-plus">
+            <a href="#">
+              <i class="fab fa-google-plus-g"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section> -->
+
+    <footer>
+      <div class="container">
+        <p>&copy; Fluto 2018. All Rights Reserved.</p> <!-- copyright -->
+      </div>
+    </footer>
+
+  <!-- our js file -->
   <script type="text/javascript" src="script.js"></script>
 </body>
 </html>

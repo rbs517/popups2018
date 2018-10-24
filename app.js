@@ -1,3 +1,5 @@
+// CREATING A NODE.JS SERVER
+
 // Require dependencies
 var express = require('express');
 var app = express ();
@@ -32,8 +34,10 @@ app.get('/data.html', function(req, res){
 
 console.log("App is served on localhost: " + PORT);
 
+// ********************************************************** //
 
-// Sockets
+// SOCKET COMMUNICATION ON SERVER SIDE
+
 var io = require('socket.io')(http);
 var userCount = 0;
 
