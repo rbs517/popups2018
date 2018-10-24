@@ -1,36 +1,38 @@
+// Require dependencies
 var express = require('express');
 var app = express ();
 var path = require('path');
 var PORT = process.env.PORT || 5000;
-var Request = require('request');
+var request = require('request');
 var http = require('http').Server(app);
 
+// File path
 app.use(express.static(path.join(__dirname, 'public')));
-// app.set('views', path.join(__dirname, 'views'));
-// app.set('view engine', 'ejs');
+
+// Port
 app.set('port', PORT);
 
+// Get request
 app.get('/', function(req, res){
   console.log('user enters..');
   res.render('index');
 });
 
-// app.get("*", function(req, res){
-// 	res.send('Ooops.. nothing here.');
-// });
-
 console.log("App is served on localhost: " + PORT);
 
+
+// Sockets
 var io = require('socket.io')(http);
 var userCount = 0;
 
-
+// On connect to socket
 io.on('connection', function(socket){
   userCount = userCount + 1;
   console.log('a user connected');
   console.log('number of connected users: ' + userCount);
   io.sockets.emit('userCount', userCount);
 
+// On disconnect to socket
   socket.on('disconnect', function(){
     userCount = userCount - 1;
     console.log('user disconnected');
@@ -45,5 +47,5 @@ io.on('connection', function(socket){
 
 });
 
-
+// Http listen on the port
 http.listen(PORT, () => console.log(`Listening on ${ PORT }`));

@@ -1,0 +1,22 @@
+.flex-center {
+  margin: 90px auto;
+  display: flex;
+/*  flex-direction: column;*/
+  justify-content: center;
+  height: 100px;
+  width: 300px;
+  overflow: auto;
+}
+
+div.circle {
+  width: 3em;
+  height: 3em;
+  border-radius: 50%;
+  background-color: #108040;
+  -webkit-touch-callout: none !important;
+}
+  
+div.circle.taphold {
+    background-color: #7ACEF4;
+    -webkit-user-select: none !important;
+}
