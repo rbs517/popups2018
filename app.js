@@ -52,9 +52,15 @@ io.on('connection', function(socket){
     io.sockets.emit('userCount', userCount);
   });
 
-  socket.on('newData', function(data) {
-      console.log(data);
+  socket.on('newData', function(socket) {
+      console.log('im the server and i see ur: ' + touchValue);
+      // io.emit('message', msg);
   });
+
+  // socket.on('newData', function(data) {
+  //     console.log(data);
+  // });
+
   // socket.on('newData', function(){
   //   console.log("hey! I am the app and I saw new data");
   // });
