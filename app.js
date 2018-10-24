@@ -52,7 +52,7 @@ io.on('connection', function(socket){
     io.sockets.emit('userCount', userCount);
   });
 
-  socket.on('newData', function(socket) {
+  socket.on('newData', function(touchValue) {
       console.log('im the server and i see ur: ' + touchValue);
       // io.emit('message', msg);
   });
