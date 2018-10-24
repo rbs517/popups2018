@@ -12,13 +12,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Port
 app.set('port', PORT);
 
-// Get request from index.html
+// Get request to me from index.html
 app.get('/', function(req, res){
   console.log('user enters..');
   res.render('index');
 });
 
-// Get request from data.html
+// Get request to me from data.html
 app.get('/data.html', function(req, res){
   console.log('arduino is asking for data');
   res.render('data');
@@ -52,9 +52,12 @@ io.on('connection', function(socket){
     io.sockets.emit('userCount', userCount);
   });
 
-  io.on('newData', function(){
-    console.log("hey! I am the app and I saw new data");
+  socket.on('newData', function(data) {
+      console.log(data);
   });
+  // socket.on('newData', function(){
+  //   console.log("hey! I am the app and I saw new data");
+  // });
 
   function restart (){
     final = 0;

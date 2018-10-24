@@ -82,6 +82,11 @@
 		  // console.log('total number of users online is: ' + userCount);
 		});
 
+		socket.on('receiveMessage', function(msg){
+		  console.log(msg);
+		  console.log("hello");
+		});
+
 		// socket.on('tapholdData', function(colorTap){
 		//   console.log('Color: ' + color);
 		// });
