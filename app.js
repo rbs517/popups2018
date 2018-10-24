@@ -52,7 +52,7 @@ io.on('connection', function(socket){
     io.sockets.emit('userCount', userCount);
   });
 
-  socket.on('newData', function(){
+  io.on('newData', function(){
     console.log("hey! I am the app and I saw new data");
   });
 
