@@ -17,6 +17,21 @@ section h2{
 font-size:50px;
 }
 
+section.download{
+  position:relative;
+  padding:150px;
+}
+
+section.download p{
+  color: #ffffff;
+}
+
+
+section.download h2{
+  font-size:50px;
+  margin-top:0;
+  color:#ffffff;
+}
 
 .flex-center {
   margin: 90px auto;
