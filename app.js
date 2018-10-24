@@ -42,6 +42,12 @@ io.on('connection', function(socket){
   userCount = userCount + 1;
   console.log('a user connected');
   console.log('number of connected users: ' + userCount);
+
+//example from docs
+    socket.emit('news', { hello: 'world' });
+  socket.on('my other event', function (data) {
+    console.log(data);
+    });
   //io.sockets.emit('userCount', userCount);
 
 // On disconnect to socket
@@ -52,10 +58,10 @@ io.on('connection', function(socket){
     io.sockets.emit('userCount', userCount);
   });
 
-  socket.on('newData', function(data) {
-      console.log('im the server and i see ur: ' + data);
-      // io.emit('message', msg);
-  });
+  // socket.on('newData', function(data) {
+  //     console.log('im the server and i see ur: ' + data);
+  //     // io.emit('message', msg);
+  // });
 
   // socket.on('newData', function(data) {
   //     console.log(data);

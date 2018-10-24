@@ -86,6 +86,12 @@
 		  // console.log('total number of users online is: ' + userCount);
 		});
 
+		//example from docs
+		socket.on('news', function (data) {
+    console.log(data);
+    socket.emit('my other event', { my: 'data' });
+  });
+
 		socket.on('receiveMessage', function(msg){
 		  console.log(msg);
 		  console.log("hello");
