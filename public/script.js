@@ -21,13 +21,13 @@ $("div.circleContainer").longclick(250, longClickHandler);
 $(function() {
   $("div.circleContainer").bind("taphold", tapholdHandler);
   // $("div.circleContainer").addEventListener("blow", blowVal);
-  var data = 0;
+
   function tapholdHandler(event) {
     $(event.target).addClass("taphold");
     console.log("i touched the but");
-    socket.emit('pressed', 'pressed');
-    data = 1;
     blowVal(); //only if you are pressing, will the mic be listening
+    socket.emit('pressed', 'pressed');
+    
     // socket.emit('mouse', data);
 
     // socket.emit('newData', 

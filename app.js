@@ -53,10 +53,10 @@ io.on('connection', function(socket){
   console.log('number of connected users: ' + userCount);
 
 //example from docs
-  socket.emit('news', { hello: 'world' }); //emitting data to html console
-  socket.on('my other event', function (data) {
-  console.log(data);
-  });
+  // socket.emit('news', { hello: 'world' }); //emitting data to html console
+  // socket.on('my other event', function (data) {
+  // console.log(data);
+  // });
   //io.sockets.emit('userCount', userCount);
 
 
