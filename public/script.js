@@ -20,7 +20,7 @@ $(function() {
     console.log("i touched the but");
     touchValue = 1;
     var data = 1;
-    //socket.emit('pressed', 'pressed');
+    socket.emit('pressed', 'pressed');
     // socket.emit('newData', 
     // {my: 'data'
     //   // (touchValue) =>{
