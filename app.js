@@ -65,22 +65,12 @@ io.on('connection', function(socket){
     io.sockets.emit('dimensions', {h: h});
   });
 
-  // message handling
-  socket.on('message', function(msg){
-    // check if the values are valid/useful
-    var intComing = parseInt(msg);
-    if(intComing){
-      _scene = parseInt(msg);
-      broadcast(_scene);
-      console.log("change scene broadcast: " + _scene);
-    }
-  });
 
-  function broadcast(msg){
-    socket.forEach(function each(client) {
-      socket.emit(msg);
-    });
-  }
+  // function broadcast(msg){
+  //   socket.forEach(function each(client) {
+  //     socket.emit(msg);
+  //   });
+  // }
 
   // socket.on('newData', function(data) {
   //     console.log('im the server and i see ur: ' + data);
