@@ -92,7 +92,7 @@ function blowVal() {
     // var myBtn = document.getElementById('circle1');
     // myBtn.style.backgroundColor = "red";
     // myBtn.disabled = true;
-    socket.emit('mouse', data);
+    // socket.emit('mouse', data);
     console.log('Sending: ' + data);
   // }, 10);
 
@@ -145,7 +145,7 @@ function draw() {
 
 var socket = io();
 // Value of Pressed or not 0 = off, 1 = on
-var touchValue = 0;
+// var touchValue = 0;
 
 socket.emit('user', 'new user is connected');
 socket.on('userCount', function(userCount) {
