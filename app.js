@@ -49,7 +49,7 @@ io.on('connection', function(socket){
 
 //example from docs
     socket.emit('news', { hello: 'world' });
-  socket.on('my other event', function (data) {
+    socket.on('my other event', function (data) {
     console.log(data);
     });
   //io.sockets.emit('userCount', userCount);

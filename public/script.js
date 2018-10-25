@@ -20,11 +20,19 @@ $(function() {
     console.log("i touched the but");
     touchValue = 1;
     var data = 1;
-    socket.emit('newData', {
-      my: 'data'
-      // (touchValue) =>{
-      // console.log(touchValue);
-      // console.log(touchValue +4);
+    // socket.emit('newData', 
+    // {my: 'data'
+    //   // (touchValue) =>{
+    //   // console.log(touchValue);
+    //   // console.log(touchValue +4);
+    // });
+
+    //example from docs
+    socket.on('news', function(data) {
+      console.log(data);
+      socket.emit('my other event', {
+        my: 'data'
+      });
     });
 
   }
@@ -34,12 +42,6 @@ $(function() {
 $(document).on("vmouseup", function() {
   $(event.target).removeClass("taphold");
 });
-
-
-
-
-
-
 
 
 
@@ -55,13 +57,13 @@ socket.on('userCount', function(userCount) {
   // console.log('total number of users online is: ' + userCount);
 });
 
-//example from docs
-socket.on('news', function(data) {
-  console.log(data);
-  socket.emit('my other event', {
-    my: 'data'
-  });
-});
+// //example from docs
+// socket.on('news', function(data) {
+//   console.log(data);
+//   socket.emit('my other event', {
+//     my: 'data'
+//   });
+// });
 
 socket.on('receiveMessage', function(msg) {
   console.log(msg);
