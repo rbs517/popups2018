@@ -89,7 +89,7 @@ io.on('connection', function(socket){
         length: 12
       }, ],
       gamma: 2.8,
-    })
+    });
 
     strip.on("ready", function() {
       // Set the entire strip to pink.
@@ -114,7 +114,7 @@ io.on('connection', function(socket){
       var led = new five.Led(5); // pin 13
       led.brightness(data);
       console.log(data);
-      var led = new five.Led(6); // pin 13
+      led = new five.Led(6); // pin 13
       led.brightness(0);
     }  
   }

@@ -24,9 +24,8 @@ $(function() {
   function tapholdHandler(event) {
     $(event.target).addClass("taphold");
     console.log("i touched the but");
-    touchValue = 1;
-    var data = 1;
     socket.emit('pressed', 'pressed');
+    blowVal();
     // socket.emit('newData', 
     // {my: 'data'
     //   // (touchValue) =>{
@@ -67,10 +66,10 @@ function setup() {
 }
 
 function newDrawing(data) {
-  background(200);
-  fill(127);
-  stroke(0);
-  ellipse(width / 2, data - 25, 50, 50);
+  // background(200);
+  // fill(127);
+  // stroke(0);
+  // ellipse(width / 2, data - 25, 50, 50);
 
 }
 
@@ -83,35 +82,35 @@ function blowVal() {
     data = h;
     // if (data )
     newDrawing(data);
-    var myBtn = document.getElementById('myBtn');
-    myBtn.style.backgroundColor = "red";
-    myBtn.disabled = true;
+    // var myBtn = document.getElementById('circle1');
+    // myBtn.style.backgroundColor = "red";
+    // myBtn.disabled = true;
     socket.emit('mouse', data);
     console.log('Sending: ' + data);
   }, 10);
 
 
 
-  setTimeout(function() {
-    // isStop = true;
-    myBtn.disabled = false;
-    clearInterval(interval);
-  }, 5000);
+  // setTimeout(function() {
+  //   // isStop = true;
+  //   myBtn.disabled = false;
+  //   clearInterval(interval);
+  // }, 5000);
 
-  setTimeout(function() {
-    myBtn.style.backgroundColor = '#4CAF50';
-    data = 125;
-    socket.emit('mouse', data);
-    console.log('Sending: ' + data);
-  }, 5100);
+  // setTimeout(function() {
+  //   myBtn.style.backgroundColor = '#4CAF50';
+  //   data = 125;
+  //   socket.emit('mouse', data);
+  //   console.log('Sending: ' + data);
+  // }, 5100);
 
 }
 
 
-var setBtn = document.getElementById('myBtn');
-setBtn.addEventListener("click", function() {
-  blowVal();
-});
+// var setBtn = document.getElementById('myBtn');
+// setBtn.addEventListener("click", function() {
+//   blowVal();
+// });
 
 
 function draw() {
