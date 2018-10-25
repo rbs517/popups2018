@@ -21,7 +21,7 @@
     function d() {
       a(e).data(h, true);
       b.type = f;
-      jQuery.event.handle.apply(e, o)
+      // jQuery.event.handle.apply(e, o);
     }
     if (!a(this).data(g)) {
       var e = this,
