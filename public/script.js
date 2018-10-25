@@ -47,7 +47,7 @@ $(function() {
 // On tap release go back to original color
 $(document).on("vmouseup", function() {
   $(event.target).removeClass("taphold");
-  $(event.target).removeEventListener("blow");
+  // $(event.target).removeEventListener("blow");
 });
 
 
