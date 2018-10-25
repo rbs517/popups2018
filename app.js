@@ -27,7 +27,10 @@ app.get('/data.json', function(req, res){
   res.render('data');
 });
 
-
+var pixel = require("node-pixel");
+var five = require('johnny-five');
+var board = new five.Board();
+var strip = null;
 
 // // Post request
 // app.post('/', function(req, res){
@@ -69,10 +72,52 @@ io.on('connection', function(socket){
   socket.on('pressed', function(){
     console.log('got a press');
     //socket.broadcast.emit('broadcasting');
-    socket.broadcast.emit('broadcast', 'hello friends!');
+    //socket.broadcast.emit('broadcast', 'hello friends!');
     // io.sockets.emit('dimensions', {h: h});
   });
 
+  socket.on('mouse', mouseMsg);
+
+  board.on('ready', function() {
+    boardIsReady = true;
+
+    strip = new pixel.Strip({
+      board: this,
+      controller: "FIRMATA",
+      strips: [{
+        pin: 10,
+        length: 12
+      }, ],
+      gamma: 2.8,
+    })
+
+    strip.on("ready", function() {
+      // Set the entire strip to pink.
+      strip.color('#903');
+
+      // Send instructions to NeoPixel.
+      strip.show();
+    });
+
+    this.repl.inject({
+      strip: strip
+    });
+
+  });
+
+  function mouseMsg(data) {
+    // socket.broadcast.emit('mouse', data); //
+    // io.socket.emit('mouse', data); // including client who sends the msg
+    // console.log(socket.id + ': ' + data);
+
+    if (boardIsReady) {
+      var led = new five.Led(5); // pin 13
+      led.brightness(data);
+      console.log(data);
+      var led = new five.Led(6); // pin 13
+      led.brightness(0);
+    }  
+  }
 
 
   // socket.on('newData', function(data) {

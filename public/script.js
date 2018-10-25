@@ -1,6 +1,12 @@
 // ********************************************************** 
 // STARTING JS FILE
 
+var mic;
+var inputVal;
+var vol = 0;
+var h;
+var data;
+var isStop = false;
 
 //Disable longpress on mobile devices
 function longClickHandler(e) {
@@ -43,6 +49,88 @@ $(function() {
 $(document).on("vmouseup", function() {
   $(event.target).removeClass("taphold");
 });
+
+
+
+
+function setup() {
+
+  mic = new p5.AudioIn();
+  mic.start();
+
+  // createCanvas(200, 200);
+  // background(200);
+  // // var button = createButton("Start Blowing");
+  // // button.style("background-color:red");
+  // socket = io.connect('https://fluto.ngrok.io');
+  // // socket.on('mouse', newDrawing);
+}
+
+function newDrawing(data) {
+  background(200);
+  fill(127);
+  stroke(0);
+  ellipse(width / 2, data - 25, 50, 50);
+
+}
+
+function blowVal() {
+
+  var interval = setInterval(function() {
+    vol = mic.getLevel();
+    // h = map(vol, 0, 1, height, 0); //for ellipse
+    h = map(vol, 0.3, 1, 130, 255); //for fan
+    data = h;
+    // if (data )
+    newDrawing(data);
+    var myBtn = document.getElementById('myBtn');
+    myBtn.style.backgroundColor = "red";
+    myBtn.disabled = true;
+    socket.emit('mouse', data);
+    console.log('Sending: ' + data);
+  }, 10);
+
+
+
+  setTimeout(function() {
+    // isStop = true;
+    myBtn.disabled = false;
+    clearInterval(interval);
+  }, 5000);
+
+  setTimeout(function() {
+    myBtn.style.backgroundColor = '#4CAF50';
+    data = 125;
+    socket.emit('mouse', data);
+    console.log('Sending: ' + data);
+  }, 5100);
+
+}
+
+
+var setBtn = document.getElementById('myBtn');
+setBtn.addEventListener("click", function() {
+  blowVal();
+});
+
+
+function draw() {
+
+  // blowVal();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
