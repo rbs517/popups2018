@@ -1,4 +1,49 @@
 // ********************************************************** 
+// STARTING JS FILE
+
+
+//Disable longpress on mobile devices
+function longClickHandler(e) {
+  e.preventDefault();
+  // $("body").append("<p>You longclicked. Nice!</p>");
+}
+
+$("div.circleContainer").longclick(250, longClickHandler);
+
+
+// On tap hold change color
+$(function() {
+  $("div.circleContainer").bind("taphold", tapholdHandler);
+
+  function tapholdHandler(event) {
+    $(event.target).addClass("taphold");
+    console.log("i touched the but");
+    touchValue = 1;
+    var data = 1;
+    socket.emit('newData', {
+      my: 'data'
+      // (touchValue) =>{
+      // console.log(touchValue);
+      // console.log(touchValue +4);
+    });
+
+  }
+});
+
+// On tap release go back to original color
+$(document).on("vmouseup", function() {
+  $(event.target).removeClass("taphold");
+});
+
+
+
+
+
+
+
+
+
+// ********************************************************** 
 // SOCKET COMMUNICATION ON CLIENT SIDE
 
 var socket = io();
@@ -53,43 +98,5 @@ socket.on('dimensions', function(data) {
 //   a(),e(window).scroll(a);
 
 // }(jQuery);
-
-
-// ********************************************************** 
-// STARTING JS FILE
-
-
-//Disable longpress on mobile devices
-function longClickHandler(e) {
-  e.preventDefault();
-  // $("body").append("<p>You longclicked. Nice!</p>");
-}
-
-$("div.circleContainer").longclick(250, longClickHandler);
-
-
-// On tap hold change color
-$(function() {
-  $("div.circleContainer").bind("taphold", tapholdHandler);
-
-  function tapholdHandler(event) {
-    $(event.target).addClass("taphold");
-    console.log("i touched the but");
-    touchValue = 1;
-    var data = 1;
-    socket.emit('newData', {
-      my: 'data'
-      // (touchValue) =>{
-      // console.log(touchValue);
-      // console.log(touchValue +4);
-    });
-
-  }
-});
-
-// On tap release go back to original color
-$(document).on("vmouseup", function() {
-  $(event.target).removeClass("taphold");
-});
 
 
