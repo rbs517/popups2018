@@ -61,7 +61,7 @@ socket.on('userCount', function(userCount) {
 socket.on('dimensions', function(data){
   w = data.w;
   h = data.h;
-}
+});
 // //example from docs
 // socket.on('news', function(data) {
 //   console.log(data);
