@@ -1,12 +1,15 @@
 // ********************************************************** 
 // STARTING JS FILE
 
+// Declaring variables
 var mic;
 var inputVal;
 var vol = 0;
 var h;
 var data;
 var isStop = false;
+
+
 
 //Disable longpress on mobile devices
 function longClickHandler(e) {
@@ -16,7 +19,6 @@ function longClickHandler(e) {
 
 $("div.circleContainer").longclick(250, longClickHandler);
 
-
 // On tap hold change color
 $(function() {
   $("div.circleContainer").bind("taphold", tapholdHandler);
@@ -25,6 +27,7 @@ $(function() {
   function tapholdHandler(event) {
     $(event.target).addClass("taphold");
     console.log("i touched the but");
+    console.log(event.target.id);
     blowVal(); //only if you are pressing, will the mic be listening
     socket.emit('pressed', 'pressed');
     
@@ -92,7 +95,7 @@ function blowVal() {
     // var myBtn = document.getElementById('circle1');
     // myBtn.style.backgroundColor = "red";
     // myBtn.disabled = true;
-    // socket.emit('mouse', data);
+    socket.emit('mouse', data);
     console.log('Sending: ' + data);
   // }, 10);
 

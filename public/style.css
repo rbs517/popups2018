@@ -54,12 +54,53 @@ div.circleContainer {
   width: 3em;
   height: 3em;
   border-radius: 50%;
-  background-color: #108040;
+/*  background-color: #108040;*/
   -webkit-touch-callout: none !important;
 }
-  
-div.circleContainer.taphold {
-  background-color: #7ACEF4;
+
+
+#circle1 {
+  background-color: maroon;
+}
+
+#circle2 {
+  background-color: red;
+}
+
+#circle3 {
+  background-color: orange;
+}
+
+#circle4 {
+  background-color: yellow;
+}
+
+#circle5 {
+  background-color: green;
+}
+
+#circle6 {
+  background-color: lime;
+}
+
+#circle7 {
+  background-color: teal;
+}
+
+#circle8 {
+  background-color: aqua;
+}
+
+#circle9 {
+  background-color: blue;
+}
+
+#circle10 {
+  background-color: purple;
+}
+
+div.circleContainer.taphold{
+  border: 3px solid black;
   -webkit-user-select: none !important;
 }
 
