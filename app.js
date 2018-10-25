@@ -19,7 +19,6 @@ app.set('port', PORT);
 app.get('/', function(req, res){
   console.log('user enters..');
   res.render('index');
-  respondToClient();
 });
 
 // // Get request to me from data.html
@@ -97,3 +96,4 @@ io.on('connection', function(socket){
 
 // Http listen on the port
 http.listen(PORT, () => console.log(`Listening on ${ PORT }`));
+http.get('help', respondToClient);
