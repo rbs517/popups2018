@@ -28,13 +28,13 @@ $(function() {
     //   // console.log(touchValue +4);
     // });
 
-    //example from docs
-    socket.on('news', function(data) {
-      console.log(data);
-      socket.emit('my other event', {
-        my: 'data'
-      });
-    });
+    // //example from docs
+    // socket.on('news', function(data) {
+    //   console.log(data);
+    //   socket.emit('my other event', {
+    //     my: 'data'
+    //   });
+    // });
 
   }
 });
@@ -58,6 +58,10 @@ socket.on('userCount', function(userCount) {
   // console.log('total number of users online is: ' + userCount);
 });
 
+socket.on('dimensions', function(data){
+  w = data.w;
+  h = data.h;
+}
 // //example from docs
 // socket.on('news', function(data) {
 //   console.log(data);
@@ -66,10 +70,10 @@ socket.on('userCount', function(userCount) {
 //   });
 // });
 
-socket.on('receiveMessage', function(msg) {
-  console.log(msg);
-  console.log("hello");
-});
+// socket.on('receiveMessage', function(msg) {
+//   console.log(msg);
+//   console.log("hello");
+// });
 
 // socket.on('tapholdData', function(colorTap){
 //   console.log('Color: ' + color);
