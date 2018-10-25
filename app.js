@@ -50,12 +50,12 @@ io.on('connection', function(socket){
   });
 
   //trying this
-  socket.on('pressed', function(){
-    console.log('got a press');
+  // socket.on('pressed', function(){
+  //   console.log('got a press');
     //socket.broadcast.emit('broadcasting');
     //socket.broadcast.emit('broadcast', 'hello friends!');
     // io.sockets.emit('dimensions', {h: h});
-  });
+  // });
 
   //LED STUFF
   // socket.on('mouse', mouseMsg);

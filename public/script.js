@@ -3,12 +3,114 @@
 
 // Declaring variables
 var mic;
-var inputVal;
-var vol = 0;
 var h;
-var data;
-var isStop = false;
+var l;
+var inputVal = 1;
+var serial; // variable to hold an instance of the serialport library
+var portName = '/dev/cu.usbmodem1422'; // fill in your serial port name here -- CHANGE ME!
+var options = {
+  baudrate: 9600
+}; // change the data rate to whatever you wish -- MAKE ME MATCH!
+var inData; // for incoming serial data
+var colorSelection;
+var colorSelectonString;
+var outputString;
+var outputVal;
+var smoothVal;
+var inputValString;
+var blowData = [0, 0, 0, 0, 0]; //an array of recent microphone readings (for moving average)
 
+//p5 Serialport
+
+function checkPorts() {
+  serial = new p5.SerialPort(); // make a new instance of the serialport library
+  serial.on('list', printList); // set a callback function for the serialport list event
+
+  serial.list(); // list the serial ports
+}
+
+// get the list of ports:
+function printList(portList) {
+  // portList is an array of serial port names
+  for (var i = 0; i < portList.length; i++) {
+    // Display the list the console:
+    console.log(i + " " + portList[i]);
+  }
+}
+
+function connectToSerialPort(port) {
+  serial = new p5.SerialPort(); // make a new instance of the serialport library
+  serial.on('list', printList); // set a callback function for the serialport list event
+  serial.on('connected', serverConnected); // callback for connecting to the server
+  serial.on('open', portOpen); // callback for the port opening
+  serial.on('data', serialEvent); // callback for when new data arrives
+  serial.on('error', serialError); // callback for errors
+  serial.on('close', portClose); // callback for the port closing
+
+  serial.list(); // list the serial ports
+  serial.open(port, options); // open a serial port
+}
+
+function serverConnected() {
+  console.log('connected to server.');
+}
+
+function portOpen() {
+  console.log('the serial port opened.')
+}
+
+function serialEvent() {
+  var inString = serial.readStringUntil('\r\n');
+
+  //check to see that there's actually a string there:
+  if (inString.length > 0) {
+    //console.log("I read a string that says: " + inString) // if there is something in that line...
+    if (inString == "A") { // ... and that something is 'hello' in the form of "A"...
+      smoothVal = smoothReading(inputVal) // prepare the value to send
+      // combine the mic value and color selection into a 4 digit number for arudiuno
+      var tempInt = int(smoothVal);
+      inputValString = String(tempInt);
+      // var tempVal = int(smoothVal);
+      if (inputValString.length == 1) {inputValString = "00" + inputValString};
+      if (inputValString.length == 2) {inputValString = "0" + inputValString};
+      colorSelectonString = String(colorSelection);
+      outputString = inputValString + colorSelectonString; //mash together the intended strip (0 -4) and the value
+      // outputVal = int(outputString);
+      // outboundString = String(outPutVal); //mash together the intended strip (0 -4) and the value
+      // outboundString = String(colorSelection) + String(outPutVal); //mash together the intended strip (0 -4) and the value
+      // outBoundInt = int(outboundString); //convert it to a string
+      console.log("sending: " + outputString);
+      serial.write(outputString+ '\n'); // write the value - add + '\n' if using arduino uno
+    }
+    // else {serial.clear();
+    //   serial.write(valToSend + '\n'); // write the value
+    // }
+  }
+}
+
+function serialError(err) {
+  console.log('Something went wrong with the serial port. ' + err);
+}
+
+function portClose() {
+  console.log('The serial port closed.');
+}
+
+
+// p5.js function protocol
+ 
+
+function setup() {
+  mic = new p5.AudioIn();
+  mic.start();
+}
+
+function draw() {
+
+}
+
+
+// Sketch
 
 //Disable longpress on mobile devices
 function longClickHandler(e) {
@@ -25,9 +127,13 @@ $(function() {
   function tapholdHandler(event) {
     $(event.target).addClass("taphold");
     console.log("i touched the but");
-    console.log(event.target.id);
+    console.log(event.target.id); // which circle is being pressed?
+    var idString = (event.target.id); //take the circle id string
+    colorSelection = idString.slice(6); //slice the string so it only prints the circle number
+    console.log(colorSelection); //print button color number
+
     blowVal(); //only if you are pressing, will the mic be listening
-    socket.emit('pressed', 'pressed');
+    // socket.emit('pressed', 'pressed');
   }
 });
 
@@ -40,23 +146,27 @@ $(document).on("vmouseup", function() {
 });
 
 
-function setup() {
-  mic = new p5.AudioIn();
-  mic.start();
-}
-
 function blowVal() {
     vol = mic.getLevel();
-    // h = map(vol, 0, 1, height, 0); //for ellipse
-    h = map(vol, 0.3, 1, 130, 255); //for fan
-    data = h;
-    socket.emit('mouse', data);
-    console.log('Sending: ' + data);
+    inputVal = map(vol, 0, 1, 1, 255); //inputVal is for arduino to control the fan
+    data = inputVal;
+    // socket.emit('mouse', data);
+    // console.log('Sending: ' + data);
 }
 
-function draw() {
-
+//Data smoothing functions
+function smoothReading(newReading) {
+  blowData.shift();
+  blowData.push(newReading);
+  var total = 0;
+  for (var i = 0; i < blowData.length; i++) {
+    total += blowData[i];
+  }
+  var avg = total / blowData.length;
+  return avg;
+  //maybe use math.floor and do more elegant control on the arduino side
 }
+
 
 
 // ********************************************************** 
