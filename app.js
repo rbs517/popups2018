@@ -27,13 +27,6 @@ app.get('/', function(req, res){
 //   res.render('data');
 // });
 
-// Post request
-// define the callback function that's called when
-// a client makes a request:
-function respondToClient(request, response) {
-  response.write("Hello, client!\n");
-  response.end();
-}
 
 console.log("App is served on localhost: " + PORT);
 
@@ -72,6 +65,22 @@ io.on('connection', function(socket){
     io.sockets.emit('dimensions', {h: h});
   });
 
+  // message handling
+  socket.on('message', function(msg){
+    // check if the values are valid/useful
+    var intComing = parseInt(msg);
+    if(intComing){
+      _scene = parseInt(msg);
+      broadcast(_scene);
+      console.log("change scene broadcast: " + _scene);
+    }
+  });
+
+  function broadcast(msg){
+    socket.forEach(function each(client) {
+      socket.emit(msg);
+    });
+  }
 
   // socket.on('newData', function(data) {
   //     console.log('im the server and i see ur: ' + data);
@@ -96,4 +105,3 @@ io.on('connection', function(socket){
 
 // Http listen on the port
 http.listen(PORT, () => console.log(`Listening on ${ PORT }`));
-app.get('help', respondToClient);
