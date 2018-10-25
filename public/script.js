@@ -12,7 +12,7 @@ var options = {
   baudrate: 9600
 }; // change the data rate to whatever you wish -- MAKE ME MATCH!
 var inData; // for incoming serial data
-var colorSelection;
+var colorSelection=0;
 var colorSelectonString;
 var outputString;
 var outputVal;
@@ -109,7 +109,7 @@ function setup() {
 
 function draw() {
   vol = mic.getLevel();
-  inputVal = map(vol, 0, 1, 1, 255); //inputVal is for arduino to control the fan
+  inputVal = map(vol, 0, 0.4, 1, 255); //inputVal is for arduino to control the fan
 }
 
 
