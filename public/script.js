@@ -103,6 +103,8 @@ function portClose() {
 function setup() {
   mic = new p5.AudioIn();
   mic.start();
+  connectToSerialPort(portName); // list and connect to portName, throw errors if they happen
+  serial.write("100") //send a "hello" value to start off the serial communication
 }
 
 function draw() {
