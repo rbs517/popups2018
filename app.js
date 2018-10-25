@@ -21,19 +21,22 @@ app.get('/', function(req, res){
   res.render('index');
 });
 
-// Get request to me from data.html
-app.get('/data.html', function(req, res){
-  console.log('arduino is asking for data');
-  res.render('data');
-});
-
-// // Post request
-// app.post('/', function(req, res){
-//   console.log('user enters..');
-//   res.render('index');
+// // Get request to me from data.html
+// app.get('/data.html', function(req, res){
+//   console.log('arduino is asking for data');
+//   res.render('data');
 // });
 
+// Post request
+// define the callback function that's called when
+// a client makes a request:
+function respondToClient(request, response) {
+  response.write("Hello, client!\n");
+  response.end();
+}
+
 console.log("App is served on localhost: " + PORT);
+
 
 // **********************************************************
 // SOCKET COMMUNICATION ON SERVER SIDE
@@ -69,6 +72,7 @@ io.on('connection', function(socket){
     io.sockets.emit('dimensions', {h: h});
   });
 
+
   // socket.on('newData', function(data) {
   //     console.log('im the server and i see ur: ' + data);
   //     // io.emit('message', msg);
@@ -89,5 +93,8 @@ io.on('connection', function(socket){
 
 });
 
+
 // Http listen on the port
 http.listen(PORT, () => console.log(`Listening on ${ PORT }`));
+// define what to do when the client requests something:
+http.get('test', respondToClient);
