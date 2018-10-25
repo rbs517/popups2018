@@ -66,7 +66,7 @@ function serialEvent() {
   if (inString.length > 0) {
     //console.log("I read a string that says: " + inString) // if there is something in that line...
     if (inString == "A") { // ... and that something is 'hello' in the form of "A"...
-      smoothVal = smoothReading(inputVal) // prepare the value to send
+      smoothVal = smoothReading(inputVal); // prepare the value to send
       // combine the mic value and color selection into a 4 digit number for arudiuno
       var tempInt = int(smoothVal);
       inputValString = String(tempInt);
@@ -149,7 +149,7 @@ $(document).on("vmouseup", function() {
 function blowVal() {
     vol = mic.getLevel();
     inputVal = map(vol, 0, 1, 1, 255); //inputVal is for arduino to control the fan
-    data = inputVal;
+    // data = inputVal;
     // socket.emit('mouse', data);
     // console.log('Sending: ' + data);
 }
