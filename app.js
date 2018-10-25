@@ -68,7 +68,7 @@ io.on('connection', function(socket){
   //trying this
   socket.on('pressed', function(){
     console.log('got a press');
-    io.sockets.emit('dimensions', {h: h});
+    // io.sockets.emit('dimensions', {h: h});
   });
 
 
