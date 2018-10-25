@@ -106,7 +106,8 @@ function setup() {
 }
 
 function draw() {
-
+  vol = mic.getLevel();
+  inputVal = map(vol, 0, 1, 1, 255); //inputVal is for arduino to control the fan
 }
 
 
@@ -146,13 +147,10 @@ $(document).on("vmouseup", function() {
 });
 
 
-function blowVal() {
-    vol = mic.getLevel();
-    inputVal = map(vol, 0, 1, 1, 255); //inputVal is for arduino to control the fan
-    // data = inputVal;
-    // socket.emit('mouse', data);
-    // console.log('Sending: ' + data);
-}
+// function blowVal() {
+//     vol = mic.getLevel();
+//     inputVal = map(vol, 0, 1, 1, 255); //inputVal is for arduino to control the fan
+// }
 
 //Data smoothing functions
 function smoothReading(newReading) {
