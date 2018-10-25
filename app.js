@@ -22,7 +22,7 @@ app.get('/', function(req, res){
 });
 
 // Get request to me from data.html
-app.get('/data.html', function(req, res){
+app.get('/data.json', function(req, res){
   console.log('arduino is asking for data');
   res.render('data');
 });
@@ -68,6 +68,7 @@ io.on('connection', function(socket){
   //trying this
   socket.on('pressed', function(){
     console.log('got a press');
+
     // io.sockets.emit('dimensions', {h: h});
   });
 
