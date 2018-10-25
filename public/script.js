@@ -20,12 +20,12 @@ $("div.circleContainer").longclick(250, longClickHandler);
 // On tap hold change color
 $(function() {
   $("div.circleContainer").bind("taphold", tapholdHandler);
+  $("div.circleContainer").addEventListener("blow", blowVal);
 
   function tapholdHandler(event) {
     $(event.target).addClass("taphold");
     console.log("i touched the but");
     socket.emit('pressed', 'pressed');
-    blowVal();
     // socket.emit('newData', 
     // {my: 'data'
     //   // (touchValue) =>{
@@ -47,6 +47,7 @@ $(function() {
 // On tap release go back to original color
 $(document).on("vmouseup", function() {
   $(event.target).removeClass("taphold");
+  $(event.target).removeEventListener("blow");
 });
 
 
@@ -65,29 +66,29 @@ function setup() {
   // // socket.on('mouse', newDrawing);
 }
 
-function newDrawing(data) {
+// function newDrawing(data) {
   // background(200);
   // fill(127);
   // stroke(0);
   // ellipse(width / 2, data - 25, 50, 50);
 
-}
+// }
 
 function blowVal() {
 
-  var interval = setInterval(function() {
+  // var interval = setInterval(function() {
     vol = mic.getLevel();
     // h = map(vol, 0, 1, height, 0); //for ellipse
     h = map(vol, 0.3, 1, 130, 255); //for fan
     data = h;
     // if (data )
-    newDrawing(data);
+    //newDrawing(data);
     // var myBtn = document.getElementById('circle1');
     // myBtn.style.backgroundColor = "red";
     // myBtn.disabled = true;
     socket.emit('mouse', data);
     console.log('Sending: ' + data);
-  }, 10);
+  // }, 10);
 
 
 
@@ -145,10 +146,10 @@ socket.on('userCount', function(userCount) {
   // console.log('total number of users online is: ' + userCount);
 });
 
-socket.on('dimensions', function(data){
-  w = data.w;
-  h = data.h;
-});
+// socket.on('dimensions', function(data){
+//   w = data.w;
+//   h = data.h;
+// });
 // //example from docs
 // socket.on('news', function(data) {
 //   console.log(data);
@@ -166,9 +167,9 @@ socket.on('dimensions', function(data){
 //   console.log('Color: ' + color);
 // });
 
-socket.on('dimensions', function(data) {
-  console.log('new data came to light...');
-});
+// socket.on('dimensions', function(data) {
+//   console.log('new data came to light...');
+// });
 
 
 // ********************************************************** 

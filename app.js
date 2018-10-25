@@ -22,10 +22,10 @@ app.get('/', function(req, res){
 });
 
 // Get request to me from data.html
-app.get('/data.json', function(req, res){
-  console.log('arduino is asking for data');
-  res.render('data');
-});
+// app.get('/data.json', function(req, res){
+//   console.log('arduino is asking for data');
+//   res.render('data');
+// });
 
 var pixel = require("node-pixel");
 var five = require('johnny-five');
@@ -77,7 +77,6 @@ io.on('connection', function(socket){
   });
 
   socket.on('mouse', mouseMsg);
-
   board.on('ready', function() {
     boardIsReady = true;
 
