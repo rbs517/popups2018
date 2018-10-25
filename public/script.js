@@ -133,7 +133,7 @@ $(function() {
     colorSelection = idString.slice(6); //slice the string so it only prints the circle number
     console.log(colorSelection); //print button color number
 
-    blowVal(); //only if you are pressing, will the mic be listening
+    // blowVal(); //only if you are pressing, will the mic be listening
     // socket.emit('pressed', 'pressed');
   }
 });
