@@ -27,7 +27,9 @@ $(function() {
     console.log("i touched the but");
     socket.emit('pressed', 'pressed');
     data = 1;
-    socket.emit('mouse', data);
+    blowVal(); //only if you are pressing, will the mic be listening
+    // socket.emit('mouse', data);
+
     // socket.emit('newData', 
     // {my: 'data'
     //   // (touchValue) =>{
@@ -49,8 +51,8 @@ $(function() {
 // On tap release go back to original color
 $(document).on("vmouseup", function() {
   $(event.target).removeClass("taphold");
-  data = 0;
-  socket.emit('mouse', data);
+  // data = 0;
+  // socket.emit('mouse', data);
   // $(event.target).removeEventListener("blow");
 });
 
