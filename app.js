@@ -96,4 +96,4 @@ io.on('connection', function(socket){
 
 // Http listen on the port
 http.listen(PORT, () => console.log(`Listening on ${ PORT }`));
-http.get('help', respondToClient);
+app.get('help', respondToClient);
