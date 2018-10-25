@@ -21,15 +21,21 @@ app.get('/', function(req, res){
   res.render('index');
 });
 
-// // Get request to me from data.html
-// app.get('/data.html', function(req, res){
-//   console.log('arduino is asking for data');
-//   res.render('data');
+// Get request to me from data.html
+app.get('/data.html', function(req, res){
+  console.log('arduino is asking for data');
+  res.render('data');
+});
+
+
+
+// // Post request
+// app.post('/', function(req, res){
+//   console.log('user enters..');
+//   res.render('index');
 // });
 
-
 console.log("App is served on localhost: " + PORT);
-
 
 // **********************************************************
 // SOCKET COMMUNICATION ON SERVER SIDE
@@ -66,11 +72,6 @@ io.on('connection', function(socket){
   });
 
 
-  // function broadcast(msg){
-  //   socket.forEach(function each(client) {
-  //     socket.emit(msg);
-  //   });
-  // }
 
   // socket.on('newData', function(data) {
   //     console.log('im the server and i see ur: ' + data);
@@ -91,7 +92,6 @@ io.on('connection', function(socket){
   }
 
 });
-
 
 // Http listen on the port
 http.listen(PORT, () => console.log(`Listening on ${ PORT }`));
