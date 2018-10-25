@@ -48,11 +48,20 @@ io.on('connection', function(socket){
   console.log('number of connected users: ' + userCount);
 
 //example from docs
-    socket.emit('news', { hello: 'world' });
+    socket.emit('news', { hello: 'world' }); //emitting data to html console
     socket.on('my other event', function (data) {
     console.log(data);
     });
   //io.sockets.emit('userCount', userCount);
+
+//trying this
+  socket.on('pressed', function(){
+    console.log('got a press');
+
+  });
+
+
+
 
 // On disconnect to socket
   socket.on('disconnect', function(){
