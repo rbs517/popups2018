@@ -64,7 +64,7 @@ function portOpen() {
 
 function serialEvent() {
   var inString = serial.readStringUntil('\r\n');
-  console.log(haveibeenpressed);
+  // console.log(haveibeenpressed);
   //check to see that there's actually a string there:
   if (inString.length > 0) {
     //console.log("I read a string that says: " + inString) // if there is something in that line...
