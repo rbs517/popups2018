@@ -84,6 +84,7 @@ function serialEvent() {
       // outBoundInt = int(outboundString); //convert it to a string
       console.log("sending: " + outputString);
       serial.write(outputString+ '\n'); // write the value - add + '\n' if using arduino uno
+      serial.write("hello"+'\n');
     }
     // else {serial.clear();
     //   serial.write(valToSend + '\n'); // write the value
@@ -184,6 +185,7 @@ socket.on('userCount', function(userCount) {
 
 socket.on('pressed', function(data){
  haveibeenpressed = true;
+ console.log("am I being pressed?");
 });
 
 
