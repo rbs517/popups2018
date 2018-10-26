@@ -184,7 +184,7 @@ socket.on('userCount', function(userCount) {
 
 socket.on('pressed', function(data){
  haveibeenpressed = true;
-}
+});
 
 
 // ********************************************************** 
