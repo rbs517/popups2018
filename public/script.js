@@ -82,7 +82,7 @@ function serialEvent() {
       // outboundString = String(outPutVal); //mash together the intended strip (0 -4) and the value
       // outboundString = String(colorSelection) + String(outPutVal); //mash together the intended strip (0 -4) and the value
       // outBoundInt = int(outboundString); //convert it to a string
-      console.log("sending: " + outputString);
+      // console.log("sending: " + outputString);
       serial.write(outputString+ '\n'); // write the value - add + '\n' if using arduino uno
       serial.write("hello"+'\n');
     }
@@ -183,9 +183,12 @@ socket.on('userCount', function(userCount) {
   console.log('total number of users online is: ' + userCount);
 });
 
-socket.on('pressed', function(data){
- haveibeenpressed = true;
- console.log("am I being pressed?");
+socket.on('connect', function(){
+  socket.emit('ferret','tobiiiii',function(data){
+    console.log("feeretsssss"+ data);
+  });
+ // haveibeenpressed = true;
+ //console.log("am I being pressed?");
 });
 
 
