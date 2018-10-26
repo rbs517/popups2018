@@ -1,7 +1,10 @@
 // ********************************************************** 
 // STARTING JS FILE
 
+
+
 // Declaring variables
+let haveibeenpressed = false;
 var mic;
 var h;
 var l;
@@ -61,7 +64,7 @@ function portOpen() {
 
 function serialEvent() {
   var inString = serial.readStringUntil('\r\n');
-
+  console.log(haveibeenpressed);
   //check to see that there's actually a string there:
   if (inString.length > 0) {
     //console.log("I read a string that says: " + inString) // if there is something in that line...
@@ -136,7 +139,7 @@ $(function() {
     console.log(colorSelection); //print button color number
 
     // blowVal(); //only if you are pressing, will the mic be listening
-    // socket.emit('pressed', 'pressed');
+    socket.emit('pressed', 'pressed');
   }
 });
 
@@ -178,6 +181,10 @@ socket.emit('user', 'new user is connected');
 socket.on('userCount', function(userCount) {
   // console.log('total number of users online is: ' + userCount);
 });
+
+socket.on('pressed', function(data){
+ haveibeenpressed = true;
+}
 
 
 // ********************************************************** 
