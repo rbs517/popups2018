@@ -180,7 +180,7 @@ var socket = io();
 
 socket.emit('user', 'new user is connected');
 socket.on('userCount', function(userCount) {
-  // console.log('total number of users online is: ' + userCount);
+  console.log('total number of users online is: ' + userCount);
 });
 
 socket.on('pressed', function(data){
