@@ -37,8 +37,8 @@ var userCount = 0;
 
 // On connect to socket
 io.on('connection', function(socket){
-  socket.on('pressed',function(name, socketData){
-    socketData('got a press');
+  socket.on('pressed',function(name, fn){
+    fn('got a press');
 }
 //on pressed send meeeehhhhh
 );

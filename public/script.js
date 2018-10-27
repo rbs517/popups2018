@@ -2,7 +2,7 @@
 // STARTING JS FILE
 
 // Declaring variables
-let haveibeenpressed = false;
+var haveibeenpressed = false;
 var mic;
 var inputVal = 1;
 var colorSelection=0;
@@ -86,7 +86,7 @@ socket.on('userCount', function(userCount) {
 });
 
 socket.on('connect', function(){
-  socket.emit('ferret','tobiiiii',function(data){
+  socket.emit('pressed',function(data){
     console.log("feeretsssss"+ data);
   });
  // haveibeenpressed = true;
