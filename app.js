@@ -39,9 +39,9 @@ var userCount = 0;
 io.on('connection', function(socket){
   socket.on('pressed',function(name, fn){
     fn('got a press');
-}
+  }
 //on pressed send meeeehhhhh
-);
+  );
 
   userCount = userCount + 1;
   console.log('a user connected');
@@ -69,54 +69,10 @@ io.on('connection', function(socket){
     // io.sockets.emit('dimensions', {h: h});
   // });
 
-  //LED STUFF
-  // socket.on('mouse', mouseMsg);
-  // board.on('ready', function() {
-  //   boardIsReady = true;
-
-  //   strip = new pixel.Strip({
-  //     board: this,
-  //     controller: "FIRMATA",
-  //     strips: [{
-  //       pin: 10,
-  //       length: 12
-  //     }, ],
-  //     gamma: 2.8,
-  //   });
-
-  //   strip.on("ready", function() {
-  //     // Set the entire strip to pink.
-  //     strip.color('#903');
-
-  //     // Send instructions to NeoPixel.
-  //     strip.show();
-  //   });
-
-  //   this.repl.inject({
-  //     strip: strip
-  //   });
-
-  // });
-
-  // function mouseMsg(data) {
-  //   // socket.broadcast.emit('mouse', data); //
-  //   // io.socket.emit('mouse', data); // including client who sends the msg
-  //   // console.log(socket.id + ': ' + data);
-
-  //   if (boardIsReady) {
-  //     var led = new five.Led(5); // pin 13
-  //     led.brightness(data);
-  //     console.log(data);
-  //     led = new five.Led(6); // pin 13
-  //     led.brightness(0);
-  //   }  
+  // function restart (){
+  //   final = 0;
+  //   console.log('restarting...');
   // }
-
-
-  function restart (){
-    final = 0;
-    console.log('restarting...');
-  }
 
 });
 
