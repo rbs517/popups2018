@@ -22,7 +22,7 @@ app.get('/', function(req, res){
 });
 
 // Get request to me from data.html
-// app.get('/data.json', function(req, res){
+// app.get('/.json', function(req, res){
 //   console.log('arduino is asking for data');
 //   res.render('data');
 // });
@@ -37,10 +37,12 @@ var userCount = 0;
 
 // On connect to socket
 io.on('connection', function(socket){
-  socket.on('ferret',function(name, fn){
-    fn('mehhhhh');
-  });
-  
+  socket.on('pressed',function(name, socketData){
+    socketData('got a press');
+}
+//on pressed send meeeehhhhh
+);
+
   userCount = userCount + 1;
   console.log('a user connected');
   console.log('number of connected users: ' + userCount);
@@ -60,12 +62,12 @@ io.on('connection', function(socket){
   // });
 
   //trying this
-  socket.on('pressed', function(){
-    console.log('got a press');
+  // socket.on('pressed', function(){
+  //   console.log('got a press');
     //socket.broadcast.emit('broadcasting');
     //socket.broadcast.emit('broadcast', 'hello friends!');
     // io.sockets.emit('dimensions', {h: h});
-  });
+  // });
 
   //LED STUFF
   // socket.on('mouse', mouseMsg);
@@ -119,4 +121,4 @@ io.on('connection', function(socket){
 });
 
 // Http listen on the port
-http.listen(PORT, () => console.log(`Listening on ${ PORT }`));
+http.listen(PORT, () => console.log('Listening on ${ PORT }'));
