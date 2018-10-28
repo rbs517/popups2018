@@ -69,27 +69,12 @@ $(document).on("vmouseup", function() {
   // $(event.target).removeEventListener("blow");
 });
 
-var interval = setInterval(function blowVal() {
+function blowVal() {
     vol = mic.getLevel();
     micInput = map(vol, 0, 0.4, 1, 255); //inputVal is for arduino to control the fan
     // tell the server that the button has been pressed
-    // if (data )
-
     socket.emit('testingMic', micInput);
-  }, 10);
-
-
-  setTimeout(function() {
-    // isStop = true;
-    myBtn.disabled = false;
-    clearInterval(interval);
-  }, 5000);
-
-  setTimeout(function() {
-    myBtn.style.backgroundColor = '#4CAF50';
-    data = 125;
-    socket.emit('testingMic', micInput);
-  }, 5100);
+  }
 
 
 //Data smoothing functions
