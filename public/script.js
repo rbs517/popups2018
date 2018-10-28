@@ -1,14 +1,12 @@
 // ********************************************************** 
 // STARTING JS FILE
 
-
 // Declaring variables
-let haveibeenpressed = false;
+var haveibeenpressed = false;
 var mic;
 var h;
 var l;
 var inputVal = 1;
-
 var colorSelection=0;
 var colorSelectonString;
 var outputString;
@@ -18,14 +16,12 @@ var inputValString;
 var blowData = [0, 0, 0, 0, 0]; //an array of recent microphone readings (for moving average)
 
 
-
 // p5.js function protocol
-
 function setup() {
   mic = new p5.AudioIn();
   mic.start();
-  connectToSerialPort(portName); // list and connect to portName, throw errors if they happen
-  serial.write("100"); //send a "hello" value to start off the serial communication
+  // connectToSerialPort(portName); // list and connect to portName, throw errors if they happen
+  // serial.write("100"); //send a "hello" value to start off the serial communication
 }
 
 function draw() {
@@ -35,7 +31,6 @@ function draw() {
 
 
 // Sketch
-
 //Disable longpress on mobile devices
 function longClickHandler(e) {
   e.preventDefault();
@@ -74,11 +69,6 @@ $(document).on("vmouseup", function() {
 });
 
 
-// function blowVal() {
-//     vol = mic.getLevel();
-//     inputVal = map(vol, 0, 1, 1, 255); //inputVal is for arduino to control the fan
-// }
-
 //Data smoothing functions
 function smoothReading(newReading) {
   blowData.shift();
@@ -93,7 +83,6 @@ function smoothReading(newReading) {
 }
 
 
-
 // ********************************************************** 
 // SOCKET COMMUNICATION ON CLIENT SIDE
 
@@ -104,10 +93,13 @@ socket.on('userCount', function(userCount) {
   console.log('total number of users online is: ' + userCount); //console number of users after one goes off;
 });
 
-// socket.on('pressed', function(){
-  // socket.emit('press','tobiiiii',function(data){
-  //   console.log("feeretsssss"+ data);
-  // });
+socket.on('connect', function(){
+  console.log('here');
+  connectToSerialPort(portName); // list and connect to portName, throw errors if they happen
+  serial.write("100"); //send a "hello" value to start off the serial communication
+  console.log('still here');
+});
+
  // haveibeenpressed = true;
  //console.log("am I being pressed?");
 // });

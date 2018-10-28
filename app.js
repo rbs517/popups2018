@@ -37,6 +37,12 @@ var userCount = 0;
 
 // On connect to socket
 io.on('connection', function(socket){
+
+  socket.on('connect', function(){
+    io.emit('start p5');
+  });
+
+
   // When you receive "pressed" from the client (js)
   socket.on('pressed',function(name, fn){
     console.log('got a press'); // heroku console
