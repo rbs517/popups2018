@@ -187,8 +187,8 @@ function whichColorIsPressed(colorNum){
     }),
   e(".js-scroll-trigger").click(function(){
   
-  }),
+  });
 
-  a(),e(window).scroll(a);
+  // a(),e(window).scroll(a);
 
 }(jQuery);
