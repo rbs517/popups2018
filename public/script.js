@@ -140,7 +140,7 @@ $(function() {
     console.log(colorSelection); //print button color number
 
     // blowVal(); //only if you are pressing, will the mic be listening
-    socket.emit('pressed', 'pressed');
+    // socket.emit('pressed', 'pressed');
 
   }
 });
