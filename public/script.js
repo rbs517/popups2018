@@ -133,7 +133,7 @@ $(function() {
 
   function tapholdHandler(event) {
     $(event.target).addClass("taphold");
-    console.log("i touched the but");
+    console.log("I touched the button");
     console.log(event.target.id); // which circle is being pressed?
     var idString = (event.target.id); //take the circle id string
     colorSelection = idString.slice(6); //slice the string so it only prints the circle number
