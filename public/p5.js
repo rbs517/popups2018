@@ -13,6 +13,7 @@ function sendPressValtoSerialport(){
 
 function sendMicValtoSerialport(){
   micInput = inputVal;
+  console.log(inputVal);
 }
 
 //p5 Serialport
