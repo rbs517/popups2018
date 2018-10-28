@@ -189,6 +189,15 @@ socket.on('connect', function(){
   });
  // haveibeenpressed = true;
  //console.log("am I being pressed?");
+
+socket.on('pressed', function(data){
+    console.log(data);
+  });
+
+
+
+
+
 });
 
 

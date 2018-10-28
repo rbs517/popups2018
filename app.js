@@ -38,10 +38,8 @@ var userCount = 0;
 // On connect to socket
 io.on('connection', function(socket){
   socket.on('ferret',function(name, fn){
-    fn('mehhhhh');
-}
-//on pressed send meeeehhh
-);
+    fn('mehhhhh'); //on pressed send meeeehhh
+  });
 
   userCount = userCount + 1;
   console.log('a user connected');
@@ -56,7 +54,6 @@ io.on('connection', function(socket){
     io.sockets.emit('userCount', userCount);
   });
 
-
   // socket.on ('private message', function(from, msg){
   //   console.log("I received a pm by", from, "saying", msg);
   // });
@@ -64,7 +61,7 @@ io.on('connection', function(socket){
   //trying this
   socket.on('pressed', function(){
     console.log('got a press');
-    socket.emit('server is confirming pressed');
+    io.emit('server is confirming pressed');
     //socket.broadcast.emit('broadcasting');
     //socket.broadcast.emit('broadcast', 'hello friends!');
     // io.sockets.emit('dimensions', {h: h});
