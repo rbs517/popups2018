@@ -3,6 +3,11 @@ body{
   sans-serif;
  }
 
+a{
+  color:#fdcc52;
+  -webkit-transition:all .35s;
+  transition:all .35s;
+}
 
 a:focus,a:hover{
 color:#fcbd20;
@@ -124,8 +129,8 @@ div.circleContainer.taphold{
 footer{
   padding:25px;
   text-align:center;
-/*  background-color:#000000;
-  color: #ffffff;*/
+  background-color: white;
+  color: black;
 }
 
 footer p{
