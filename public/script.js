@@ -63,7 +63,7 @@ var webaudio_tooling_obj = function () {
             micInput = given_typed_array[index];
             // socket.emit('testingMic', micInput);
             inputVal = map(micInput, 0, 150, 1, 255);
-            console.log(inputVal);
+            // console.log(inputVal);
         }
     }
 
