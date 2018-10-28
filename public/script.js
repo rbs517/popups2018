@@ -26,6 +26,9 @@ function setup() {
 }
 
 function draw() {
+  vol = mic.getLevel();
+  micInput = map(vol, 0, 0.4, 1, 255); //inputVal is for arduino to control the fan
+  // tell the server that the button has been pressed
 }
 
 
@@ -51,11 +54,7 @@ $(function() {
     // console.log(colorSelection); //print button color number
     socket.emit('pressed', colorNum);
 
-    vol = mic.getLevel();
-    micInput = map(vol, 0, 0.4, 1, 255); //inputVal is for arduino to control the fan
-    // tell the server that the button has been pressed
     socket.emit('testingMic', micInput);
-
 
     // tell the server that the button has been pressed
   //   socket.emit('pressed', colorNum,function(data){
