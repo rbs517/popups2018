@@ -1,9 +1,13 @@
 body{
   font-family:Muli,Helvetica,Arial,
   sans-serif;
-  background-color:#000000;
-  color: #ffffff;
  }
+
+ui-pagecontainer ui-mobile-viewport ui-overlay-a{
+  background-color: #000000;
+  color: #ffffff;
+}
+
 
 a:focus,a:hover{
 color:#fcbd20;
@@ -14,8 +18,6 @@ section.masthead {
   width: 100%;
   padding-top: 150px;
   padding-bottom: 100px;
-  background-color:#000000;
-  color: #ffffff;
 }
 
 section{
@@ -29,20 +31,15 @@ font-size:50px;
 section.download{
   position:relative;
   padding:150px;
-  background-color:#000000;
-  color: #ffffff;
 }
 
 section.download p{
-  background-color:#000000;
-  color: #ffffff;
 }
 
 
 section.download h2{
   font-size:50px;
   margin-top:0;
-  color:#ffffff;
 }
 
 .flex-center {
@@ -130,8 +127,8 @@ div.circleContainer.taphold{
 footer{
   padding:25px;
   text-align:center;
-  background-color:#000000;
-  color: #ffffff;
+/*  background-color:#000000;
+  color: #ffffff;*/
 }
 
 footer p{
