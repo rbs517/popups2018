@@ -17,22 +17,6 @@ var inputValString;
 var blowData = [0, 0, 0, 0, 0]; //an array of recent microphone readings (for moving average)
 
 
-// p5.js function protocol
-function setup() {
-  mic = new p5.AudioIn();
-  mic.start();
-  // connectToSerialPort(portName); // list and connect to portName, throw errors if they happen
-  // serial.write("100"); //send a "hello" value to start off the serial communication
-}
-
-function draw() {
-  vol = mic.getLevel();
-  inputVal = map(vol, 0, 0.4, 1, 255); //inputVal is for arduino to control the fan
-  // tell the server that the button has been pressed
-  // socket.emit('testingMic', micInput);
-  // inputVal = micInput;
-}
-
 // Sketch
 //Disable longpress on mobile devices
 function longClickHandler(e) {
