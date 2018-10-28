@@ -61,7 +61,7 @@ io.on('connection', function(socket){
   //trying this
   socket.on('pressed', function(){
     console.log('got a press');
-    io.sockets.emit('server is confirming pressed', pressed);
+    io.sockets.emit('server is confirming pressed', pressedConfirmed);
     //socket.broadcast.emit('broadcasting');
     //socket.broadcast.emit('broadcast', 'hello friends!');
     // io.sockets.emit('dimensions', {h: h});
