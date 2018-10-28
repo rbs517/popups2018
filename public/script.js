@@ -19,15 +19,15 @@ var blowData = [0, 0, 0, 0, 0]; //an array of recent microphone readings (for mo
 
 // p5.js function protocol
 function setup() {
-  // mic = new p5.AudioIn();
-  // mic.start();
+  mic = new p5.AudioIn();
+  mic.start();
   // connectToSerialPort(portName); // list and connect to portName, throw errors if they happen
   // serial.write("100"); //send a "hello" value to start off the serial communication
 }
 
 function draw() {
-  // vol = mic.getLevel();
-  // inputVal = map(vol, 0, 0.4, 1, 255); //inputVal is for arduino to control the fan
+  vol = mic.getLevel();
+  inputVal = map(vol, 0, 0.4, 1, 255); //inputVal is for arduino to control the fan
   // tell the server that the button has been pressed
   // socket.emit('testingMic', micInput);
   // inputVal = micInput;
@@ -71,95 +71,95 @@ $(document).on("vmouseup", function() {
   // $(event.target).removeEventListener("blow");
 });
 
-var webaudio_tooling_obj = function () {
+// var webaudio_tooling_obj = function () {
 
-    var audioContext = new AudioContext();
+//     var audioContext = new AudioContext();
 
-    var BUFF_SIZE = 16384;
+//     var BUFF_SIZE = 16384;
 
-    var audioInput = null,
-        microphone_stream = null,
-        gain_node = null,
-        script_processor_node = null,
-        script_processor_fft_node = null,
-        analyserNode = null;
+//     var audioInput = null,
+//         microphone_stream = null,
+//         gain_node = null,
+//         script_processor_node = null,
+//         script_processor_fft_node = null,
+//         analyserNode = null;
 
-    if (!navigator.getUserMedia)
-            navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia ||
-                          navigator.mozGetUserMedia || navigator.msGetUserMedia;
+//     if (!navigator.getUserMedia)
+//             navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia ||
+//                           navigator.mozGetUserMedia || navigator.msGetUserMedia;
 
-    if (navigator.getUserMedia){
+//     if (navigator.getUserMedia){
 
-        navigator.getUserMedia({audio:true}, 
-          function(stream) {
-              start_microphone(stream);
-          },
-          function(e) {
-            alert('Error capturing audio.');
-          }
-        );
+//         navigator.getUserMedia({audio:true}, 
+//           function(stream) {
+//               start_microphone(stream);
+//           },
+//           function(e) {
+//             alert('Error capturing audio.');
+//           }
+//         );
 
-    } else { alert('getUserMedia not supported in this browser.'); }
+//     } else { alert('getUserMedia not supported in this browser.'); }
 
-    // ---
+//     // ---
 
-    function show_some_data(given_typed_array, num_row_to_display, label) {
+//     function show_some_data(given_typed_array, num_row_to_display, label) {
 
-        var size_buffer = given_typed_array.length;
-        var index = 0;
-        var max_index = num_row_to_display;
+//         var size_buffer = given_typed_array.length;
+//         var index = 0;
+//         var max_index = num_row_to_display;
 
-        // console.log("__________ " + label);
+//         // console.log("__________ " + label);
 
-        for (; index < max_index && index < size_buffer; index += 1) {
+//         for (; index < max_index && index < size_buffer; index += 1) {
 
-            // console.log(given_typed_array[index]);
-            micInput = given_typed_array[index];
-            // socket.emit('testingMic', micInput);
-            inputVal = map(micInput, 0, 150, 1, 255);
-            // console.log(inputVal);
-        }
-    }
+//             // console.log(given_typed_array[index]);
+//             micInput = given_typed_array[index];
+//             // socket.emit('testingMic', micInput);
+//             inputVal = map(micInput, 0, 150, 1, 255);
+//             // console.log(inputVal);
+//         }
+//     }
 
-    function start_microphone(stream){
+//     function start_microphone(stream){
 
-      gain_node = audioContext.createGain();
-      gain_node.connect( audioContext.destination );
+//       gain_node = audioContext.createGain();
+//       gain_node.connect( audioContext.destination );
 
-      microphone_stream = audioContext.createMediaStreamSource(stream);
-      // microphone_stream.connect(gain_node); 
+//       microphone_stream = audioContext.createMediaStreamSource(stream);
+//       // microphone_stream.connect(gain_node); 
 
-      script_processor_node = audioContext.createScriptProcessor(BUFF_SIZE, 1, 1);
-      // script_processor_node.onaudioprocess = process_microphone_buffer;
+//       script_processor_node = audioContext.createScriptProcessor(BUFF_SIZE, 1, 1);
+//       // script_processor_node.onaudioprocess = process_microphone_buffer;
 
-      microphone_stream.connect(script_processor_node);
+//       microphone_stream.connect(script_processor_node);
 
-      script_processor_fft_node = audioContext.createScriptProcessor(2048, 1, 1);
-      script_processor_fft_node.connect(gain_node);
+//       script_processor_fft_node = audioContext.createScriptProcessor(2048, 1, 1);
+//       script_processor_fft_node.connect(gain_node);
 
-      analyserNode = audioContext.createAnalyser();
-      analyserNode.smoothingTimeConstant = 0;
-      analyserNode.fftSize = 2048;
+//       analyserNode = audioContext.createAnalyser();
+//       analyserNode.smoothingTimeConstant = 0;
+//       analyserNode.fftSize = 2048;
 
-      microphone_stream.connect(analyserNode);
+//       microphone_stream.connect(analyserNode);
 
-      analyserNode.connect(script_processor_fft_node);
+//       analyserNode.connect(script_processor_fft_node);
 
-      script_processor_fft_node.onaudioprocess = function() {
+//       script_processor_fft_node.onaudioprocess = function() {
 
-        // get the average for the first channel
-        var array = new Uint8Array(analyserNode.frequencyBinCount);
-        analyserNode.getByteFrequencyData(array);
+//         // get the average for the first channel
+//         var array = new Uint8Array(analyserNode.frequencyBinCount);
+//         analyserNode.getByteFrequencyData(array);
 
-        // draw the spectrogram
-        if (microphone_stream.playbackState == microphone_stream.PLAYING_STATE) {
+//         // draw the spectrogram
+//         if (microphone_stream.playbackState == microphone_stream.PLAYING_STATE) {
 
-            show_some_data(array, 5, "from fft");
-        }
-      };
-    }
+//             show_some_data(array, 5, "from fft");
+//         }
+//       };
+//     }
 
-  }(); //  webaudio_tooling_obj = function()
+//   }(); //  webaudio_tooling_obj = function()
 
 // ********************************************************** 
 // SOCKET COMMUNICATION ON CLIENT SIDE
