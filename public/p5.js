@@ -6,8 +6,12 @@ var options = {
 var inData; // for incoming serial data
 
 
-//p5 Serialport
 
+function sendtoSerialport(){
+  colorSelection = colorNum;
+}
+
+//p5 Serialport
 function checkPorts() {
   serial = new p5.SerialPort(); // make a new instance of the serialport library
   serial.on('list', printList); // set a callback function for the serialport list event

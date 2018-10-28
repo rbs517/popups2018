@@ -65,7 +65,9 @@ io.on('connection', function(socket){
     io.sockets.emit('userCount', userCount); //call userCount function on js side
   });
 
-
+  socket.on('micVal',function(name, fn){
+    fn('mic value');
+  });
   // socket.on ('private message', function(from, msg){
   //   console.log("I received a pm by", from, "saying", msg);
   // });

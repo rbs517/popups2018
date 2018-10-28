@@ -6,6 +6,7 @@ var haveibeenpressed = false;
 var mic;
 var h;
 var l;
+var micInput;
 var inputVal = 1;
 var colorSelection=0;
 var colorSelectonString;
@@ -26,7 +27,14 @@ function setup() {
 
 function draw() {
   vol = mic.getLevel();
-  inputVal = map(vol, 0, 0.4, 1, 255); //inputVal is for arduino to control the fan
+  micInput = map(vol, 0, 0.4, 1, 255); //inputVal is for arduino to control the fan
+      // tell the server that the button has been pressed
+    socket.emit('micVal', 'mic',function(data){
+      console.log(data);
+      // console log the data you get back from the server
+      // sendtoSerialport();
+      // console.log(colorNum + ' ' + data);
+  });
 }
 
 
@@ -48,13 +56,14 @@ $(function() {
     console.log("i touched the but");
     console.log(event.target.id); // which circle is being pressed?
     var idString = (event.target.id); //take the circle id string
-    colorSelection = idString.slice(6); //slice the string so it only prints the circle number
-    console.log(colorSelection); //print button color number
+    colorNum = idString.slice(6); //slice the string so it only prints the circle number
+    // console.log(colorSelection); //print button color number
 
     // tell the server that the button has been pressed
     socket.emit('pressed','tobiiiii',function(data){
       // console log the data you get back from the server
-      console.log(colorSelection + ' ' + data);
+      sendtoSerialport();
+      // console.log(colorNum + ' ' + data);
   });
     // socket.emit('pressed', 'pressed');
   }
@@ -96,7 +105,6 @@ socket.on('userCount', function(userCount) {
 socket.on('connect', function(){
   connectToSerialPort(portName); // list and connect to portName, throw errors if they happen
   serial.write("100"); //send a "hello" value to start off the serial communication
-  serial.print("here!");
 });
 
 
