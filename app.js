@@ -46,7 +46,7 @@ io.on('connection', function(socket){
   // When you receive "pressed" from the client (js)
   socket.on('pressed',function(name, fn){
     console.log('got a press'); // heroku console
-    fn('pressed!'); //send this data to client (js)
+    // fn('pressed!'); //send this data to client (js)
     io.emit('pressed', 'pressed');
 }
 //on pressed send meeeehhh
@@ -66,7 +66,8 @@ io.on('connection', function(socket){
   });
 
   socket.on('micVal',function(name, fn){
-    fn('mic value');
+    // fn('mic value');
+    io.emit('mic value', 'mic value');
   });
   // socket.on ('private message', function(from, msg){
   //   console.log("I received a pm by", from, "saying", msg);

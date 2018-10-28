@@ -30,7 +30,7 @@ function draw() {
   micInput = map(vol, 0, 0.4, 1, 255); //inputVal is for arduino to control the fan
       // tell the server that the button has been pressed
     socket.emit('micVal', 'mic',function(data){
-      console.log(data);
+      sendMicValtoSerialport();
       // console log the data you get back from the server
       // sendtoSerialport();
       // console.log(colorNum + ' ' + data);
@@ -62,7 +62,7 @@ $(function() {
     // tell the server that the button has been pressed
     socket.emit('pressed','tobiiiii',function(data){
       // console log the data you get back from the server
-      sendtoSerialport();
+      sendPressValtoSerialport();
       // console.log(colorNum + ' ' + data);
   });
     // socket.emit('pressed', 'pressed');
