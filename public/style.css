@@ -31,16 +31,21 @@ section h2{
 
 #download h2{
   font-size:90px;
-  margin-top: 0;
+  padding-top: -500;
   padding-bottom: 50;
   text-align: center;
 }
 
 #download p{
-  padding-top: 200;
+  padding-top: 280;
   padding-bottom: 400;
   font-size: 70px;
   text-align: center;
+}
+
+#blowText{
+  position: relative;
+  top: -250px; /*for example purposes only*/
 }
 
 .container{   
@@ -112,7 +117,7 @@ ul {
   display: flex;
   justify-content: center;
   position: relative;
-    top: -700px; /*for example purposes only*/
+    top: -650px; /*for example purposes only*/
   list-style-type: none;
   margin: 0;
   padding: 0;
