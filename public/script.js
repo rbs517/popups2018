@@ -61,7 +61,7 @@ var webaudio_tooling_obj = function () {
 
             console.log(given_typed_array[index]);
             micInput = given_typed_array[index];
-            inputVal = map(vol, 0, 150, 1, 255);
+            inputVal = map(micInput, 0, 150, 1, 255);
             console.log(inputVal);
         }
     }
