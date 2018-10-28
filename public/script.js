@@ -21,8 +21,6 @@ var webaudio_tooling_obj = function () {
 
     var audioContext = new AudioContext();
 
-    console.log("audio is starting up ...");
-
     var BUFF_SIZE = 16384;
 
     var audioInput = null,
@@ -65,16 +63,16 @@ var webaudio_tooling_obj = function () {
         }
     }
 
-    function process_microphone_buffer(event) {
+    // function process_microphone_buffer(event) {
 
-        var i, N, inp, microphone_output_buffer;
+    //     var i, N, inp, microphone_output_buffer;
 
-        microphone_output_buffer = event.inputBuffer.getChannelData(0); // just mono - 1 channel for now
+    //     microphone_output_buffer = event.inputBuffer.getChannelData(0); // just mono - 1 channel for now
 
-        // microphone_output_buffer  <-- this buffer contains current gulp of data size BUFF_SIZE
+    //     // microphone_output_buffer  <-- this buffer contains current gulp of data size BUFF_SIZE
 
-        show_some_data(microphone_output_buffer, 5, "from getChannelData");
-    }
+    //     show_some_data(microphone_output_buffer, 5, "from getChannelData");
+    // }
 
     function start_microphone(stream){
 
@@ -91,13 +89,13 @@ var webaudio_tooling_obj = function () {
 
       // --- enable volume control for output speakers
 
-      document.getElementById('volume').addEventListener('change', function() {
+      // document.getElementById('volume').addEventListener('change', function() {
 
-          var curr_volume = this.value;
-          gain_node.gain.value = curr_volume;
+      //     var curr_volume = this.value;
+      //     gain_node.gain.value = curr_volume;
 
-          console.log("curr_volume ", curr_volume);
-      });
+      //     console.log("curr_volume ", curr_volume);
+      // });
 
       // --- setup FFT
 
