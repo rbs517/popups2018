@@ -55,7 +55,7 @@ var webaudio_tooling_obj = function () {
         var index = 0;
         var max_index = num_row_to_display;
 
-        console.log("__________ " + label);
+        // console.log("__________ " + label);
 
         for (; index < max_index && index < size_buffer; index += 1) {
 
