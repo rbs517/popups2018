@@ -3,7 +3,7 @@ body{
   sans-serif;
  }
 
-ui-pagecontainer ui-mobile-viewport ui-overlay-a{
+body.ui-pagecontainer,body.ui-mobile-viewport, body.ui-overlay-a{
   background-color: #000000;
   color: #ffffff;
 }
