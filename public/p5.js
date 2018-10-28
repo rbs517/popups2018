@@ -45,6 +45,10 @@ function portOpen() {
   console.log('the serial port opened.')
 }
 
+function whichColorIsPressed(colorNum){
+  colorSelection = colorNum;
+}
+
 function serialEvent() {
   var inString = serial.readStringUntil('\r\n');
   // console.log(haveibeenpressed);

@@ -44,13 +44,19 @@ io.on('connection', function(socket){
 
 
   // When you receive "pressed" from the client (js)
-  socket.on('pressed',function(name, fn){
-    console.log('got a press'); // heroku console
-    // fn('pressed!'); //send this data to client (js)
-    io.emit('hello');
-}
-//on pressed send meeeehhh
-);
+  socket.on('pressed', colorMsg);
+
+  function colorMsg(colorNum){
+    io.sockets.emit('pressed', colorNum);
+    console.log(colorNum);
+  }
+
+  // // When you receive "pressed" from the client (js)
+  // socket.on('pressed',function(name, fn){
+  //   console.log('got a press'); // heroku console
+  //   // fn('pressed!'); //send this data to client (js)
+  //   io.emit('hello');
+  // });
 
   userCount = userCount + 1;
   console.log('a user connected');
@@ -65,10 +71,10 @@ io.on('connection', function(socket){
     io.sockets.emit('userCount', userCount); //call userCount function on js side
   });
 
-  socket.on('micVal',function(name, fn){
-    // fn('mic value');
-    io.emit('mic value', 'mic value');
-  });
+  // socket.on('micVal',function(name, fn){
+  //   // fn('mic value');
+  //   io.emit('mic value', 'mic value');
+  // });
   // socket.on ('private message', function(from, msg){
   //   console.log("I received a pm by", from, "saying", msg);
   // });

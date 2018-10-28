@@ -58,11 +58,15 @@ $(function() {
     colorNum = idString.slice(6); //slice the string so it only prints the circle number
     // console.log(colorSelection); //print button color number
 
+
+    socket.emit('pressed', colorNum);
+
+
     // tell the server that the button has been pressed
-    socket.emit('pressed',function(data){
-      // console log the data you get back from the server
-      console.log(data);
-  });
+  //   socket.emit('pressed', colorNum,function(data){
+  //     // console log the data you get back from the server
+  //     console.log(data);
+  // });
     // socket.emit('pressed', 'pressed');
   }
 });
@@ -104,6 +108,8 @@ socket.on('connect', function(){
   connectToSerialPort(portName); // list and connect to portName, throw errors if they happen
   serial.write("100"); //send a "hello" value to start off the serial communication
 });
+
+socket.on('pressed', whichColorIsPressed);
 
 
 // ********************************************************** 
