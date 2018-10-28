@@ -42,11 +42,7 @@ function serverConnected() {
 }
 
 function portOpen() {
-  console.log('the serial port opened.')
-}
-
-function whichColorIsPressed(colorNum){
-  colorSelection = colorNum;
+  console.log('the serial port opened.');
 }
 
 function serialEvent() {

@@ -52,8 +52,8 @@ $(function() {
 
   function tapholdHandler(event) {
     $(event.target).addClass("taphold");
-    console.log("i touched the but");
-    console.log(event.target.id); // which circle is being pressed?
+    // console.log("i touched the but");
+    // console.log(event.target.id); // which circle is being pressed?
     var idString = (event.target.id); //take the circle id string
     colorNum = idString.slice(6); //slice the string so it only prints the circle number
     // console.log(colorSelection); //print button color number
@@ -111,7 +111,9 @@ socket.on('connect', function(){
 
 socket.on('pressed', whichColorIsPressed);
 
-
+function whichColorIsPressed(colorNum){
+  colorSelection = colorNum;
+}
 // ********************************************************** 
 // BOOTSTRAP 
 // * Start Bootstrap - New Age v5.0.0 (https://startbootstrap.com/template-overviews/new-age)
