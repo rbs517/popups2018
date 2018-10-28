@@ -188,10 +188,10 @@ socket.on('connect', function(){
     console.log("feeretsssss"+ data);
   });
 
-  socket.emit('pressed', function(data){
-    console.log("pressed" + data);
+  // socket.emit('pressed', function(data){
+  //   console.log("pressed" + data);
 
-  });
+  // });
  // haveibeenpressed = true;
  //console.log("am I being pressed?");
 
