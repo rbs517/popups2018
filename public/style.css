@@ -34,12 +34,12 @@ section h2{
   padding-bottom: 40;
   text-align: center;
   position: relative;
-    top: -400px; /*for example purposes only*/
+    top: -200px; /*for example purposes only*/
 }
 
 #download p{
   position: relative;
-    top: -150px; /*for example purposes only*/
+    top: 0px; /*for example purposes only*/
   padding-bottom: 400;
   font-size: 70px;
   text-align: center;
@@ -47,7 +47,7 @@ section h2{
 
 #blowText{
   position: relative;
-    top: -10px; /*for example purposes only*/
+    top: -130px; /*for example purposes only*/
 }
 
 .container{   
@@ -62,8 +62,8 @@ section h2{
 }
 
 div.circleContainer {
-  width: 12em;
-  height: 12em;
+  width: 11em;
+  height: 11em;
   border-radius: 50%;
 /*  background-color: #108040;*/
   -webkit-touch-callout: none !important;
@@ -119,7 +119,7 @@ ul {
   display: flex;
   justify-content: center;
   position: relative;
-    top: -800px; /*for example purposes only*/
+    top: -650px; /*for example purposes only*/
   list-style-type: none;
   margin: 0;
   padding: 0;
