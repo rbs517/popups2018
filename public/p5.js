@@ -7,8 +7,12 @@ var inData; // for incoming serial data
 
 
 
-function sendtoSerialport(){
+function sendPressValtoSerialport(){
   colorSelection = colorNum;
+}
+
+function sendMicValtoSerialport(){
+  micInput = inputVal;
 }
 
 //p5 Serialport
