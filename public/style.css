@@ -17,7 +17,7 @@ section.masthead {
   position: relative;
   width: 100%;
   padding-top: 150px;
-  padding-bottom: 100px;
+  padding-bottom: 300px;
   background-color: black;
   color: white;
 }
@@ -47,12 +47,12 @@ section.download h2{
 }
 
 .flex-center {
-/*  margin: 90px auto;*/
+  margin: 90px auto;
   display: flex;
 /*  flex-direction: column;*/
   justify-content: center;
-/*  height: 100px;
-  width: 300px;*/
+  height: 100px;
+  width: 300px;
 /*  overflow: auto;*/
 }
 
@@ -118,6 +118,7 @@ div.circleContainer.taphold{
 
 .btn{
   border-radius:300px;
+  border-color: white;
   font-family:Lato,Helvetica,Arial,sans-serif;letter-spacing:2.5px;
   text-transform:uppercase;
 
