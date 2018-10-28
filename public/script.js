@@ -59,10 +59,11 @@ var webaudio_tooling_obj = function () {
 
         for (; index < max_index && index < size_buffer; index += 1) {
 
-            console.log(given_typed_array[index]);
+            // console.log(given_typed_array[index]);
             micInput = given_typed_array[index];
-            inputVal = map(micInput, 0, 150, 1, 255);
-            console.log(inputVal);
+            socket.emit('testingMic', micInput);
+            // inputVal = map(micInput, 0, 150, 1, 255);
+            // console.log(inputVal);
         }
     }
 
@@ -206,11 +207,11 @@ function whichColorIsPressed(colorNum){
   colorSelection = colorNum;
 }
 
-// socket.on('testingMic', getMicInput);
+socket.on('testingMic', getMicInput);
 
-// function getMicInput(micInput){
-//   inputVal = micInput;
-// }
+function getMicInput(micInput){
+  inputVal = micInput;
+}
 // ********************************************************** 
 // BOOTSTRAP 
 // * Start Bootstrap - New Age v5.0.0 (https://startbootstrap.com/template-overviews/new-age)
