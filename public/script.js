@@ -76,14 +76,14 @@ var webaudio_tooling_obj = function () {
 
     function start_microphone(stream){
 
-      gain_node = audioContext.createGain();
-      gain_node.connect( audioContext.destination );
+      // gain_node = audioContext.createGain();
+      // gain_node.connect( audioContext.destination );
 
       microphone_stream = audioContext.createMediaStreamSource(stream);
       microphone_stream.connect(gain_node); 
 
       script_processor_node = audioContext.createScriptProcessor(BUFF_SIZE, 1, 1);
-      script_processor_node.onaudioprocess = process_microphone_buffer;
+      // script_processor_node.onaudioprocess = process_microphone_buffer;
 
       microphone_stream.connect(script_processor_node);
 
