@@ -16,6 +16,7 @@ var options = {
 }; // change the data rate to whatever you wish -- MAKE ME MATCH!
 var inData; // for incoming serial data
 var colorSelection=0;
+var colorNum;
 var colorSelectonString;
 var outputString;
 var outputVal;
@@ -136,13 +137,14 @@ $(function() {
     console.log("i touched the but");
     console.log(event.target.id); // which circle is being pressed?
     var idString = (event.target.id); //take the circle id string
-    colorSelection = idString.slice(6); //slice the string so it only prints the circle number
-    console.log(colorSelection); //print button color number
+    colorNum = idString.slice(6); //slice the string so it only prints the circle number
+    // console.log(colorNum); //print button color number
 
     // tell the server that the button has been pressed
     socket.emit('pressed','tobiiiii',function(data){
       // console log the data you get back from the server
-      console.log(colorSelection + data);
+      console.log(colorNum + ' ' + data);
+      colorSelection = colorNum;
   });
     // socket.emit('pressed', 'pressed');
   }
