@@ -184,7 +184,7 @@ socket.on('userCount', function(userCount) {
 });
 
 socket.on('connect', function(){
-  socket.emit('ferret','tobiiiii',function(data){
+  socket.emit('press','tobiiiii',function(data){
     console.log("feeretsssss"+ data);
   });
  // haveibeenpressed = true;

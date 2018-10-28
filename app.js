@@ -37,8 +37,8 @@ var userCount = 0;
 
 // On connect to socket
 io.on('connection', function(socket){
-  socket.on('ferret',function(name, fn){
-    fn('mehhhhh');
+  socket.on('press',function(name, fn){
+    fn('press');
 }
 //on pressed send meeeehhh
 );
