@@ -133,15 +133,14 @@ $(function() {
 
   function tapholdHandler(event) {
     $(event.target).addClass("taphold");
-    console.log("I touched the button");
+    console.log("i touched the but");
     console.log(event.target.id); // which circle is being pressed?
     var idString = (event.target.id); //take the circle id string
     colorSelection = idString.slice(6); //slice the string so it only prints the circle number
     console.log(colorSelection); //print button color number
 
     // blowVal(); //only if you are pressing, will the mic be listening
-    // socket.emit('pressed', 'pressed');
-
+    socket.emit('pressed', 'pressed');
   }
 });
 
@@ -184,32 +183,12 @@ socket.on('userCount', function(userCount) {
   console.log('total number of users online is: ' + userCount);
 });
 
-// socket.on('connect', function(){
-//   socket.emit('ferret','tobiiiii',function(data){
-//     console.log("feeretsssss"+ data);
-//   });
-
 socket.on('connect', function(){
-  socket.emit('pressed',function(data){
+  socket.emit('ferret','tobiiiii',function(data){
     console.log("feeretsssss"+ data);
   });
-
-
-  // socket.emit('pressed', function(data){
-  //   console.log("pressed" + data);
-
-  // });
  // haveibeenpressed = true;
  //console.log("am I being pressed?");
-
-// socket.on('pressConfirmed', function(pressConfirmed){
-//     console.log(pressConfirmed);
-//   });
-
-
-
-
-
 });
 
 

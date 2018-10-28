@@ -37,13 +37,11 @@ var userCount = 0;
 
 // On connect to socket
 io.on('connection', function(socket){
-  socket.on('pressed',function(name, fn){
-    console.log('got a press');
-    fn('press confirmed'); //on pressed send meeeehhh
-
-  // socket.on('ferret',function(name, fn){
-  //   fn('mehhhhh'); //on pressed send meeeehhh
-  });
+  socket.on('ferret',function(name, fn){
+    fn('mehhhhh');
+}
+//on pressed send meeeehhh
+);
 
   userCount = userCount + 1;
   console.log('a user connected');
@@ -58,20 +56,18 @@ io.on('connection', function(socket){
     io.sockets.emit('userCount', userCount);
   });
 
+
   // socket.on ('private message', function(from, msg){
   //   console.log("I received a pm by", from, "saying", msg);
   // });
 
   //trying this
-  // socket.on('pressed', function(){
-  //   console.log('got a press');
+  socket.on('pressed', function(){
+    console.log('got a press');
     //socket.broadcast.emit('broadcasting');
     //socket.broadcast.emit('broadcast', 'hello friends!');
     // io.sockets.emit('dimensions', {h: h});
-  // });
-
-
-
+  });
 
   //LED STUFF
   // socket.on('mouse', mouseMsg);
