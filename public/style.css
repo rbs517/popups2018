@@ -32,13 +32,13 @@ section h2{
 #download h2{
   font-size:90px;
   margin-top: 0;
-  padding-bottom: 400;
+  padding-bottom: 50;
   text-align: center;
 }
 
 #download p{
-  padding-top: 600;
-  padding-bottom: 600;
+  padding-top: 200;
+  padding-bottom: 400;
   font-size: 70px;
   text-align: center;
 }
@@ -112,7 +112,7 @@ ul {
   display: flex;
   justify-content: center;
   position: relative;
-    top: -900px; /*for example purposes only*/
+    top: -700px; /*for example purposes only*/
   list-style-type: none;
   margin: 0;
   padding: 0;
