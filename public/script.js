@@ -26,6 +26,12 @@ function setup() {
 }
 
 function draw() {
+  vol = mic.getLevel();
+  micInput = map(vol, 0, 0.4, 1, 255); //inputVal is for arduino to control the fan
+  // tell the server that the button has been pressed
+  // socket.emit('testingMic', micInput);
+  console.log(micInput);
+  inputVal = micInput;
 }
 
 
@@ -51,7 +57,6 @@ $(function() {
     // console.log(colorSelection); //print button color number
     socket.emit('pressed', colorNum);
 
-    blowVal();
 
     // tell the server that the button has been pressed
   //   socket.emit('pressed', colorNum,function(data){
@@ -68,13 +73,6 @@ $(document).on("vmouseup", function() {
   // socket.emit('mouse', data);
   // $(event.target).removeEventListener("blow");
 });
-
-function blowVal() {
-    vol = mic.getLevel();
-    micInput = map(vol, 0, 0.4, 1, 255); //inputVal is for arduino to control the fan
-    // tell the server that the button has been pressed
-    socket.emit('testingMic', micInput);
-  }
 
 
 //Data smoothing functions
@@ -112,11 +110,11 @@ function whichColorIsPressed(colorNum){
   colorSelection = colorNum;
 }
 
-socket.on('testingMic', getMicInput);
+// socket.on('testingMic', getMicInput);
 
-function getMicInput(micInput){
-  inputVal = micInput;
-}
+// function getMicInput(micInput){
+//   inputVal = micInput;
+// }
 // ********************************************************** 
 // BOOTSTRAP 
 // * Start Bootstrap - New Age v5.0.0 (https://startbootstrap.com/template-overviews/new-age)
