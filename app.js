@@ -22,7 +22,7 @@ app.get('/', function(req, res){
 });
 
 // Get request to me from data.html
-// app.get('/.json', function(req, res){
+// app.get('/data.json', function(req, res){
 //   console.log('arduino is asking for data');
 //   res.render('data');
 // });
@@ -37,11 +37,11 @@ var userCount = 0;
 
 // On connect to socket
 io.on('connection', function(socket){
-  socket.on('pressed',function(name, fn){
-    fn('got a press');
-  }
-//on pressed send meeeehhhhh
-  );
+  socket.on('ferret',function(name, fn){
+    fn('mehhhhh');
+}
+//on pressed send meeeehhh
+);
 
   userCount = userCount + 1;
   console.log('a user connected');
@@ -62,19 +62,63 @@ io.on('connection', function(socket){
   // });
 
   //trying this
-  // socket.on('pressed', function(){
-  //   console.log('got a press');
+  socket.on('pressed', function(){
+    console.log('got a press');
     //socket.broadcast.emit('broadcasting');
     //socket.broadcast.emit('broadcast', 'hello friends!');
     // io.sockets.emit('dimensions', {h: h});
+  });
+
+  //LED STUFF
+  // socket.on('mouse', mouseMsg);
+  // board.on('ready', function() {
+  //   boardIsReady = true;
+
+  //   strip = new pixel.Strip({
+  //     board: this,
+  //     controller: "FIRMATA",
+  //     strips: [{
+  //       pin: 10,
+  //       length: 12
+  //     }, ],
+  //     gamma: 2.8,
+  //   });
+
+  //   strip.on("ready", function() {
+  //     // Set the entire strip to pink.
+  //     strip.color('#903');
+
+  //     // Send instructions to NeoPixel.
+  //     strip.show();
+  //   });
+
+  //   this.repl.inject({
+  //     strip: strip
+  //   });
+
   // });
 
-  // function restart (){
-  //   final = 0;
-  //   console.log('restarting...');
+  // function mouseMsg(data) {
+  //   // socket.broadcast.emit('mouse', data); //
+  //   // io.socket.emit('mouse', data); // including client who sends the msg
+  //   // console.log(socket.id + ': ' + data);
+
+  //   if (boardIsReady) {
+  //     var led = new five.Led(5); // pin 13
+  //     led.brightness(data);
+  //     console.log(data);
+  //     led = new five.Led(6); // pin 13
+  //     led.brightness(0);
+  //   }  
   // }
+
+
+  function restart (){
+    final = 0;
+    console.log('restarting...');
+  }
 
 });
 
 // Http listen on the port
-http.listen(PORT, () => console.log('Listening on ${ PORT }'));
+http.listen(PORT, () => console.log(`Listening on ${ PORT }`));

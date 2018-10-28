@@ -1,18 +1,30 @@
+// ********************************************************** 
+// STARTING JS FILE
+
+
+
 // Declaring variables
+let haveibeenpressed = false;
+var mic;
+var h;
+var l;
+var inputVal = 1;
 var serial; // variable to hold an instance of the serialport library
 var portName = '/dev/cu.usbmodem1421'; // fill in your serial port name here -- CHANGE ME!
 var options = {
   baudrate: 9600
 }; // change the data rate to whatever you wish -- MAKE ME MATCH!
 var inData; // for incoming serial data
+var colorSelection=0;
 var colorSelectonString;
 var outputString;
 var outputVal;
 var smoothVal;
 var inputValString;
-
+var blowData = [0, 0, 0, 0, 0]; //an array of recent microphone readings (for moving average)
 
 //p5 Serialport
+
 function checkPorts() {
   serial = new p5.SerialPort(); // make a new instance of the serialport library
   serial.on('list', printList); // set a callback function for the serialport list event
@@ -89,29 +101,23 @@ function portClose() {
 }
 
 
-// ********************************************************** 
-// STARTING JS FILE
+// p5.js function protocol
+ 
 
-// Declaring variables
-var haveibeenpressed = false;
-var mic;
-var inputVal = 1;
-var colorSelection=0;
-var blowData = [0, 0, 0, 0, 0]; //an array of recent microphone readings (for moving average)
-
-
-// Sketch
 function setup() {
   mic = new p5.AudioIn();
   mic.start();
   connectToSerialPort(portName); // list and connect to portName, throw errors if they happen
-  serial.write("100"); //send a "hello" value to start off the serial communication
+  serial.write("100") //send a "hello" value to start off the serial communication
 }
 
 function draw() {
   vol = mic.getLevel();
   inputVal = map(vol, 0, 0.4, 1, 255); //inputVal is for arduino to control the fan
 }
+
+
+// Sketch
 
 //Disable longpress on mobile devices
 function longClickHandler(e) {
@@ -123,6 +129,7 @@ $("div.circleContainer").longclick(250, longClickHandler);
 // On tap hold change color
 $(function() {
   $("div.circleContainer").bind("taphold", tapholdHandler);
+  // $("div.circleContainer").addEventListener("blow", blowVal);
 
   function tapholdHandler(event) {
     $(event.target).addClass("taphold");
@@ -177,7 +184,7 @@ socket.on('userCount', function(userCount) {
 });
 
 socket.on('connect', function(){
-  socket.emit('pressed',function(data){
+  socket.emit('ferret','tobiiiii',function(data){
     console.log("feeretsssss"+ data);
   });
  // haveibeenpressed = true;
