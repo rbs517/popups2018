@@ -20,7 +20,7 @@ var blowData = [0, 0, 0, 0, 0]; //an array of recent microphone readings (for mo
 // Sketch
 
 var type = 1, //circle type - 1 whole, 0.5 half, 0.25 quarter
-    radius = '12em', //distance from center
+    radius = '30em', //distance from center
     start = -90, //shift start from 0
     $elements = $('li'),
     numberOfElements = (type === 1) ?  $elements.length : $elements.length - 1, //adj for even distro of elements when not full circle
