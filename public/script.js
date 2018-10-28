@@ -180,16 +180,16 @@ var socket = io();
 
 socket.emit('user', 'new user is connected');
 socket.on('userCount', function(userCount) { 
-  console.log('total number of users online is: ' + userCount); //console number of users after one gets disconnected
+  console.log('total number of users online is: ' + userCount); //console number of users after one goes off;
 });
 
-// socket.on('pressed', function(){
-//   socket.emit('press','tobiiiii',function(data){
-//     console.log("feeretsssss"+ data);
-//   });
+socket.on('pressed', function(){
+  socket.emit('press','tobiiiii',function(data){
+    console.log("feeretsssss"+ data);
+  });
  // haveibeenpressed = true;
  //console.log("am I being pressed?");
-// });
+});
 
 
 // ********************************************************** 
