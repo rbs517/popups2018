@@ -51,12 +51,12 @@ io.on('connection', function(socket){
     console.log(colorNum);
   }
 
-  socket.on('testingMic', micInput);
+  // socket.on('testingMic', micInput);
 
-  function micMsg(micInput){
-    io.sockets.emit('testingMic', micInput);
-    console.log(micInput);
-  }
+  // function micMsg(micInput){
+  //   io.sockets.emit('testingMic', micInput);
+  //   console.log(micInput);
+  // }
 
   // // When you receive "pressed" from the client (js)
   // socket.on('pressed',function(name, fn){

@@ -19,15 +19,15 @@ var blowData = [0, 0, 0, 0, 0]; //an array of recent microphone readings (for mo
 
 // p5.js function protocol
 function setup() {
-  mic = new p5.AudioIn();
-  mic.start();
+  // mic = new p5.AudioIn();
+  // mic.start();
   // connectToSerialPort(portName); // list and connect to portName, throw errors if they happen
   // serial.write("100"); //send a "hello" value to start off the serial communication
 }
 
 function draw() {
-  vol = mic.getLevel();
-  inputVal = map(vol, 0, 0.4, 1, 255); //inputVal is for arduino to control the fan
+  // vol = mic.getLevel();
+  // inputVal = map(vol, 0, 0.4, 1, 255); //inputVal is for arduino to control the fan
   // tell the server that the button has been pressed
   // socket.emit('testingMic', micInput);
   // inputVal = micInput;
@@ -70,20 +70,6 @@ $(document).on("vmouseup", function() {
   // socket.emit('mouse', data);
   // $(event.target).removeEventListener("blow");
 });
-
-
-//Data smoothing functions
-function smoothReading(newReading) {
-  blowData.shift();
-  blowData.push(newReading);
-  var total = 0;
-  for (var i = 0; i < blowData.length; i++) {
-    total += blowData[i];
-  }
-  var avg = total / blowData.length;
-  return avg;
-  //maybe use math.floor and do more elegant control on the arduino side
-}
 
 
 // ********************************************************** 
