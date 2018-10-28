@@ -18,6 +18,37 @@ var blowData = [0, 0, 0, 0, 0]; //an array of recent microphone readings (for mo
 
 
 // Sketch
+
+var type = 1, //circle type - 1 whole, 0.5 half, 0.25 quarter
+    radius = '7em', //distance from center
+    start = -90, //shift start from 0
+    $elements = $('li'),
+    numberOfElements = (type === 1) ?  $elements.length : $elements.length - 1, //adj for even distro of elements when not full circle
+    slice = 360 * type / numberOfElements;
+
+$elements.each(function(i) {
+    var $self = $(this),
+        rotate = slice * i + start,
+        rotateReverse = rotate * -1;
+    
+    $self.css({
+        'transform': 'rotate(' + rotate + 'deg) translate(' + radius + ') rotate(' + rotateReverse + 'deg)'
+    });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //Disable longpress on mobile devices
 function longClickHandler(e) {
   e.preventDefault();
@@ -36,7 +67,7 @@ $(function() {
     // console.log(event.target.id); // which circle is being pressed?
     var idString = (event.target.id); //take the circle id string
     colorNum = idString.slice(6); //slice the string so it only prints the circle number
-    // console.log(colorSelection); //print button color number
+    console.log(colorNum); //print button color number
     socket.emit('pressed', colorNum);
 
     // tell the server that the button has been pressed

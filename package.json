@@ -27,6 +27,7 @@
         "jquery": "3.3.1",
         "jquery.easing": "^1.4.1",
         "node-pixel": "^0.10.1",
+        "nodemon": "^1.18.5",
         "path": "^0.12.7",
         "request": "^2.88.0",
         "simple-line-icons": "2.4.1",
