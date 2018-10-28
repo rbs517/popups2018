@@ -9,10 +9,11 @@ var inData; // for incoming serial data
 
 function sendPressValtoSerialport(){
   colorSelection = colorNum;
+  console.log(colorSelection);
 }
 
 function sendMicValtoSerialport(){
-  micInput = inputVal;
+  inputVal = micInput;
   console.log(inputVal);
 }
 
