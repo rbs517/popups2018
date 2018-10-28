@@ -41,6 +41,7 @@ io.on('connection', function(socket){
   socket.on('pressed',function(name, fn){
     console.log('got a press'); // heroku console
     fn('pressed!'); //send this data to client (js)
+    io.emit('pressed', 'pressed');
 }
 //on pressed send meeeehhh
 );

@@ -142,7 +142,7 @@ $(function() {
     // tell the server that the button has been pressed
     socket.emit('pressed','tobiiiii',function(data){
       // console log the data you get back from the server
-      console.log(colorSelection+ data);
+      console.log(colorSelection + data);
   });
     // socket.emit('pressed', 'pressed');
   }
