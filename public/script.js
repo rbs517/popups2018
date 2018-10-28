@@ -28,12 +28,8 @@ function setup() {
 function draw() {
   vol = mic.getLevel();
   micInput = map(vol, 0, 0.4, 1, 255); //inputVal is for arduino to control the fan
-      // tell the server that the button has been pressed
-    socket.emit('micVal', 'mic',function(data){
-      // console log the data you get back from the server
-      // sendtoSerialport();
-      // console.log(colorNum + ' ' + data);
-  });
+  // tell the server that the button has been pressed
+  socket.emit('testing1-2', micInput);
 }
 
 
@@ -57,8 +53,6 @@ $(function() {
     var idString = (event.target.id); //take the circle id string
     colorNum = idString.slice(6); //slice the string so it only prints the circle number
     // console.log(colorSelection); //print button color number
-
-
     socket.emit('pressed', colorNum);
 
 
@@ -67,7 +61,6 @@ $(function() {
   //     // console log the data you get back from the server
   //     console.log(data);
   // });
-    // socket.emit('pressed', 'pressed');
   }
 });
 
@@ -113,6 +106,12 @@ socket.on('pressed', whichColorIsPressed);
 
 function whichColorIsPressed(colorNum){
   colorSelection = colorNum;
+}
+
+socket.on('testing1-2', getMicInput);
+
+function getMicInput(micInput){
+  inputVal = micInput;
 }
 // ********************************************************** 
 // BOOTSTRAP 
