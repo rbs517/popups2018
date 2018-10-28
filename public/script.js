@@ -139,9 +139,10 @@ $(function() {
     colorSelection = idString.slice(6); //slice the string so it only prints the circle number
     console.log(colorSelection); //print button color number
 
-    // blowVal(); //only if you are pressing, will the mic be listening
+    // tell the server that the button has been pressed
     socket.emit('pressed','tobiiiii',function(data){
-      console.log("feeretsssss"+ data);
+      // console log the data you get back from the server
+      console.log(colorSelection+ data);
   });
     // socket.emit('pressed', 'pressed');
   }
