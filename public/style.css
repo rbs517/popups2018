@@ -47,13 +47,13 @@ section.download h2{
 }
 
 .flex-center {
-  margin: 90px auto;
+/*  margin: 90px auto;*/
   display: flex;
 /*  flex-direction: column;*/
   justify-content: center;
-  height: 100px;
-  width: 300px;
-  overflow: auto;
+/*  height: 100px;
+  width: 300px;*/
+/*  overflow: auto;*/
 }
 
 div.circleContainer {
