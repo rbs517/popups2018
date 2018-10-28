@@ -140,7 +140,10 @@ $(function() {
     console.log(colorSelection); //print button color number
 
     // blowVal(); //only if you are pressing, will the mic be listening
-    socket.emit('pressed', 'pressed');
+    socket.emit('pressed','tobiiiii',function(data){
+      console.log("feeretsssss"+ data);
+  });
+    // socket.emit('pressed', 'pressed');
   }
 });
 
@@ -183,13 +186,13 @@ socket.on('userCount', function(userCount) {
   console.log('total number of users online is: ' + userCount); //console number of users after one goes off;
 });
 
-socket.on('pressed', function(){
-  socket.emit('press','tobiiiii',function(data){
-    console.log("feeretsssss"+ data);
-  });
+// socket.on('pressed', function(){
+  // socket.emit('press','tobiiiii',function(data){
+  //   console.log("feeretsssss"+ data);
+  // });
  // haveibeenpressed = true;
  //console.log("am I being pressed?");
-});
+// });
 
 
 // ********************************************************** 
