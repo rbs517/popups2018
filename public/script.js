@@ -183,7 +183,7 @@ socket.on('userCount', function(userCount) {
   console.log('total number of users online is: ' + userCount);
 });
 
-socket.on('connect', function(){
+socket.on('pressed', function(){
   socket.emit('press','tobiiiii',function(data){
     console.log("feeretsssss"+ data);
   });
