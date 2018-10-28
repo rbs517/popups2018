@@ -207,11 +207,11 @@ function whichColorIsPressed(colorNum){
   colorSelection = colorNum;
 }
 
-socket.on('testingMic', getMicInput);
+// socket.on('testingMic', getMicInput);
 
-function getMicInput(micInput){
-  inputVal = micInput;
-}
+// function getMicInput(micInput){
+//   inputVal = micInput;
+// }
 // ********************************************************** 
 // BOOTSTRAP 
 // * Start Bootstrap - New Age v5.0.0 (https://startbootstrap.com/template-overviews/new-age)
