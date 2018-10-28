@@ -37,8 +37,8 @@ var userCount = 0;
 
 // On connect to socket
 io.on('connection', function(socket){
-  socket.on('press',function(name, fn){
-    fn('press');
+  socket.on('pressed',function(name, fn){
+    fn('pressed!');
 }
 //on pressed send meeeehhh
 );
@@ -53,7 +53,7 @@ io.on('connection', function(socket){
     userCount = userCount - 1;
     console.log('user disconnected');
     console.log('number of connected users: ' + userCount);
-    io.sockets.emit('userCount', userCount);
+    io.sockets.emit('userCount', userCount); //call userCount function on js side
   });
 
 
