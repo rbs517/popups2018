@@ -51,19 +51,19 @@ var webaudio_tooling_obj = function () {
 
     // ---
 
-    function show_some_data(given_typed_array, num_row_to_display, label) {
+    // function show_some_data(given_typed_array, num_row_to_display, label) {
 
-        var size_buffer = given_typed_array.length;
-        var index = 0;
-        var max_index = num_row_to_display;
+    //     var size_buffer = given_typed_array.length;
+    //     var index = 0;
+    //     var max_index = num_row_to_display;
 
-        console.log("__________ " + label);
+    //     console.log("__________ " + label);
 
-        for (; index < max_index && index < size_buffer; index += 1) {
+    //     for (; index < max_index && index < size_buffer; index += 1) {
 
-            console.log(given_typed_array[index]);
-        }
-    }
+    //         console.log(given_typed_array[index]);
+    //     }
+    // }
 
     // function process_microphone_buffer(event) {
 
@@ -87,7 +87,7 @@ var webaudio_tooling_obj = function () {
       // script_processor_node = audioContext.createScriptProcessor(BUFF_SIZE, 1, 1);
       // script_processor_node.onaudioprocess = process_microphone_buffer;
 
-      microphone_stream.connect(script_processor_node);
+      // microphone_stream.connect(script_processor_node);
 
       // --- enable volume control for output speakers
 
