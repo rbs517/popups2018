@@ -187,12 +187,17 @@ socket.on('connect', function(){
   socket.emit('ferret','tobiiiii',function(data){
     console.log("feeretsssss"+ data);
   });
+
+  socket.emit('pressed', function(data){
+    console.log("pressed" + data);
+
+  });
  // haveibeenpressed = true;
  //console.log("am I being pressed?");
 
-socket.on('pressConfirmed', function(pressConfirmed){
-    console.log(pressConfirmed);
-  });
+// socket.on('pressConfirmed', function(pressConfirmed){
+//     console.log(pressConfirmed);
+//   });
 
 
 

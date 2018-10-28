@@ -59,9 +59,9 @@ io.on('connection', function(socket){
   // });
 
   //trying this
-  socket.on('pressed', function(){
+  socket.on('pressed', function(name, fn){
     console.log('got a press');
-    io.sockets.emit('pressConfirmed');
+    fn('pressConfirmed');
     //socket.broadcast.emit('broadcasting');
     //socket.broadcast.emit('broadcast', 'hello friends!');
     // io.sockets.emit('dimensions', {h: h});
