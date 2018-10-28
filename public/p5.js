@@ -7,16 +7,6 @@ var inData; // for incoming serial data
 
 
 
-function sendPressValtoSerialport(){
-  colorSelection = colorNum;
-  console.log(colorSelection);
-}
-
-function sendMicValtoSerialport(){
-  inputVal = micInput;
-  console.log(inputVal);
-}
-
 //p5 Serialport
 function checkPorts() {
   serial = new p5.SerialPort(); // make a new instance of the serialport library
