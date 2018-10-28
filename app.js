@@ -37,8 +37,12 @@ var userCount = 0;
 
 // On connect to socket
 io.on('connection', function(socket){
-  socket.on('ferret',function(name, fn){
-    fn('mehhhhh'); //on pressed send meeeehhh
+  socket.on('pressed',function(name, fn){
+    console.log('got a press');
+    fn('press confirmed'); //on pressed send meeeehhh
+
+  // socket.on('ferret',function(name, fn){
+  //   fn('mehhhhh'); //on pressed send meeeehhh
   });
 
   userCount = userCount + 1;
@@ -59,12 +63,12 @@ io.on('connection', function(socket){
   // });
 
   //trying this
-  socket.on('pressed', function(){
-    console.log('got a press');
+  // socket.on('pressed', function(){
+  //   console.log('got a press');
     //socket.broadcast.emit('broadcasting');
     //socket.broadcast.emit('broadcast', 'hello friends!');
     // io.sockets.emit('dimensions', {h: h});
-  });
+  // });
 
 
 
