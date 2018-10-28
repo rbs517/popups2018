@@ -140,10 +140,8 @@ $(function() {
     console.log(colorSelection); //print button color number
 
     // blowVal(); //only if you are pressing, will the mic be listening
-    // socket.emit('pressed', 'pressed');
-    socket.emit('pressed',function(data){
-      console.log("feeretsssss"+ data);
-    });
+    socket.emit('pressed', 'pressed');
+
   }
 });
 
@@ -191,10 +189,10 @@ socket.on('userCount', function(userCount) {
 //     console.log("feeretsssss"+ data);
 //   });
 
-// socket.on('pressed', function(){
-//   socket.emit('pressed',function(data){
-//     console.log("feeretsssss"+ data);
-//   });
+socket.on('connect', function(){
+  socket.emit('pressed',function(data){
+    console.log("feeretsssss"+ data);
+  });
 
 
   // socket.emit('pressed', function(data){
@@ -212,7 +210,7 @@ socket.on('userCount', function(userCount) {
 
 
 
-// });
+});
 
 
 // ********************************************************** 
