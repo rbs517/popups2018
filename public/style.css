@@ -11,7 +11,7 @@ section.masthead {
 }
 
 section.masthead p{
-  margin-top: 90;
+  margin-top: 200;
   font-size: 70px;
 }
 
@@ -24,35 +24,22 @@ section h2{
 }
 
 #download{
-  position:relative;
-  padding: 0px;
   background-color: black;
   color: white;
 }
 
 
 #download h2{
-  padding: 0px;
-}
-
-#download p{
-  padding-top: 400;
+  font-size:90px;
+  margin-top: 0;
   padding-bottom: 400;
-  font-size: 70px;
   text-align: center;
 }
 
-section.download{
-
-}
-
-section.download p{
-}
-
-
-section.download h2{
-  font-size:90px;
-  margin-top:0;
+#download p{
+  padding-top: 600;
+  padding-bottom: 600;
+  font-size: 70px;
   text-align: center;
 }
 
@@ -68,8 +55,8 @@ section.download h2{
 }
 
 div.circleContainer {
-  width: 14em;
-  height: 14em;
+  width: 12em;
+  height: 12em;
   border-radius: 50%;
 /*  background-color: #108040;*/
   -webkit-touch-callout: none !important;
@@ -125,7 +112,7 @@ ul {
   display: flex;
   justify-content: center;
   position: relative;
-    top: -600px; /*for example purposes only*/
+    top: -900px; /*for example purposes only*/
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -145,16 +132,16 @@ li {
 }
 
 .btn{
-  border-radius:350px;
-  border: 5px solid white;
-  font-family:Lato,Helvetica,Arial,sans-serif;letter-spacing:2.5px;
+  border-radius:380px;
+  border: 6px solid white;
+  font-family:Lato,Helvetica,Arial,sans-serif;letter-spacing:6px;
   text-transform:uppercase;
 
 }
 
 .btn-xl{
-  font-size:45px;
-  padding:45px 75px;
+  font-size:48px;
+  padding:48px 78px;
 }
 
 footer{
