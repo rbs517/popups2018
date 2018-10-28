@@ -190,8 +190,8 @@ socket.on('connect', function(){
  // haveibeenpressed = true;
  //console.log("am I being pressed?");
 
-socket.on('pressedConfirmed', function(pressedConfirmed){
-    console.log(pressedConfirmed);
+socket.on('pressConfirmed', function(pressConfirmed){
+    console.log(pressConfirmed);
   });
 
 
