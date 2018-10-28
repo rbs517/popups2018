@@ -78,14 +78,14 @@ var webaudio_tooling_obj = function () {
 
     function start_microphone(stream){
 
-      gain_node = audioContext.createGain();
-      gain_node.connect( audioContext.destination );
+      // gain_node = audioContext.createGain();
+      // gain_node.connect( audioContext.destination );
 
-      microphone_stream = audioContext.createMediaStreamSource(stream);
-      microphone_stream.connect(gain_node); 
+      // microphone_stream = audioContext.createMediaStreamSource(stream);
+      // microphone_stream.connect(gain_node); 
 
-      script_processor_node = audioContext.createScriptProcessor(BUFF_SIZE, 1, 1);
-      script_processor_node.onaudioprocess = process_microphone_buffer;
+      // script_processor_node = audioContext.createScriptProcessor(BUFF_SIZE, 1, 1);
+      // script_processor_node.onaudioprocess = process_microphone_buffer;
 
       microphone_stream.connect(script_processor_node);
 
@@ -101,22 +101,22 @@ var webaudio_tooling_obj = function () {
 
       // --- setup FFT
 
-      script_processor_fft_node = audioContext.createScriptProcessor(2048, 1, 1);
-      script_processor_fft_node.connect(gain_node);
+      // script_processor_fft_node = audioContext.createScriptProcessor(2048, 1, 1);
+      // script_processor_fft_node.connect(gain_node);
 
-      analyserNode = audioContext.createAnalyser();
-      analyserNode.smoothingTimeConstant = 0;
-      analyserNode.fftSize = 2048;
+      // analyserNode = audioContext.createAnalyser();
+      // analyserNode.smoothingTimeConstant = 0;
+      // analyserNode.fftSize = 2048;
 
-      microphone_stream.connect(analyserNode);
+      // microphone_stream.connect(analyserNode);
 
-      analyserNode.connect(script_processor_fft_node);
+      // analyserNode.connect(script_processor_fft_node);
 
       script_processor_fft_node.onaudioprocess = function() {
 
         // get the average for the first channel
-        var array = new Uint8Array(analyserNode.frequencyBinCount);
-        analyserNode.getByteFrequencyData(array);
+        // var array = new Uint8Array(analyserNode.frequencyBinCount);
+        // analyserNode.getByteFrequencyData(array);
 
         // draw the spectrogram
         if (microphone_stream.playbackState == microphone_stream.PLAYING_STATE) {
