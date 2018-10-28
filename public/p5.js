@@ -62,7 +62,7 @@ function serialEvent() {
     if (inString == "A") { // ... and that something is 'hello' in the form of "A"...
       smoothVal = smoothReading(inputVal); // prepare the value to send
       // combine the mic value and color selection into a 4 digit number for arudiuno
-      var tempInt = int(smoothVal);
+      var tempInt = parseInt(smoothVal);
       inputValString = String(tempInt);
       // var tempVal = int(smoothVal);
       if (inputValString.length == 1) {inputValString = "00" + inputValString};
