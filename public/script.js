@@ -94,15 +94,10 @@ socket.on('userCount', function(userCount) {
 });
 
 socket.on('connect', function(){
-  console.log('here');
   connectToSerialPort(portName); // list and connect to portName, throw errors if they happen
   serial.write("100"); //send a "hello" value to start off the serial communication
-  console.log('still here');
+  serial.print("here!");
 });
-
- // haveibeenpressed = true;
- //console.log("am I being pressed?");
-// });
 
 
 // ********************************************************** 
@@ -126,5 +121,3 @@ socket.on('connect', function(){
 //   a(),e(window).scroll(a);
 
 // }(jQuery);
-
-
