@@ -1,12 +1,9 @@
 body{
   font-family:Muli,Helvetica,Arial,
   sans-serif;
- }
-
-body.ui-pagecontainer,body.ui-mobile-viewport, body.ui-overlay-a{
   background-color: #000000;
   color: #ffffff;
-}
+ }
 
 
 a:focus,a:hover{
