@@ -98,7 +98,8 @@ $(function() {
 
     // tell the server that we want the mic data now 
     vol = mic.getLevel();
-    micInput = map(vol, 0, 0.01, 1, 255); //inputVal is for arduino to control the fan
+    micInput = vol;
+    // micInput = map(vol, 0, 0.001, 1, 255); //inputVal is for arduino to control the fan
 
     socket.emit('testingMic', micInput);
   }
