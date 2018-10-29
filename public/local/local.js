@@ -121,7 +121,7 @@ let init = () => {
 
 	socket.on('toLocal', function(data){
 		// this is the function got long press data from socket.io server
-		console.log(data); //colorNum data
+		// console.log(data); //colorNum data
     colorSelection = data;
 	});
 

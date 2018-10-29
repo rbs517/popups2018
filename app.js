@@ -38,7 +38,7 @@ io.on('connection', function(socket){
   function colorMsg(colorNum){
     // send long press data to Local.js which is used to talk to serialport
     io.sockets.emit('toLocal', colorNum);
-    console.log(colorNum);
+    // console.log(colorNum);
   }
 
   socket.on('testingMic', micMsg);
