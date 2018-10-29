@@ -44,7 +44,7 @@ io.on('connection', function(socket){
   socket.on('testingMic', micMsg);
 
   function micMsg(micInput){
-    io.sockets.emit('toLocal2', micInput);
+    io.sockets.emit('toLocal', micInput);
     console.log(micInput);
   }
 
