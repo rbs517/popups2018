@@ -37,14 +37,40 @@ $elements.each(function(i) {
 });
 
 
+var circleDesign = document.getElementById('circle10');
+
+//   var circleDesign = class {
+//   constructor(x, y) {
+//     this.x = 100;
+//     this.y = 100;
+//     color: 255, 255, 255;
+//     // this.width = 20;
+//     // this.height = 20;
+//     // this.r = 3.0;
+//     // this.x = x;
+//     // this.y = y;
+//     // this.color = z; 
+//   }
+//   show(){
+//     ellipse(this.x, this.y, 20, 20);
+//   }
+// };
 
 
+// var circleDesign;
 
+// cd1 = new circleDesign();
+// cd1.show();
+// console.log(cd1);
 
+// var circleDesign = {
+//     x: 0,
+//     y: 200,
+//     diameter: 50
+// };
 
-
-
-
+// var m = 4;
+// var circleDesign1 = new circleDesign(85*m, 20*m, blue);
 
 
 
