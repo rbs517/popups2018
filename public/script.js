@@ -2,20 +2,10 @@
 // STARTING JS FILE
 
 // Declaring variables
-var haveibeenpressed = false;
 var mic;
 var h;
 var l;
 var micInput;
-var inputVal = 1;
-var colorSelection=0;
-var colorSelectonString;
-var outputString;
-var outputVal;
-var smoothVal;
-var inputValString;
-var blowData = [0, 0, 0, 0, 0]; //an array of recent microphone readings (for moving average)
-
 
 // Sketch
 
@@ -23,25 +13,16 @@ var blowData = [0, 0, 0, 0, 0]; //an array of recent microphone readings (for mo
 function setup() {
   mic = new p5.AudioIn();
   mic.start();
-  // connectToSerialPort(portName); // list and connect to portName, throw errors if they happen
-  // serial.write("100"); //send a "hello" value to start off the serial communication
 }
 
 function draw() {
   vol = mic.getLevel();
-  inputVal = map(vol, 0, 0.4, 1, 255); //inputVal is for arduino to control the fan
-  // tell the server that the button has been pressed
-  // socket.emit('testingMic', micInput);
-  // inputVal = micInput;
-  // console.log(inputVal);
 }
 
-
-
 // Circles placed in a circle design for taphold page
-var type = 1, //circle type - 1 whole, 0.5 half, 0.25 quarter
-    radius = '22em', //distance from center
-    start = -90, //shift start from 0
+var type = 1, // circle type - 1 whole, 0.5 half, 0.25 quarter
+    radius = '22em', // distance from center
+    start = -90, // shift start from 0
     $elements = $('li'),
     numberOfElements = (type === 1) ?  $elements.length : $elements.length - 1, //adj for even distro of elements when not full circle
     slice = 360 * type / numberOfElements;
@@ -93,9 +74,7 @@ $elements.each(function(i) {
 // var circleDesign1 = new circleDesign(85*m, 20*m, blue);
 
 
-
-
-//Disable longpress on mobile devices
+// Disable longpress on mobile devices
 function longClickHandler(e) {
   e.preventDefault();
 }
@@ -114,13 +93,12 @@ $(function() {
     var idString = (event.target.id); //take the circle id string
     colorNum = idString.slice(6); //slice the string so it only prints the circle number
     // console.log(colorNum); //print button color number
+    
+    // tell the server that the button has been pressed
     socket.emit('pressed', colorNum);
 
-    // tell the server that the button has been pressed
-  //   socket.emit('pressed', colorNum,function(data){
-  //     // console log the data you get back from the server
-  //     console.log(data);
-  // });
+    // tell the server that we want the mic data now 
+    socket.emit('testingMic', micInput);
   }
 });
 
@@ -227,14 +205,9 @@ var socket = io();
 
 socket.emit('user', 'new user is connected');
 socket.on('userCount', function(userCount) { 
-  console.log('total number of users online is: ' + userCount); //console number of users after one goes off;
+  console.log('total number of users online is: ' + userCount); // console number of users after one goes off;
 });
 
-// socket.on('testingMic', getMicInput);
-
-// function getMicInput(micInput){
-//   inputVal = micInput;
-// }
 // ********************************************************** 
 // BOOTSTRAP 
 // * Start Bootstrap - New Age v5.0.0 (https://startbootstrap.com/template-overviews/new-age)

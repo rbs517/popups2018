@@ -8,15 +8,16 @@ var options = {
   baudrate: 9600 // change the data rate to whatever you wish -- MAKE ME MATCH!
 }; 
 var inData; // for incoming serial data
+var inputVal = 1;
+var colorSelection=0;
+var colorSelectonString;
+var outputString;
+var outputVal;
+var smoothVal;
+var inputValString;
+var blowData = [0, 0, 0, 0, 0]; // an array of recent microphone readings (for moving average)
 
-// //p5 Serialport
-// function checkPorts() {
-//   serial = new p5.SerialPort(); // make a new instance of the serialport library
-//   serial.on('list', printList); // set a callback function for the serialport list event
-//   serial.list(); // list the serial ports
-// }
-
-// get the list of ports:
+// Get the list of ports:
 function printList(portList) {
   // portList is an array of serial port names
   for (var i = 0; i < portList.length; i++) {
@@ -46,10 +47,21 @@ function portOpen() {
   console.log('the serial port opened.');
 }
 
+// Data smoothing function
+function smoothReading(newReading) {
+  blowData.shift();
+  blowData.push(newReading);
+  var total = 0;
+  for (var i = 0; i < blowData.length; i++) {
+    total += blowData[i];
+  }
+  var avg = total / blowData.length;
+  return avg;
+  // maybe use math.floor and do more elegant control on the arduino side
+}
 
 function serialEvent() {
   var inString = serial.readStringUntil('\r\n');
-  // console.log(haveibeenpressed);
   //check to see that there's actually a string there:
   if (inString.length > 0) {
     //console.log("I read a string that says: " + inString) // if there is something in that line...
@@ -107,11 +119,16 @@ let init = () => {
   //   colorSelection = colorNum;
   // }
 
-	socket.on("toLocal", function(data){
-		//this is the function got long press data from socket.io server
+	socket.on('toLocal', function(data){
+		// this is the function got long press data from socket.io server
 		console.log(data); //colorNum data
     colorSelection = data;
 	});
+
+  socket.on('testingMic', function(getMicInput){
+    console.log(getMicInput);
+    inputVal = getMicInput;
+  });
 
 	console.log(portName);
 	connectToSerialPort(portName);
@@ -120,5 +137,5 @@ let init = () => {
 };
 
 
-//init a connection to socket.io server (heroku server)
+// init a connection to socket.io server (heroku server)
 window.onload =init();
