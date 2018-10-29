@@ -94,9 +94,10 @@ let init = () => {
 
 	socket.emit('user', 'new user is connected');
 	socket.on('userCount', function(userCount) { 
-  		console.log('total number of users online is: ' + userCount); //console number of users after one goes off;
+  console.log('total number of users online is: ' + userCount); //console number of users after one goes off;
 	});
-	console.log("init done");
+	
+  console.log("init done");
 
 // ********************************************************** 
 // WHEN RECEIVE DATA FROM SOCKET.IO, SEND THE DATA TO SERIALPORT 
