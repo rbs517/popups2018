@@ -3,8 +3,6 @@
 
 // Declaring variables
 var mic;
-var h;
-var l;
 var micInput;
 
 // Sketch
@@ -16,8 +14,8 @@ function setup() {
 }
 
 function draw() {
-  vol = mic.getLevel();
-  micInput = map(vol, 0, 0.4, 1, 255); //inputVal is for arduino to control the fan
+  // vol = mic.getLevel();
+  // micInput = map(vol, 0, 0.4, 1, 255); //inputVal is for arduino to control the fan
 }
 
 // Circles placed in a circle design for taphold page
@@ -99,6 +97,8 @@ $(function() {
     socket.emit('pressed', colorNum);
 
     // tell the server that we want the mic data now 
+    vol = mic.getLevel();
+    micInput = map(vol, 0, 0.4, 1, 255); //inputVal is for arduino to control the fan
     socket.emit('testingMic', micInput);
   }
 });
