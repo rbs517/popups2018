@@ -17,6 +17,7 @@ function setup() {
 
 function draw() {
   vol = mic.getLevel();
+  micInput = map(vol, 0, 0.4, 1, 255); //inputVal is for arduino to control the fan
 }
 
 // Circles placed in a circle design for taphold page
