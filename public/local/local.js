@@ -125,7 +125,7 @@ let init = () => {
     colorSelection = data;
 	});
 
-  socket.on('testingMic', function(getMicInput){
+  socket.on('toLocal2', function(getMicInput){
     console.log(getMicInput);
     inputVal = getMicInput;
   });

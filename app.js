@@ -41,10 +41,10 @@ io.on('connection', function(socket){
     console.log(colorNum);
   }
 
-  socket.on('testingMic', micInput);
+  socket.on('testingMic', micMsg);
 
   function micMsg(micInput){
-    io.sockets.emit('testingMic', micInput);
+    io.sockets.emit('toLocal2', micInput);
     console.log(micInput);
   }
 
