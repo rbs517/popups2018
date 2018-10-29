@@ -59,6 +59,7 @@ function draw() {
   // tell the server that the button has been pressed
   // socket.emit('testingMic', micInput);
   // inputVal = micInput;
+  console.log(inputVal)
 }
 
 //Data smoothing functions
