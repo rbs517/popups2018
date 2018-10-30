@@ -100,6 +100,11 @@ $(function(){
   }
 });
 
+// On tap release go back to original color
+$("div.circleContainer").on("vmouseup", function() {
+  $(event.target).removeClass("tap");
+});
+
 // // On tap hold change color
 // $(function() {
 //   $("div.circleContainer").bind("taphold", tapholdHandler);
@@ -117,10 +122,10 @@ $(function(){
 //   }
 // });
 
-// On tap release go back to original color
-$(document).on("vmouseup", function() {
-  $(event.target).removeClass("tap");
-});
+// // On tap release go back to original color
+// $(document).on("vmouseup", function() {
+//   $(event.target).removeClass("tap");
+// });
 
 
 // var webaudio_tooling_obj = function () {
