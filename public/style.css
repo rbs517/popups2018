@@ -4,7 +4,7 @@ html, body{
  }
 
 section.masthead {
-  padding-top: 150px;
+  padding-top: 80px;
   padding-bottom: 800px;
   background-color: black;
   color: white;
@@ -20,6 +20,7 @@ section{
 }
 
 section h2{
+  padding-top: 20px;
   font-size:90px;
 }
 
