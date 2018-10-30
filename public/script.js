@@ -92,11 +92,11 @@ $(function(){
     // tell the server that the button has been pressed
     socket.emit('pressed', colorNum);
 
-  vol = mic.getLevel();
-  // micInput = map(vol, 0, 0.03, 1, 255); // micInput is for arduino to control the fan
-  micInput = (vol*10) + 100; // micInput is for arduino to control the fan
-  // tell the server that we want the mic data now 
-  socket.emit('testingMic', micInput);
+    vol = mic.getLevel();
+    // micInput = map(vol, 0, 0.03, 1, 255); // micInput is for arduino to control the fan
+    micInput = (vol*10) + 100; // micInput is for arduino to control the fan
+    // tell the server that we want the mic data now 
+    socket.emit('testingMic', micInput);
   }
 });
 
@@ -119,7 +119,7 @@ $(function(){
 
 // On tap release go back to original color
 $(document).on("vmouseup", function() {
-  $(event.target).removeClass("taphold");
+  $(event.target).removeClass("tap");
 });
 
 
