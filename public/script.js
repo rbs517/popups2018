@@ -83,6 +83,11 @@ $("div.circleContainer").longclick(250, longClickHandler);
 
 $(function(){
   $( "div.circleContainer" ).bind( "tap", tapHandler );
+  
+  // On tap release go back to original color
+  $("div.circleContainer").on("vmouseup", function() {
+    $(event.target).removeClass("tap");
+  });
  
   function tapHandler( event ){
     // Highlight button/circle when clicked on
@@ -100,10 +105,7 @@ $(function(){
   }
 });
 
-// On tap release go back to original color
-$("div.circleContainer").on("vmouseup", function() {
-  $(event.target).removeClass("tap");
-});
+
 
 // // On tap hold change color
 // $(function() {
