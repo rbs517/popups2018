@@ -4,7 +4,7 @@ html, body{
  }
 
 section.masthead {
-  padding-top: 80px;
+  padding-top: 30px;
   padding-bottom: 800px;
   background-color: black;
   color: white;
@@ -151,7 +151,7 @@ li {
 }
 
 .btn{
-  margin-top: 250;
+  margin-top: 300;
   border-radius:380px;
   border: 6px solid white;
   font-family:Lato,Helvetica,Arial,sans-serif;letter-spacing:6px;
