@@ -20,7 +20,7 @@ function draw() {
 
 // Circles placed in a circle design for taphold page
 var type = 1, // circle type - 1 whole, 0.5 half, 0.25 quarter
-    radius = '22em', // distance from center
+    radius = '20em', // distance from center
     start = -90, // shift start from 0
     $elements = $('li'),
     numberOfElements = (type === 1) ?  $elements.length : $elements.length - 1, //adj for even distro of elements when not full circle

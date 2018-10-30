@@ -12,7 +12,7 @@ section.masthead {
 
 section.masthead p{
   margin-top: 0;
-  font-size: 70px;
+  font-size: 64px;
 }
 
 section{
@@ -42,7 +42,7 @@ section h2{
   position: relative;
     top: 0px; /*for example purposes only*/
   padding-bottom: 400;
-  font-size: 70px;
+  font-size: 64px;
   text-align: center;
 }
 
@@ -63,8 +63,8 @@ section h2{
 }
 
 div.circleContainer {
-  width: 11em;
-  height: 11em;
+  width: 10em;
+  height: 10em;
   border-radius: 50%;
 /*  background-color: #108040;*/
   -webkit-touch-callout: none !important;
@@ -151,7 +151,7 @@ li {
 }
 
 .btn{
-  margin-top: 450;
+  margin-top: 500;
   border-radius: 380px;
   border: 6px solid white;
   font-family:"Avenir Next", sans-serif;letter-spacing:6px;
@@ -172,6 +172,6 @@ footer{
 }
 
 footer p{
-  font-size:22px;
+  font-size:26px;
   margin:40;
 }
