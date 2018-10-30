@@ -75,8 +75,8 @@ $elements.each(function(i) {
 // On click mic listen and send data
 $("div.circleContainer").click(function(){
   vol = mic.getLevel();
-  // micInput = map(vol, 0, 0.03, 1, 255); //inputVal is for arduino to control the fan
-  micInput = (vol*10) + 100;
+  micInput = map(vol, 0, 0.03, 1, 255); //inputVal is for arduino to control the fan
+  // micInput = (vol*10) + 100;
   // tell the server that we want the mic data now 
   socket.emit('testingMic', micInput);
 });
