@@ -7,12 +7,6 @@ var micInput;
 
 // Sketch
 
-function init(){
-    vol = mic.getLevel();
-    // micInput = map(vol, 0, 0.03, 1, 255); //inputVal is for arduino to control the fan
-    micInput = (vol*10) + 100;
-}
-
 // p5.js function protocol
 function setup() {
   mic = new p5.AudioIn();
@@ -78,6 +72,15 @@ $elements.each(function(i) {
 // var m = 4;
 // var circleDesign1 = new circleDesign(85*m, 20*m, blue);
 
+// On click mic listen and send data
+$("div.circleContainer").click(function(){
+  vol = mic.getLevel();
+  // micInput = map(vol, 0, 0.03, 1, 255); //inputVal is for arduino to control the fan
+  micInput = (vol*10) + 100;
+  // tell the server that we want the mic data now 
+  socket.emit('testingMic', micInput);
+});
+
 
 // Disable longpress on mobile devices
 function longClickHandler(e) {
@@ -101,9 +104,6 @@ $(function() {
     
     // tell the server that the button has been pressed
     socket.emit('pressed', colorNum);
-
-    // tell the server that we want the mic data now 
-    socket.emit('testingMic', micInput);
   }
 });
 
@@ -234,7 +234,3 @@ socket.on('userCount', function(userCount) {
   a(),e(window).scroll(a);
 
 }(jQuery);
-
-
-//initialize on window
-window.onload =init();
