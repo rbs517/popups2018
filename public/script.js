@@ -72,30 +72,33 @@ $elements.each(function(i) {
 // var m = 4;
 // var circleDesign1 = new circleDesign(85*m, 20*m, blue);
 
-// On click: mic listen and send data
-$("div.circleContainer").click(function(){
-  vol = mic.getLevel();
-  // micInput = map(vol, 0, 0.03, 1, 255); // micInput is for arduino to control the fan
-  micInput = (vol*10) + 100; // micInput is for arduino to control the fan
-  // tell the server that we want the mic data now 
-  socket.emit('testingMic', micInput);
-
-  // Highlight button/circle when clicked on
-  $(event.target).addClass("taphold");
-  var idString = (event.target.id); //take the circle id string
-  colorNum = idString.slice(6); //slice the string so it only prints the circle number
-  // tell the server that the button has been pressed
-  socket.emit('pressed', colorNum);
-});
-
-
 // Disable longpress "highlight" on mobile devices
 function longClickHandler(e) {
   e.preventDefault();
 }
 
-// Taphold (longclick)
-// $("div.circleContainer").longclick(250, longClickHandler);
+$("div.circleContainer").longclick(250, longClickHandler);
+
+// On click: mic listen and send data
+
+$(function(){
+  $( "div.circleContainer" ).bind( "tap", tapHandler );
+ 
+  function tapHandler( event ){
+    // Highlight button/circle when clicked on
+    $( event.target ).addClass( "tap" );
+    var idString = (event.target.id); //take the circle id string
+    colorNum = idString.slice(6); //slice the string so it only prints the circle number
+    // tell the server that the button has been pressed
+    socket.emit('pressed', colorNum);
+
+  vol = mic.getLevel();
+  // micInput = map(vol, 0, 0.03, 1, 255); // micInput is for arduino to control the fan
+  micInput = (vol*10) + 100; // micInput is for arduino to control the fan
+  // tell the server that we want the mic data now 
+  socket.emit('testingMic', micInput);
+  }
+});
 
 // // On tap hold change color
 // $(function() {

@@ -121,7 +121,7 @@ div.circleContainer {
 
 }
 
-div.circleContainer.taphold{
+div.circleContainer.tap{
   border: 3px solid white;
   -webkit-user-select: none !important;
 }
