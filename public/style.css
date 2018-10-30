@@ -1,17 +1,17 @@
 html, body{
-  font-family:Muli,Helvetica,Arial,
+  font-family:"Avenir Next" !important,
   sans-serif;
  }
 
 section.masthead {
-  padding-top: 30px;
+  padding-top: 0px;
   padding-bottom: 800px;
   background-color: black;
   color: white;
 }
 
 section.masthead p{
-  margin-top: 30;
+  margin-top: 0;
   font-size: 70px;
 }
 
@@ -20,7 +20,7 @@ section{
 }
 
 section h2{
-  padding-top: 20px;
+  padding-top: 5px;
   font-size:90px;
 }
 
@@ -151,7 +151,7 @@ li {
 }
 
 .btn{
-  margin-top: 300;
+  margin-top: 350;
   border-radius:380px;
   border: 6px solid white;
   font-family:Lato,Helvetica,Arial,sans-serif;letter-spacing:6px;
