@@ -10,7 +10,7 @@ var micInput;
 function init(){
     vol = mic.getLevel();
     // micInput = map(vol, 0, 0.03, 1, 255); //inputVal is for arduino to control the fan
-    micInput = vol*10 + 100;
+    micInput = (vol*10) + 100;
 }
 
 // p5.js function protocol
