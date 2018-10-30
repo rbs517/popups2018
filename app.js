@@ -32,6 +32,19 @@ var userCount = 0;
 // On connect to socket
 io.on('connection', function(socket){
 
+  userCount = userCount + 1;
+  console.log('a user connected');
+  console.log('number of connected users: ' + userCount);
+  io.emit('this', {will: 'be received by everyone'});
+
+  // On disconnect to socket
+  socket.on('disconnect', function(){
+    userCount = userCount - 1;
+    console.log('user disconnected');
+    console.log('number of connected users: ' + userCount);
+    io.sockets.emit('userCount', userCount); // call userCount function on js side
+  });
+
   // When you receive "pressed" from the client (js)
   socket.on('pressed', colorMsg);
 
@@ -47,19 +60,6 @@ io.on('connection', function(socket){
     io.sockets.emit('toLocal', micInput);
     console.log(micInput);
   }
-
-  userCount = userCount + 1;
-  console.log('a user connected');
-  console.log('number of connected users: ' + userCount);
-  io.emit('this', {will: 'be received by everyone'});
-
-// On disconnect to socket
-  socket.on('disconnect', function(){
-    userCount = userCount - 1;
-    console.log('user disconnected');
-    console.log('number of connected users: ' + userCount);
-    io.sockets.emit('userCount', userCount); // call userCount function on js side
-  });
 
   function restart (){
     final = 0;

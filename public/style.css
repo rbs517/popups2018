@@ -11,7 +11,7 @@ section.masthead {
 }
 
 section.masthead p{
-  margin-top: 200;
+  margin-top: 30;
   font-size: 70px;
 }
 
@@ -150,6 +150,7 @@ li {
 }
 
 .btn{
+  margin-top: 250;
   border-radius:380px;
   border: 6px solid white;
   font-family:Lato,Helvetica,Arial,sans-serif;letter-spacing:6px;
