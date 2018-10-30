@@ -7,6 +7,12 @@ var micInput;
 
 // Sketch
 
+function init(){
+    vol = mic.getLevel();
+    micInput = map(vol, 0, 0.03, 1, 255); //inputVal is for arduino to control the fan
+    // micInput = vol*10 + 100;
+}
+
 // p5.js function protocol
 function setup() {
   mic = new p5.AudioIn();
@@ -97,10 +103,6 @@ $(function() {
     socket.emit('pressed', colorNum);
 
     // tell the server that we want the mic data now 
-    vol = mic.getLevel();
-    micInput = vol;
-    // micInput = map(vol, 0, 0.001, 1, 255); //inputVal is for arduino to control the fan
-
     socket.emit('testingMic', micInput);
   }
 });
@@ -232,3 +234,7 @@ socket.on('userCount', function(userCount) {
   a(),e(window).scroll(a);
 
 }(jQuery);
+
+
+//initialize on window
+window.onload =init();
