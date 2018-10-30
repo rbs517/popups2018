@@ -72,40 +72,47 @@ $elements.each(function(i) {
 // var m = 4;
 // var circleDesign1 = new circleDesign(85*m, 20*m, blue);
 
-// On click mic listen and send data
+// On click: mic listen and send data
 $("div.circleContainer").click(function(){
   vol = mic.getLevel();
-  micInput = map(vol, 0, 0.03, 1, 255); //inputVal is for arduino to control the fan
-  // micInput = (vol*10) + 100;
+  // micInput = map(vol, 0, 0.03, 1, 255); // micInput is for arduino to control the fan
+  micInput = (vol*10) + 100; // micInput is for arduino to control the fan
   // tell the server that we want the mic data now 
   socket.emit('testingMic', micInput);
+
+  // Highlight button/circle when clicked on
+  $(event.target).addClass("taphold");
+  var idString = (event.target.id); //take the circle id string
+  colorNum = idString.slice(6); //slice the string so it only prints the circle number
+  // tell the server that the button has been pressed
+  socket.emit('pressed', colorNum);
 });
 
 
-// Disable longpress on mobile devices
+// Disable longpress "highlight" on mobile devices
 function longClickHandler(e) {
   e.preventDefault();
 }
 
-$("div.circleContainer").longclick(250, longClickHandler);
+// Taphold (longclick)
+// $("div.circleContainer").longclick(250, longClickHandler);
 
-// On tap hold change color
-$(function() {
-  $("div.circleContainer").bind("taphold", tapholdHandler);
-  // $("div.circleContainer").addEventListener("blow", blowVal);
+// // On tap hold change color
+// $(function() {
+//   $("div.circleContainer").bind("taphold", tapholdHandler);
 
-  function tapholdHandler(event) {
-    $(event.target).addClass("taphold");
-    // console.log("i touched the but");
-    // console.log(event.target.id); // which circle is being pressed?
-    var idString = (event.target.id); //take the circle id string
-    colorNum = idString.slice(6); //slice the string so it only prints the circle number
-    // console.log(colorNum); //print button color number
+//   function tapholdHandler(event) {
+//     $(event.target).addClass("taphold");
+//     // console.log("i touched the but");
+//     // console.log(event.target.id); // which circle is being pressed?
+//     var idString = (event.target.id); //take the circle id string
+//     colorNum = idString.slice(6); //slice the string so it only prints the circle number
+//     // console.log(colorNum); //print button color number
     
-    // tell the server that the button has been pressed
-    socket.emit('pressed', colorNum);
-  }
-});
+//     // tell the server that the button has been pressed
+//     socket.emit('pressed', colorNum);
+//   }
+// });
 
 // On tap release go back to original color
 $(document).on("vmouseup", function() {
