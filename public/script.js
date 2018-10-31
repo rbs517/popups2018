@@ -82,8 +82,14 @@ $("div.circleContainer").longclick(250, longClickHandler);
 
 // On tap hold change color
 $(function() {
-  $("div.circleContainer").bind("tap", tapholdHandler);
+  $("div.circleContainer").bind("vmousedown", tapholdHandler);
   // $("div.circleContainer").addEventListener("blow", blowVal);
+  $("div.circleContainer").bind("vmouseup", removeTap);
+
+  function removeTap(event) {
+    console.log('test');
+    $(event.target).removeClass("tap");
+  }
 
   function tapholdHandler(event) {
     $(event.target).addClass("tap");
@@ -102,9 +108,10 @@ $(function() {
 });
 
 // On tap release go back to original color
-$(document).on("vmouseup", function() {
-  $(event.target).removeClass("tap");
-});
+// $("div.circleContainer").on("vmouseup", function() {
+//   console.log('test');
+//   $(event.target).removeClass("tap");
+// });
 
 
 // var webaudio_tooling_obj = function () {
