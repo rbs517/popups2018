@@ -79,11 +79,11 @@ $(function() {
 
     // tell the server that the button has been pressed
     socket.emit('pressed', colorNum);
-    console.log(colornum);
   }
 
     function removeTap(event) {
-    $(event.target).removeClass("tap");
+      $(event.target).removeClass("tap");
+      sound[colorNum].stop();
   }
 
 });
