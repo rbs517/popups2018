@@ -5,13 +5,13 @@ html, body{
 
 section.masthead {
   padding-top: 0px;
-  padding-bottom: 150px;
+  padding-bottom: 200px;
   background-color: black;
   color: white;
 }
 
 section.masthead p{
-  margin-top: -15px;
+  margin-top: 0;
   font-size: 64px;
 }
 
@@ -20,7 +20,7 @@ section{
 }
 
 section h2{
-  padding-top: -15px;
+  padding-top: -25px;
   font-size:90px;
 }
 
@@ -32,22 +32,23 @@ section h2{
 
 #download h2{
   font-size: 90px;
-  padding-bottom: 150;
+  padding-bottom: 70;
   text-align: center;
   position: relative;
-    top: -50px; /*for example purposes only*/
+    top: -10px; /*for example purposes only*/
 }
 
 #download p{
   position: relative;
-    top: 150px; /*for example purposes only*/
+    top: 140px; /*for example purposes only*/
+  padding-bottom: 400;
   font-size: 64px;
   text-align: center;
 }
 
 #blowText{
   position: relative;
-    top: -5px; /*for example purposes only*/
+    top: 0px; /*for example purposes only*/
 }
 
 .container{   
@@ -130,7 +131,7 @@ ul {
   display: flex;
   justify-content: center;
   position: relative;
-    top: -200px; /*for example purposes only*/
+    top: -400px; /*for example purposes only*/
   list-style-type: none;
   margin: 0;
   padding: 0;
