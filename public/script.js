@@ -5,14 +5,27 @@
 var mic;
 var micInput;
 var colorNum;
-
+var sound = [];
 // Sketch
 
 // p5.js function protocol
 function setup() {
   noCanvas();
+  // mic setup
   mic = new p5.AudioIn();
   mic.start();
+  
+  // load sounds
+  sound[0] = new p5.Oscillator(220.00, 'sine');
+  sound[1] = new p5.Oscillator(246.94, 'sine');
+  sound[2] = new p5.Oscillator(277.18, 'sine');
+  sound[3] = new p5.Oscillator(329.63, 'sine');
+  sound[4] = new p5.Oscillator(349.23, 'sine');
+  sound[5] = new p5.Oscillator(207.65, 'sine');
+  sound[6] = new p5.Oscillator(293.66, 'sine');
+  sound[7] = new p5.Oscillator(253.22, 'sine');
+  sound[8] = new p5.Oscillator(270.66, 'sine');
+  sound[9] = new p5.Oscillator(300.50, 'sine');
 }
 
 function draw() {
@@ -60,8 +73,10 @@ $(function() {
     // console.log(event.target.id); // which circle is being pressed?
     var idString = (event.target.id); //take the circle id string
     colorNum = idString.slice(6); //slice the string so it only prints the circle number
-    // console.log(colorNum); //print button color number
-    //sounds colornum.play()
+    console.log(colorNum); //print button color number
+    
+    sound[colorNum].start();
+
     // tell the server that the button has been pressed
     socket.emit('pressed', colorNum);
     console.log(colornum);
