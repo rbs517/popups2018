@@ -132,7 +132,7 @@ let init = () => {
 
 	console.log(portName);
 	connectToSerialPort(portName);
-  // serial.write("100"); //send a "hello" value to start off the serial communication
+  serial.write("100"); //send a "hello" value to start off the serial communication
 
 };
 
