@@ -32,15 +32,15 @@ section h2{
 
 #download h2{
   font-size: 90px;
-  padding-bottom: 70;
+  padding-bottom: 50;
   text-align: center;
   position: relative;
-    top: -10px; /*for example purposes only*/
+    top: -150px; /*for example purposes only*/
 }
 
 #download p{
   position: relative;
-    top: 140px; /*for example purposes only*/
+    top: 110px; /*for example purposes only*/
   padding-bottom: 400;
   font-size: 64px;
   text-align: center;
@@ -48,7 +48,7 @@ section h2{
 
 #blowText{
   position: relative;
-    top: -10px; /*for example purposes only*/
+    top: -40px; /*for example purposes only*/
 }
 
 .container{   
@@ -151,7 +151,7 @@ li {
 }
 
 .btn{
-  margin-top: 500;
+  margin-top: 520;
   border-radius: 380px;
   border: 6px solid white;
   font-family:"Avenir Next", sans-serif;letter-spacing:6px;
