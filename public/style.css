@@ -20,7 +20,7 @@ section{
 }
 
 section h2{
-  padding-top: -25px;
+  padding-top: -55px;
   font-size:90px;
 }
 
@@ -131,7 +131,7 @@ ul {
   display: flex;
   justify-content: center;
   position: relative;
-    top: -400px; /*for example purposes only*/
+    top: -480px; /*for example purposes only*/
   list-style-type: none;
   margin: 0;
   padding: 0;
