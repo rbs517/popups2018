@@ -111,19 +111,8 @@ div.circleContainer {
   background-color: purple;
 }
 
-/*#circle10 {
-  background-color: #ffffff;
-  width: 4em;
-  height: 4em;
-  border-radius: 50%;
-  position: relative;
-    top: 85 ;
-    bottom: 20;
-
-}*/
-
 div.circleContainer.tap{
-  border: 3px solid white;
+  border: 4px solid white;
   -webkit-user-select: none !important;
 }
 

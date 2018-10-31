@@ -9,14 +9,13 @@ var micInput;
 
 // p5.js function protocol
 function setup() {
+  noCanvas();
   mic = new p5.AudioIn();
   mic.start();
 }
 
-function draw() {
-  // vol = mic.getLevel();
-  // micInput = map(vol, 0, 0.4, 1, 255); //inputVal is for arduino to control the fan
-}
+// function draw() {
+// }
 
 // Circles placed in a circle design for taphold page
 var type = 1, // circle type - 1 whole, 0.5 half, 0.25 quarter
@@ -36,42 +35,12 @@ $elements.each(function(i) {
     });
 });
 
-// Cicles placed in an s-curve design (bezier style) for landing page
-// var circleDesign = document.getElementById('circle10');
 
-//   var circleDesign = class {
-//   constructor(x, y) {
-//     this.x = 100;
-//     this.y = 100;
-//     color: 255, 255, 255;
-//     // this.width = 20;
-//     // this.height = 20;
-//     // this.r = 3.0;
-//     // this.x = x;
-//     // this.y = y;
-//     // this.color = z; 
-//   }
-//   show(){
-//     ellipse(this.x, this.y, 20, 20);
-//   }
-// };
-
-
-// var circleDesign;
-
-// cd1 = new circleDesign();
-// cd1.show();
-// console.log(cd1);
-
-// var circleDesign = {
-//     x: 0,
-//     y: 200,
-//     diameter: 50
-// };
-
-// var m = 4;
-// var circleDesign1 = new circleDesign(85*m, 20*m, blue);
-
+// Get mic volume level/ blow val 
+vol = mic.getLevel();
+micInput = map(vol, 0, 0.4, 1, 255); //inputVal is for arduino to control the fan
+// tell the server that we want the mic data now 
+socket.emit('testingMic', micInput);
 
 // Disable longpress on mobile devices
 function longClickHandler(e) {
@@ -80,16 +49,10 @@ function longClickHandler(e) {
 
 $("div.circleContainer").longclick(250, longClickHandler);
 
-// On tap hold change color
+// On tap add selection border
 $(function() {
   $("div.circleContainer").bind("vmousedown", tapholdHandler);
-  // $("div.circleContainer").addEventListener("blow", blowVal);
   $("div.circleContainer").bind("vmouseup", removeTap);
-
-  function removeTap(event) {
-    console.log('test');
-    $(event.target).removeClass("tap");
-  }
 
   function tapholdHandler(event) {
     $(event.target).addClass("tap");
@@ -98,22 +61,20 @@ $(function() {
     var idString = (event.target.id); //take the circle id string
     colorNum = idString.slice(6); //slice the string so it only prints the circle number
     // console.log(colorNum); //print button color number
-    
+    //sounds colornum.play()
     // tell the server that the button has been pressed
     socket.emit('pressed', colorNum);
-
-    // tell the server that we want the mic data now 
-    socket.emit('testingMic', micInput);
   }
+
+    function removeTap(event) {
+    console.log('test');
+    $(event.target).removeClass("tap");
+  }
+
 });
 
-// On tap release go back to original color
-// $("div.circleContainer").on("vmouseup", function() {
-//   console.log('test');
-//   $(event.target).removeClass("tap");
-// });
-
-
+// ********************************************************** 
+// OTHER MICROPHONE OPTION OTHER THAN P5
 // var webaudio_tooling_obj = function () {
 
 //     var audioContext = new AudioContext();
