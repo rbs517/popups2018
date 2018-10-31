@@ -26,7 +26,7 @@ function printList(portList) {
   }
 }
 
-function connectToSerialPort(port) {
+function connectToSerialPort(portName) {
   serial = new p5.SerialPort(); // make a new instance of the serialport library
   serial.on('list', printList); // set a callback function for the serialport list event
   serial.on('connected', serverConnected); // callback for connecting to the server
