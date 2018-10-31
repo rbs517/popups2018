@@ -64,11 +64,11 @@ function serialEvent() {
   var inString = serial.readStringUntil('\r\n');
   //check to see that there's actually a string there:
   if (inString.length > 0) {
-    console.log("I read a string that says: " + inString);  // if there is something in that line...
+    // console.log("I read a string that says: " + inString);  // if there is something in that line...
     if (inString == "A") { // ... and that something is 'hello' in the form of "A"...
       smoothVal = smoothReading(inputVal); // prepare the value to send
       // combine the mic value and color selection into a 4 digit number for arudiuno
-      var tempInt = parseInt(smoothVal);
+      var tempInt = int(smoothVal);
       inputValString = String(tempInt);
       // var tempVal = int(smoothVal);
       if (inputValString.length == 1) {inputValString = "00" + inputValString};
@@ -116,12 +116,12 @@ let init = () => {
 
 	socket.on('toLocal', function(data){
 		// this is the function got long press data from socket.io server
-		console.log(data); // colorNum data
+		// console.log(data); // colorNum data
     colorSelection = data;
 	});
 
   socket.on('toLocal2', function(data){
-    console.log(data); // mic data
+    // console.log(data); // mic data
     inputVal = data;
   });
 
