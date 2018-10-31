@@ -46,7 +46,7 @@ var interval = setInterval(function() {
   }, 5100);
 
 
-$('button.circle-container').on("vclick", function() {
+$('button.circle-container').on("click", function() {
     var idString = (event.target.id); //take the circle id string
     colorNum = idString.slice(6); //slice the string so it only prints the circle number
     // console.log(colorNum); //print button color number
