@@ -15,6 +15,11 @@ function setup() {
 }
 
 function draw() {
+  // Get mic volume level/ blow val 
+  vol = mic.getLevel();
+  micInput = map(vol, 0, 0.4, 1, 255); //inputVal is for arduino to control the fan
+  // tell the server that we want the mic data now 
+  socket.emit('testingMic', micInput);
 }
 
 // Circles placed in a circle design for taphold page
@@ -34,13 +39,6 @@ $elements.each(function(i) {
         'transform': 'rotate(' + rotate + 'deg) translate(' + radius + ') rotate(' + rotateReverse + 'deg)'
     });
 });
-
-
-// Get mic volume level/ blow val 
-vol = mic.getLevel();
-micInput = map(vol, 0, 0.4, 1, 255); //inputVal is for arduino to control the fan
-// tell the server that we want the mic data now 
-socket.emit('testingMic', micInput);
 
 // Disable longpress on mobile devices
 function longClickHandler(e) {
