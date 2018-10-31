@@ -82,11 +82,11 @@ $("div.circleContainer").longclick(250, longClickHandler);
 
 // On tap hold change color
 $(function() {
-  $("div.circleContainer").bind("taphold", tapholdHandler);
+  $("div.circleContainer").bind("tap", tapholdHandler);
   // $("div.circleContainer").addEventListener("blow", blowVal);
 
   function tapholdHandler(event) {
-    $(event.target).addClass("taphold");
+    $(event.target).addClass("tap");
     // console.log("i touched the but");
     // console.log(event.target.id); // which circle is being pressed?
     var idString = (event.target.id); //take the circle id string
@@ -103,7 +103,7 @@ $(function() {
 
 // On tap release go back to original color
 $(document).on("vmouseup", function() {
-  $(event.target).removeClass("taphold");
+  $(event.target).removeClass("tap");
 });
 
 
