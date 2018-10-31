@@ -114,23 +114,17 @@ let init = () => {
 // ********************************************************** 
 // WHEN RECEIVE DATA FROM SOCKET.IO, SEND THE DATA TO SERIALPORT 
 
-  // socket.on('pressed', whichColorIsPressed);
-  // function whichColorIsPressed(colorNum){
-  //   colorSelection = colorNum;
-  // }
-
 	socket.on('toLocal', function(data){
 		// this is the function got long press data from socket.io server
-		// console.log(data); //colorNum data
+		console.log(data); //colorNum data
     colorSelection = data;
 	});
 
   socket.on('toLocal2', function(data){
-    // console.log(data);
+    console.log(data);
     inputVal = data;
   });
 
-	console.log(portName);
 	connectToSerialPort(portName);
   serial.write("100"); //send a "hello" value to start off the serial communication
 
