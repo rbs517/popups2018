@@ -14,8 +14,8 @@ function setup() {
   mic.start();
 }
 
-// function draw() {
-// }
+function draw() {
+}
 
 // Circles placed in a circle design for taphold page
 var type = 1, // circle type - 1 whole, 0.5 half, 0.25 quarter
