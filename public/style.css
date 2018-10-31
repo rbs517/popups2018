@@ -48,7 +48,7 @@ section h2{
 
 #blowText{
   position: relative;
-    top: -25px; /*for example purposes only*/
+    top: -45px; /*for example purposes only*/
 }
 
 .container{   
@@ -151,7 +151,7 @@ li {
 }
 
 .btn{
-  margin-top: 520;
+  margin-top: 560;
   border-radius: 380px;
   border: 6px solid white;
   font-family:"Avenir Next", sans-serif;letter-spacing:6px;
