@@ -4,6 +4,7 @@
 // Declaring variables
 var mic;
 var micInput;
+var circles;
 
 // Sketch
 
@@ -18,23 +19,61 @@ function draw() {
   // micInput = map(vol, 0, 0.4, 1, 255); //inputVal is for arduino to control the fan
 }
 
-// Circles placed in a circle design for taphold page
-var type = 1, // circle type - 1 whole, 0.5 half, 0.25 quarter
-    radius = '20em', // distance from center
-    start = -90, // shift start from 0
-    $elements = $('li'),
-    numberOfElements = (type === 1) ?  $elements.length : $elements.length - 1, //adj for even distro of elements when not full circle
-    slice = 360 * type / numberOfElements;
+// Disable longpress "highlight" on mobile devices
+function longClickHandler(e) {
+  e.preventDefault();
+}
 
-$elements.each(function(i) {
-    var $self = $(this),
-        rotate = slice * i + start,
-        rotateReverse = rotate * -1;
-    
-    $self.css({
-        'transform': 'rotate(' + rotate + 'deg) translate(' + radius + ') rotate(' + rotateReverse + 'deg)'
-    });
+$("button.circle-container").longclick(250, longClickHandler);
+
+// Set button timeout interval
+var interval = setInterval(function() {
+    vol = mic.getLevel();
+    micInput = map(vol, 0.3, 1, 130, 255); //for fan
+    // tell the server that we want the mic data now 
+    socket.emit('testingMic', micInput);
+
+    $("button.circle-container").disabled = true;
+  }, 10);
+
+  setTimeout(function() {
+    // isStop = true;
+    $("button.circle-container").disabled = false;
+    clearInterval(interval);
+  }, 5000);
+
+  setTimeout(function() {
+  }, 5100);
+
+
+$('button.circle-container').on("vclick", function() {
+    var idString = (event.target.id); //take the circle id string
+    colorNum = idString.slice(6); //slice the string so it only prints the circle number
+    // console.log(colorNum); //print button color number
+    // tell the server that the button has been pressed
+    socket.emit('pressed', colorNum);
 });
+
+// ********************************************************** 
+// CODE WE DECIDED TO TAKE OUT
+
+// Circles placed in a circle design 
+// var type = 1, // circle type - 1 whole, 0.5 half, 0.25 quarter
+//     radius = '20em', // distance from center
+//     start = -90, // shift start from 0
+//     $elements = $('li'),
+//     numberOfElements = (type === 1) ?  $elements.length : $elements.length - 1, //adj for even distro of elements when not full circle
+//     slice = 360 * type / numberOfElements;
+
+// $elements.each(function(i) {
+//     var $self = $(this),
+//         rotate = slice * i + start,
+//         rotateReverse = rotate * -1;
+    
+//     $self.css({
+//         'transform': 'rotate(' + rotate + 'deg) translate(' + radius + ') rotate(' + rotateReverse + 'deg)'
+//     });
+// });
 
 // Cicles placed in an s-curve design (bezier style) for landing page
 // var circleDesign = document.getElementById('circle10');
@@ -72,38 +111,32 @@ $elements.each(function(i) {
 // var m = 4;
 // var circleDesign1 = new circleDesign(85*m, 20*m, blue);
 
-// Disable longpress "highlight" on mobile devices
-function longClickHandler(e) {
-  e.preventDefault();
-}
-
-$("div.circleContainer").longclick(250, longClickHandler);
 
 // On click: mic listen and send data
 
-$(function(){
-  $( "div.circleContainer" ).bind( "tap", tapHandler );
+// $(function(){
+//   $( "div.circleContainer" ).bind( "tap", tapHandler );
  
-  function tapHandler( event ){
-    // Highlight button/circle when clicked on
-    $( event.target ).addClass( "tap" );
-    var idString = (event.target.id); //take the circle id string
-    colorNum = idString.slice(6); //slice the string so it only prints the circle number
-    // tell the server that the button has been pressed
-    socket.emit('pressed', colorNum);
+//   function tapHandler( event ){
+//     // Highlight button/circle when clicked on
+//     $( event.target ).addClass( "tap" );
+//     var idString = (event.target.id); //take the circle id string
+//     colorNum = idString.slice(6); //slice the string so it only prints the circle number
+//     // tell the server that the button has been pressed
+//     socket.emit('pressed', colorNum);
 
-    vol = mic.getLevel();
-    // micInput = map(vol, 0, 0.03, 1, 255); // micInput is for arduino to control the fan
-    micInput = (vol*10) + 100; // micInput is for arduino to control the fan
-    // tell the server that we want the mic data now 
-    socket.emit('testingMic', micInput);
-  }
-});
+//     // vol = mic.getLevel();
+//     // micInput = map(vol, 0, 0.03, 1, 255); // micInput is for arduino to control the fan
+//     // micInput = (vol*10) + 100; // micInput is for arduino to control the fan
+//     // // tell the server that we want the mic data now 
+//     // socket.emit('testingMic', micInput);
+//   }
+// });
 
-// On tap release go back to original color
-$("div.circleContainer").on("vmouseup", function() {
-  $(event.target).removeClass("tap");
-});
+// // On tap release go back to original color
+// $("div.circleContainer").on("vmouseup", function() {
+//   $(event.target).removeClass("tap");
+// });
 
 
 // // On tap hold change color

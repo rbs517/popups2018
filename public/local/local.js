@@ -126,7 +126,7 @@ let init = () => {
 	});
 
   socket.on('toLocal2', function(data){
-    console.log(data);
+    // console.log(data);
     inputVal = data;
   });
 
