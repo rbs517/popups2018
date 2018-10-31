@@ -5,7 +5,7 @@ html, body{
 
 section.masthead {
   padding-top: 0px;
-  padding-bottom: 500px;
+  padding-bottom: 350px;
   background-color: black;
   color: white;
 }
@@ -35,12 +35,12 @@ section h2{
   padding-bottom: 70;
   text-align: center;
   position: relative;
-    top: -10px; /*for example purposes only*/
+    top: -50px; /*for example purposes only*/
 }
 
 #download p{
   position: relative;
-    top: 140px; /*for example purposes only*/
+    top: 150px; /*for example purposes only*/
   padding-bottom: 400;
   font-size: 64px;
   text-align: center;
@@ -131,7 +131,7 @@ ul {
   display: flex;
   justify-content: center;
   position: relative;
-    top: -400px; /*for example purposes only*/
+    top: -500px; /*for example purposes only*/
   list-style-type: none;
   margin: 0;
   padding: 0;
