@@ -77,21 +77,21 @@ button.circleContainer {
   background-color: maroon;
   height: 20em;
   position: relative;
-    left: 400px; /*for example purposes only*/
+    left: 310px; /*for example purposes only*/
 }
 
 #circle1 {
   background-color: red;
   height: 20em;
   position: relative;
-    left: -200px; /*for example purposes only*/
+    left: -130px; /*for example purposes only*/
 }
 
 #circle2 {
   background-color: orange;
   height: 22em;
   position: relative;
-    left: -100px; /*for example purposes only*/
+    left: -50px; /*for example purposes only*/
 
 }
 
@@ -99,49 +99,49 @@ button.circleContainer {
   background-color: yellow;
   height: 26em;
   position: relative;
-    left: -300px; /*for example purposes only*/
+    left: -220px; /*for example purposes only*/
 }
 
 #circle4 {
   background-color: green;
   height: 22em;
   position: relative;
-    left: 500px; /*for example purposes only*/
+    left: 400px; /*for example purposes only*/
 }
 
 #circle5 {
   background-color: lime;
   height: 26em;
   position: relative;
-    left: 300px; /*for example purposes only*/
+    left: 220px; /*for example purposes only*/
 }
 
 #circle6 {
   background-color: teal;
   height: 20em;
   position: relative;
-    left: -400px; /*for example purposes only*/
+    left: -310px; /*for example purposes only*/
 }
 
 #circle7 {
   background-color: aqua;
   height: 22em;
   position: relative;
-    left: -500px; /*for example purposes only*/
+    left: -400px; /*for example purposes only*/
 }
 
 #circle8 {
   background-color: blue;
   height: 20em;
   position: relative;
-    left: 200px; /*for example purposes only*/
+    left: 130px; /*for example purposes only*/
 }
 
 #circle9 {
   background-color: purple;
   height: 22em;
   position: relative;
-    left: 100px; /*for example purposes only*/
+    left: 50px; /*for example purposes only*/
 }
 
 /*#circle10 {
