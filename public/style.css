@@ -35,12 +35,12 @@ section h2{
   padding-bottom: 40;
   text-align: center;
   position: relative;
-    top: -200px; /*for example purposes only*/
+    top: 5px; /*for example purposes only*/
 }
 
 #download p{
   position: relative;
-    top: 0px; /*for example purposes only*/
+    top: 180px; /*for example purposes only*/
   padding-bottom: 400;
   font-size: 64px;
   text-align: center;
@@ -48,7 +48,7 @@ section h2{
 
 #blowText{
   position: relative;
-    top: -100px; /*for example purposes only*/
+    top: 5px; /*for example purposes only*/
 }
 
 .container{   
@@ -131,7 +131,7 @@ ul {
   display: flex;
   justify-content: center;
   position: relative;
-    top: -600px; /*for example purposes only*/
+    top: -400px; /*for example purposes only*/
   list-style-type: none;
   margin: 0;
   padding: 0;
