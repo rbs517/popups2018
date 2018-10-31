@@ -5,7 +5,7 @@ html, body{
 
 section.masthead {
   padding-top: 0px;
-  padding-bottom: 800px;
+  padding-bottom: 500px;
   background-color: black;
   color: white;
 }
@@ -31,16 +31,16 @@ section h2{
 
 
 #download h2{
-  font-size:90px;
-  padding-bottom: 40;
+  font-size: 90px;
+  padding-bottom: 70;
   text-align: center;
   position: relative;
-    top: 5px; /*for example purposes only*/
+    top: -10px; /*for example purposes only*/
 }
 
 #download p{
   position: relative;
-    top: 180px; /*for example purposes only*/
+    top: 140px; /*for example purposes only*/
   padding-bottom: 400;
   font-size: 64px;
   text-align: center;
@@ -48,7 +48,7 @@ section h2{
 
 #blowText{
   position: relative;
-    top: 5px; /*for example purposes only*/
+    top: 0px; /*for example purposes only*/
 }
 
 .container{   
