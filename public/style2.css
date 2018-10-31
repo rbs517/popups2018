@@ -40,7 +40,7 @@ section h2{
 
 #download p{
   position: relative;
-    top: 110px; /*for example purposes only*/
+    top: -200px; /*for example purposes only*/
   padding-bottom: 400;
   font-size: 64px;
   text-align: center;
@@ -48,7 +48,7 @@ section h2{
 
 #blowText{
   position: relative;
-    top: -45px; /*for example purposes only*/
+    top: 100px; /*for example purposes only*/
 }
 
 .container{   
@@ -62,10 +62,12 @@ section h2{
   text-align: center;
 }
 
-div.circleContainer {
-  width: 10em;
-  height: 10em;
+button.circleContainer {
+  position: relative;
+    top: -180px; /*for example purposes only*/
+  width: 5em;
   border-radius: 50%;
+  border: 0px;
 /*  background-color: #108040;*/
   -webkit-touch-callout: none !important;
 }
@@ -73,45 +75,76 @@ div.circleContainer {
 
 #circle0 {
   background-color: maroon;
+  height: 20em;
+  position: relative;
+    left: 310px; /*for example purposes only*/
 }
 
 #circle1 {
   background-color: red;
+  height: 20em;
+  position: relative;
+    left: -130px; /*for example purposes only*/
 }
 
 #circle2 {
   background-color: orange;
+  height: 22em;
+  position: relative;
+    left: -50px; /*for example purposes only*/
+
 }
 
 #circle3 {
   background-color: yellow;
+  height: 26em;
+  position: relative;
+    left: -220px; /*for example purposes only*/
 }
 
 #circle4 {
   background-color: green;
+  height: 22em;
+  position: relative;
+    left: 400px; /*for example purposes only*/
 }
 
 #circle5 {
   background-color: lime;
+  height: 26em;
+  position: relative;
+    left: 220px; /*for example purposes only*/
 }
 
 #circle6 {
   background-color: teal;
+  height: 20em;
+  position: relative;
+    left: -310px; /*for example purposes only*/
 }
 
 #circle7 {
   background-color: aqua;
+  height: 22em;
+  position: relative;
+    left: -400px; /*for example purposes only*/
 }
 
 #circle8 {
   background-color: blue;
+  height: 20em;
+  position: relative;
+    left: 130px; /*for example purposes only*/
 }
 
 #circle9 {
   background-color: purple;
+  height: 22em;
+  position: relative;
+    left: 50px; /*for example purposes only*/
 }
 
-#circle10 {
+/*#circle10 {
   background-color: #ffffff;
   width: 4em;
   height: 4em;
@@ -120,21 +153,22 @@ div.circleContainer {
     top: 85 ;
     bottom: 20;
 
-}
+}*/
 
-div.circleContainer.tap{
+/*button.circleContainer.tap{
   border: 3px solid white;
   -webkit-user-select: none !important;
-}
+}*/
 
 ul {
   display: flex;
   justify-content: center;
   position: relative;
-    top: -480px; /*for example purposes only*/
+    top: -360px; /*for example purposes only*/
   list-style-type: none;
   margin: 0;
   padding: 0;
+  transform: rotate(180deg);
 }
 li {
   position: absolute;
