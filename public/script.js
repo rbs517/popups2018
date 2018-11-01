@@ -73,7 +73,7 @@ $(function() {
     // console.log(event.target.id); // which circle is being pressed?
     var idString = (event.target.id); //take the circle id string
     colorNum = idString.slice(6); //slice the string so it only prints the circle number
-    console.log(colorNum); //print button color number
+    // console.log(colorNum); //print button color number
     
     sound[colorNum].start();
 

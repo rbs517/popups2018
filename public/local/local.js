@@ -15,7 +15,7 @@ var outputString;
 var outputVal;
 var smoothVal;
 var inputValString;
-var blowData = [0, 0, 0, 0, 0]; // an array of recent microphone readings (for moving average)
+var blowData = [0, 0, 0, 0, 0,0,0,0,0]; // an array of recent microphone readings (for moving average)
 
 // Get the list of ports:
 function printList(portList) {
@@ -37,7 +37,7 @@ function connectToSerialPort(port) {
 
   serial.list(); // list the serial ports
   serial.open(port, options); // open a serial port
-  serial.write("100"); //send a "hello" value to start off the serial communication
+  serial.write("1010"); //send a "hello" value to start off the serial communication
 }
 
 function serverConnected() {
@@ -49,16 +49,19 @@ function portOpen() {
 }
 
 // Data smoothing function
-function smoothReading(newReading) {
+function updateArray(newReading) {
   blowData.shift();
   blowData.push(newReading);
-  var total = 0;
-  for (var i = 0; i < blowData.length; i++) {
-    total += blowData[i];
-  }
-  var avg = total / blowData.length;
-  return avg;
   // maybe use math.floor and do more elegant control on the arduino side
+}
+
+function average(array) {
+    var total = 0;
+  for (var i = 0; i < array.length; i++) {
+    total += array[i];
+  }
+  var avg = total / array.length;
+  return avg;
 }
 
 function serialEvent() {
@@ -67,9 +70,9 @@ function serialEvent() {
   if (inString.length > 0) {
     // console.log("I read a string that says: " + inString);  // if there is something in that line...
     if (inString == "A") { // ... and that something is 'hello' in the form of "A"...
-      smoothVal = smoothReading(inputVal); // prepare the value to send
+      smoothVal = average(blowData); // prepare the value to send
       // combine the mic value and color selection into a 4 digit number for arduino
-      var tempInt = smoothVal;
+      var tempInt = Math.floor(smoothVal);
       inputValString = String(tempInt);
       // var tempVal = int(smoothVal);
       if (inputValString.length == 1) {inputValString = "00" + inputValString};
@@ -122,7 +125,7 @@ let init = () => {
 
   socket.on('toLocal2', function(data){
     // console.log(data); // mic data
-    inputVal = Math.floor(data);
+     updateArray(Math.floor(data));
   });
 
 	connectToSerialPort(portName);
