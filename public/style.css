@@ -15,6 +15,14 @@ section.masthead p{
   font-size: 64px;
 }
 
+section.masthead h2{
+  font-size: 90px;
+  padding-bottom: 50;
+  text-align: center;
+  position: relative;
+    top: -150px; /*for example purposes only*/
+}
+
 section{
   padding:100px;
 }
