@@ -83,7 +83,11 @@ $(function() {
 
     function removeTap(event) {
       $(event.target).removeClass("tap");
-      sound[colorNum].stop();
+      for (i=0; i<sound.length; i++){
+        sound[i].stop();
+      }
+
+      
   }
 
 });

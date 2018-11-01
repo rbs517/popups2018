@@ -37,6 +37,7 @@ function connectToSerialPort(port) {
 
   serial.list(); // list the serial ports
   serial.open(port, options); // open a serial port
+  serial.write("100"); //send a "hello" value to start off the serial communication
 }
 
 function serverConnected() {
@@ -68,7 +69,7 @@ function serialEvent() {
     if (inString == "A") { // ... and that something is 'hello' in the form of "A"...
       smoothVal = smoothReading(inputVal); // prepare the value to send
       // combine the mic value and color selection into a 4 digit number for arduino
-      var tempInt = Math.floor(smoothVal);
+      var tempInt = smoothVal;
       inputValString = String(tempInt);
       // var tempVal = int(smoothVal);
       if (inputValString.length == 1) {inputValString = "00" + inputValString};
@@ -81,7 +82,6 @@ function serialEvent() {
       // outBoundInt = int(outboundString); //convert it to a string
       console.log("sending: " + outputString);
       serial.write(outputString+ '\n'); // write the value - add + '\n' if using arduino uno
-      serial.write("hello"+'\n');
     }
     // else {serial.clear();
     //   serial.write(valToSend + '\n'); // write the value
@@ -117,17 +117,15 @@ let init = () => {
 	socket.on('toLocal', function(data){
 		// this is the function got long press data from socket.io server
 		// console.log(data); // colorNum data
-    colorSelection = data;
+    colorSelection = Math.floor(data);
 	});
 
   socket.on('toLocal2', function(data){
     // console.log(data); // mic data
-    inputVal = data;
+    inputVal = Math.floor(data);
   });
 
 	connectToSerialPort(portName);
-  serial.write("100"); //send a "hello" value to start off the serial communication
-
 };
 
 
