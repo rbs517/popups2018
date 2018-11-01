@@ -27,7 +27,6 @@ function printList(portList) {
 }
 
 function connectToSerialPort(portName) {
-  serial = new p5.SerialPort(); // make a new instance of the serialport library
   serial.on('list', printList); // set a callback function for the serialport list event
   serial.on('connected', serverConnected); // callback for connecting to the server
   serial.on('open', portOpen); // callback for the port opening
@@ -124,6 +123,8 @@ let init = () => {
     // console.log(data); // mic data
     inputVal = data;
   });
+
+  serial = new p5.SerialPort(); // make a new instance of the serialport library
 
 	connectToSerialPort(portName);
   serial.write("100"); //send a "hello" value to start off the serial communication
