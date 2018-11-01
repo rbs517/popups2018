@@ -16,11 +16,13 @@ section.masthead p{
 }
 
 section.masthead h2{
+  display: flex;
+  justify-content: center;
+  text-align: center;
   font-size: 90px;
   padding-bottom: 50;
-  text-align: center;
   position: relative;
-    top: -150px; /*for example purposes only*/
+    top: -20px; /*for example purposes only*/
 }
 
 section{
@@ -34,8 +36,8 @@ section h2{
 
 #p5dots{
   display: flex;
-  width: 600;
-  height:600;
+  width: 800;
+  height:800;
   position: relative;
     top: 50px; /*for example purposes only*/
     left: -60px;
