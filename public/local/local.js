@@ -71,8 +71,10 @@ function serialEvent() {
     // console.log("I read a string that says: " + inString);  // if there is something in that line...
     if (inString == "A") { // ... and that something is 'hello' in the form of "A"...
       smoothVal = average(blowData); // prepare the value to send
+    console.log('smoothed mic val to be serialed: ' + smoothVal);
       // combine the mic value and color selection into a 4 digit number for arduino
       var tempInt = Math.floor(smoothVal);
+      console.log('average mic val to be stringed: ' + tempInt);
       inputValString = String(tempInt);
       // var tempVal = int(smoothVal);
       if (inputValString.length == 1) {inputValString = "00" + inputValString};
@@ -120,11 +122,13 @@ let init = () => {
 	socket.on('toLocal', function(data){
 		// this is the function got long press data from socket.io server
 		// console.log(data); // colorNum data
+    console.log('color choice from phone: ' + data)
     colorSelection = Math.floor(data);
 	});
 
   socket.on('toLocal2', function(data){
     // console.log(data); // mic data
+    console.log('mic value from phone: ' + data)
      updateArray(Math.floor(data));
   });
 
