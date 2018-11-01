@@ -67,8 +67,8 @@ function serialEvent() {
     // console.log("I read a string that says: " + inString);  // if there is something in that line...
     if (inString == "A") { // ... and that something is 'hello' in the form of "A"...
       smoothVal = smoothReading(inputVal); // prepare the value to send
-      // combine the mic value and color selection into a 4 digit number for arudiuno
-      var tempInt = int(smoothVal);
+      // combine the mic value and color selection into a 4 digit number for arduino
+      var tempInt = Math.floor(smoothVal);
       inputValString = String(tempInt);
       // var tempVal = int(smoothVal);
       if (inputValString.length == 1) {inputValString = "00" + inputValString};
