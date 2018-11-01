@@ -123,7 +123,7 @@ let init = () => {
 		// this is the function got long press data from socket.io server
 		// console.log(data); // colorNum data
     console.log('color choice from phone: ' + data)
-    colorSelection = Math.floor(data);
+    colorSelection = data;
 	});
 
   socket.on('toLocal2', function(data){

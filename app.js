@@ -57,7 +57,7 @@ io.on('connection', function(socket){
   socket.on('testingMic', micMsg);
 
   function micMsg(micInput){
-    io.sockets.emit('toLocal', micInput);
+    io.sockets.emit('toLocal2', micInput);
     // console.log(micInput);
 
     // add another emit here that the phones will listen for 'notifyAllUsers'
