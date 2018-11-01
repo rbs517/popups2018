@@ -156,8 +156,10 @@ li {
 }
 
 .btn{
-  margin-top: -400;
-  border-radius: 280px;
+  position: relative;
+    top: -350px; /*for example purposes only*/
+/*  margin-top: 50;*/
+  border-radius: 380px;
   border: 6px solid white;
   font-family:"Avenir Next", sans-serif;letter-spacing:6px;
   text-transform:uppercase;
