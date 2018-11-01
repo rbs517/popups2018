@@ -48,22 +48,21 @@ io.on('connection', function(socket){
   // When you receive "pressed" from the client (js)
   socket.on('pressed', colorMsg);
 
-  function colorMsg(colorNum, idString){
+  function colorMsg(colorNum){
     // send pressed data to Local.js which is used to talk to serialport
     io.sockets.emit('toLocal', colorNum);
     console.log(colorNum);
 
     // send pressed data back to client to disable that color button
-    io.sockets.emit('colorPressed', idString);
-    console.log(idString);
+    io.sockets.emit('colorPressed', colorNum);
   }
 
   // When you receive "unpressed" from the client (js)
   socket.on('unpressed', unpressedMsg);
 
-  function unpressedMsg(colorNum, idString){
+  function unpressedMsg(colorNum){
   // send pressed data back to client to enable that color button
-  io.sockets.emit('toClients', colorNum, idString);
+  io.sockets.emit('toClients', colorNum);
 }
 
 
