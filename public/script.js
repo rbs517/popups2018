@@ -203,7 +203,7 @@ socket.on('userCount', function(userCount) {
 // if pressed
 socket.on('colorPressed', function(colorNum, idString){
   //disable button --change to grey
-  $('#' + idString).removeClass('tap');
+  removeTap(idString);
   $('#' + idString).addClass('turnGrey');
   console.log('colorNum: ' + colorNum + ' is taken!');
 });
