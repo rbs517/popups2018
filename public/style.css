@@ -16,13 +16,10 @@ section.masthead p{
 }
 
 section.masthead h2{
-  display: flex;
-  justify-content: center;
-  text-align: center;
   font-size: 90px;
   padding-bottom: 50;
   position: relative;
-    top: -20px; /*for example purposes only*/
+    top: -15px; /*for example purposes only*/
 }
 
 section{
