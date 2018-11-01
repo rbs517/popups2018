@@ -49,17 +49,28 @@ io.on('connection', function(socket){
   socket.on('pressed', colorMsg);
 
   function colorMsg(colorNum){
-    // send long press data to Local.js which is used to talk to serialport
+    // send pressed data to Local.js which is used to talk to serialport
     io.sockets.emit('toLocal', colorNum);
     console.log(colorNum);
+
+    // send pressed data back to client to disable that color button
+    io.sockets.emit('colorPressed', colorNum);
   }
+
+  // When you receive "unpressed" from the client (js)
+  socket.on('unpressed', unpressedMsg);
+
+  function unpressedMsg(colorNum){
+  // send pressed data back to client to enable that color button
+  io.sockets.emit('toClients', colorNum);
+}
+
 
   socket.on('testingMic', micMsg);
 
   function micMsg(micInput){
     io.sockets.emit('toLocal2', micInput);
     // console.log(micInput);
-
     // add another emit here that the phones will listen for 'notifyAllUsers'
   }
 

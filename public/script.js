@@ -5,7 +5,9 @@
 var mic;
 var micInput;
 var colorNum;
+var idString;
 var sound = [];
+
 // Sketch
 
 // p5.js function protocol
@@ -71,7 +73,7 @@ $(function() {
     $(event.target).addClass("tap");
     // console.log("i touched the but");
     // console.log(event.target.id); // which circle is being pressed?
-    var idString = (event.target.id); //take the circle id string
+    idString = (event.target.id); //take the circle id string
     colorNum = idString.slice(6); //slice the string so it only prints the circle number
     // console.log(colorNum); //print button color number
     
@@ -80,17 +82,19 @@ $(function() {
     // tell the server that the button has been pressed
     socket.emit('pressed', colorNum);
 
-    // setTimeout(removeTap, 5000);
+    // set timeout after 5 seconds to release the button 
+    setTimeout(function() { removeTap(idString); }, 5000);
   }
 
-    function removeTap(event) {
-      $(event.target).removeClass("tap");
+    function removeTap(id) {
+      $('#' + idString).removeClass("tap");
+
       for (i=0; i<sound.length; i++){
         sound[i].stop();
       }
-
-      
-  }
+      // tell the server that the button has been released
+      socket.emit('unpressed', colorNum);
+    } 
 
 });
 
@@ -194,6 +198,20 @@ var socket = io();
 socket.emit('user', 'new user is connected');
 socket.on('userCount', function(userCount) { 
   console.log('total number of users online is: ' + userCount); // console number of users after one goes off;
+});
+
+// if pressed
+socket.on('colorPressed', function(colorNum){
+  //disable button --change to grey
+  $('#' + idString).addClass('turnGrey');
+  console.log('colorNum: ' + colorNum + ' is taken!');
+});
+
+// if not pressed
+socket.on('toClients', function(colorNum){
+  //enable button --change to normal color state
+  $('#' + idString).removeClass('turnGrey');
+  console.log('colorNum: ' + colorNum + ' is no longer taken');
 });
 
 // ********************************************************** 

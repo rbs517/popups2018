@@ -12,13 +12,23 @@ section.masthead {
 /*  background-image margin-right: 900px;*/
 }
 
-img{
+img {
   position: relative;
     top: -290px; /*for example purposes only*/
     right: 50;
   padding: 0;
-
 }
+
+/*tap-animation {*/
+/*  -webkit-animation-name: taptutorial;*/ /* Safari 4.0 - 8.0 */
+/*  -webkit-animation-duration: 4s;*/ /* Safari 4.0 - 8.0 */
+/*}*/
+
+/* Safari 4.0 - 8.0 */
+/*@-webkit-keyframes taptutorial {
+  from { margin-left: 0%; width: 100%; }
+  to { margin-left: 0%; width: 100%; }
+}*/
 
 section.masthead p{
   margin-top: -1800;
@@ -130,6 +140,10 @@ div.circleContainer {
 div.circleContainer.tap{
   border: 4px solid white;
   -webkit-user-select: none !important;
+}
+
+div.circleContainer.turnGrey {
+  background-color: grey;
 }
 
 ul {
