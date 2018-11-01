@@ -5,14 +5,24 @@ html, body{
 
 section.masthead {
   padding-top: 0px;
-  padding-bottom: 200px;
+  padding-bottom: 0px;
   background-color: black;
   color: white;
+  z-index: 1;
+/*  background-image margin-right: 900px;*/
+}
+
+img{
+  position: relative;
+    top: -350px; /*for example purposes only*/
+    right: 50;
+
 }
 
 section.masthead p{
-  margin-top: -20;
+  margin-top: -1200;
   font-size: 64px;
+  z-index: 1;
 }
 
 section{
@@ -22,15 +32,11 @@ section{
 section h2{
   padding-top: -80px;
   font-size:90px;
+  z-index: 1;
 }
 
-#p5dots{
-  display: flex;
-  width: 800;
-  height:800;
-  position: relative;
-    top: 50px; /*for example purposes only*/
-    left: -60px;
+section.page2{
+
 }
 
 #download{
@@ -149,6 +155,8 @@ li {
 }
 
 .btn{
+  position: relative;
+    top: -300px; /*for example purposes only*/
   margin-top: 560;
   border-radius: 380px;
   border: 6px solid white;
