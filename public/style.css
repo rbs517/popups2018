@@ -24,6 +24,15 @@ section h2{
   font-size:90px;
 }
 
+#p5dots{
+  display: flex;
+  width: 600;
+  height:600;
+  position: relative;
+    top: 50px; /*for example purposes only*/
+    left: -60px;
+}
+
 #download{
   background-color: black;
   color: white;

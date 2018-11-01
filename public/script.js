@@ -80,7 +80,7 @@ $(function() {
     // tell the server that the button has been pressed
     socket.emit('pressed', colorNum);
 
-    setTimeout(removeTap, 5000);
+    // setTimeout(removeTap, 5000);
   }
 
     function removeTap(event) {
