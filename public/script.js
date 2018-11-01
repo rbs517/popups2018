@@ -80,7 +80,7 @@ $(function() {
     sound[colorNum].start();
 
     // tell the server that the button has been pressed
-    socket.emit('pressed', colorNum);
+    socket.emit('pressed', colorNum, idString);
 
     // set timeout after 5 seconds to release the button 
     setTimeout(function() { removeTap(idString); }, 5000);
@@ -93,7 +93,7 @@ $(function() {
         sound[i].stop();
       }
       // tell the server that the button has been released
-      socket.emit('unpressed', colorNum);
+      socket.emit('unpressed', colorNum, idString);
     } 
 
 });
@@ -201,14 +201,15 @@ socket.on('userCount', function(userCount) {
 });
 
 // if pressed
-socket.on('colorPressed', function(colorNum){
+socket.on('colorPressed', function(colorNum, idString){
   //disable button --change to grey
+  $('#' + idString).removeClass('tap');
   $('#' + idString).addClass('turnGrey');
   console.log('colorNum: ' + colorNum + ' is taken!');
 });
 
 // if not pressed
-socket.on('toClients', function(colorNum){
+socket.on('toClients', function(colorNum, idString){
   //enable button --change to normal color state
   $('#' + idString).removeClass('turnGrey');
   console.log('colorNum: ' + colorNum + ' is no longer taken');
