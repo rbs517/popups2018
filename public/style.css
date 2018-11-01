@@ -16,6 +16,9 @@ section.masthead p{
 }
 
 section.masthead h2{
+  display: flex;
+  justify-content: center;
+  text-align: center;
   font-size: 90px;
   padding-bottom: 50;
   position: relative;
