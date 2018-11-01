@@ -14,14 +14,14 @@ section.masthead {
 
 img{
   position: relative;
-    top: -200px; /*for example purposes only*/
-    right: 100;
+    top: -290px; /*for example purposes only*/
+    right: 50;
   padding: 0;
 
 }
 
 section.masthead p{
-  margin-top: -2000;
+  margin-top: -1800;
   font-size: 64px;
   z-index: 1;
 }
