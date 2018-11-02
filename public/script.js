@@ -203,9 +203,13 @@ socket.on('userCount', function(userCount) {
 // if pressed
 socket.on('colorPressed', function(colorNum){
   //disable button --change to grey
-  // $('#' + 'circle' + colorNum).removeClass('tap');
-  $('#' + 'circle' + colorNum).addClass('turnGrey');
+  $('#' + 'circle' + colorNum).unbind("vmousedown", function(){
+    $('#' + 'circle' + colorNum).removeClass('tap');
+    $('#' + 'circle' + colorNum).addClass('turnGrey');
+  });
+
   console.log('colorNum: ' + colorNum + ' is taken!');
+  
 });
 
 // if not pressed

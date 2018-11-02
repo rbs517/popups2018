@@ -144,7 +144,6 @@ div.circleContainer.tap{
 
 div.circleContainer.turnGrey {
   color: grey;
-  pointer-events: none;
 }
 
 ul {
