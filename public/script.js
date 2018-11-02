@@ -34,6 +34,7 @@ function draw() {
   // Get mic volume level/ blow val 
   vol = mic.getLevel();
   micInput = map(vol, 0, 1, 1, 255); //inputVal is for arduino to control the fan
+  
 
   // tell the server that we want the mic data now 
   socket.emit('testingMic', micInput);

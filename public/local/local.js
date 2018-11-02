@@ -5,17 +5,17 @@
 var serial; // variable to hold an instance of the serialport library
 var portName = '/dev/cu.usbmodem1421'; // fill in your serial port name here -- CHANGE ME!
 var options = {
-  baudrate: 9600 // change the data rate to whatever you wish -- MAKE ME MATCH!
+  baudrate: 19200 // change the data rate to whatever you wish -- MAKE ME MATCH!
 }; 
 var inData; // for incoming serial data
 var inputVal = 1;
 var colorSelection=0;
 var colorSelectonString;
-var outputString;
+var outputString = 10;
 var outputVal;
 var smoothVal;
 var inputValString;
-var blowData = [0, 0, 0, 0, 0,0,0,0,0]; // an array of recent microphone readings (for moving average)
+var blowData = [[0, 0, 0, 0, 0,0,0,0,0],[0, 0, 0, 0, 0,0,0,0,0],[0, 0, 0, 0, 0,0,0,0,0],[0, 0, 0, 0, 0,0,0,0,0],[0, 0, 0, 0, 0,0,0,0,0],[0, 0, 0, 0, 0,0,0,0,0],[0, 0, 0, 0, 0,0,0,0,0],[0, 0, 0, 0, 0,0,0,0,0],[0, 0, 0, 0, 0,0,0,0,0],[0, 0, 0, 0, 0,0,0,0,0]]; // an array of recent microphone readings (for moving average)
 
 // Get the list of ports:
 function printList(portList) {
@@ -70,12 +70,12 @@ function serialEvent() {
   if (inString.length > 0) {
     // console.log("I read a string that says: " + inString);  // if there is something in that line...
     if (inString == "A") { // ... and that something is 'hello' in the form of "A"...
-      smoothVal = average(blowData); // prepare the value to send
-    if (smoothVal > 50) {
-        inputValString = 2;
-    } else {
-      inputValString = 1;
-    }
+      // smoothVal = average(blowData); // prepare the value to send
+    // if (smoothVal > 50) {
+    //     inputValString = 2;
+    // } else {
+    //   inputValString = 1;
+    // }
       // // console.log('smoothed mic val to be serialed: ' + smoothVal);
       // // combine the mic value and color selection into a 4 digit number for arduino
       // var tempInt = Math.floor(smoothVal);
@@ -84,8 +84,8 @@ function serialEvent() {
       // // var tempVal = int(smoothVal);
       // if (inputValString.length == 1) {inputValString = "00" + inputValString};
       // if (inputValString.length == 2) {inputValString = "0" + inputValString};
-      colorSelectonString = String(colorSelection);
-      outputString = inputValString + colorSelectonString; //mash together the intended strip (0 -4) and the value
+      // colorSelectonString = String(colorSelection);
+      // outputString = inputValString + colorSelectonString; //mash together the intended strip (0 -4) and the value
       // outputVal = int(outputString);
       // outboundString = String(outPutVal); //mash together the intended strip (0 -4) and the value
       // outboundString = String(colorSelection) + String(outPutVal); //mash together the intended strip (0 -4) and the value
@@ -124,17 +124,18 @@ let init = () => {
 // ********************************************************** 
 // WHEN RECEIVE DATA FROM SOCKET.IO, SEND THE DATA TO SERIALPORT 
 
-	socket.on('toLocal', function(data){
-		// this is the function got long press data from socket.io server
-		// console.log(data); // colorNum data
-    // console.log('color choice from phone: ' + data);
-    colorSelection = data;
-	});
+	// socket.on('toLocal', function(data){
+	// 	// this is the function got long press data from socket.io server
+	// 	// console.log(data); // colorNum data
+ //    // console.log('color choice from phone: ' + data);
+ //    colorSelection = data;
+	// });
 
   socket.on('toLocal2', function(data){
     // console.log(data); // mic data
     // console.log('mic value from phone: ' + data);
-    updateArray(Math.floor(data));
+    // updateArray(Math.floor(data));
+    outputString = String(data);
   });
 
 	connectToSerialPort(portName);
