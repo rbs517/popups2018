@@ -66,8 +66,9 @@ $("div.circleContainer").longclick(250, longClickHandler);
 
 // On tap add selection border
 $(function() {
+  // vmousedown and vmouseup become a part of the circle DIVVV
   $("div.circleContainer").bind("vmousedown", tapholdHandler);
-  // $("div.circleContainer").bind("vmouseup", removeTap);
+  $("div.circleContainer").bind("vmouseup", removeTap);
 
   function tapholdHandler(event) {
     $(event.target).addClass("tap");
@@ -200,22 +201,23 @@ socket.on('userCount', function(userCount) {
   console.log('total number of users online is: ' + userCount); // console number of users after one goes off;
 });
 
-// if pressed
-socket.on('colorPressed', function(colorNum){
-  //disable button --change to grey
-  $('#' + 'circle' + colorNum).unbind("vmousedown", function(){
-    $('#' + 'circle' + colorNum).removeClass('tap');
-    $('#' + 'circle' + colorNum).addClass('turnGrey');
-  });
 
-  console.log('colorNum: ' + colorNum + ' is taken!');
-  
+socket.on('colorPressed', function(colorNum){
+console.log("Got colorPressed: " + colorNum);
+  //disable button --change to grey
+  $('#' + 'circle' + colorNum).removeClass('tap');
+  $('#' + 'circle' + colorNum).addClass('turnGrey');
+  $('#' + 'circle' + colorNum).unbind("vmousedown", function(){
+
+  });
+  console.log('colorNum: ' + colorNum + ' is taken!');  
 });
+
 
 // if not pressed
 socket.on('toClients', function(colorNum){
   //enable button --change to normal color state
-  $('#' + 'circle' + colorNum).removeClass('turnGrey');
+  $('#' + 'circle' + colorNum).removeClass('turnGray');
   console.log('colorNum: ' + colorNum + ' is no longer taken');
 });
 

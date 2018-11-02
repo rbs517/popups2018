@@ -54,7 +54,7 @@ io.on('connection', function(socket){
     console.log(colorNum);
 
     // send pressed data back to client to disable that color button
-    io.sockets.emit('colorPressed', colorNum);
+    socket.broadcast.emit('colorPressed', colorNum);
   }
 
   // When you receive "unpressed" from the client (js)
@@ -62,7 +62,7 @@ io.on('connection', function(socket){
 
   function unpressedMsg(colorNum){
   // send pressed data back to client to enable that color button
-  io.sockets.emit('toClients', colorNum);
+  socket.broadcast.emit('toClients', colorNum);
 }
 
 
