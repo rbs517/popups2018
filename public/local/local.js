@@ -71,15 +71,20 @@ function serialEvent() {
     // console.log("I read a string that says: " + inString);  // if there is something in that line...
     if (inString == "A") { // ... and that something is 'hello' in the form of "A"...
       smoothVal = average(blowData); // prepare the value to send
-      // console.log('smoothed mic val to be serialed: ' + smoothVal);
-      // combine the mic value and color selection into a 4 digit number for arduino
-      var tempInt = Math.floor(smoothVal);
-      // console.log('average mic val to be stringed: ' + tempInt);
-      inputValString = String(tempInt);
-      // var tempVal = int(smoothVal);
-      if (inputValString.length == 1) {inputValString = "00" + inputValString};
-      if (inputValString.length == 2) {inputValString = "0" + inputValString};
-      colorSelectonString = String(colorSelection);
+    if (smoothVal > 50) {
+        inputValString = 2;
+    } else {
+      inputValString = 1;
+    }
+      // // console.log('smoothed mic val to be serialed: ' + smoothVal);
+      // // combine the mic value and color selection into a 4 digit number for arduino
+      // var tempInt = Math.floor(smoothVal);
+      // // console.log('average mic val to be stringed: ' + tempInt);
+      // inputVal =String = String(tempInt);
+      // // var tempVal = int(smoothVal);
+      // if (inputValString.length == 1) {inputValString = "00" + inputValString};
+      // if (inputValString.length == 2) {inputValString = "0" + inputValString};
+      // colorSelectonString = String(colorSelection);
       outputString = inputValString + colorSelectonString; //mash together the intended strip (0 -4) and the value
       // outputVal = int(outputString);
       // outboundString = String(outPutVal); //mash together the intended strip (0 -4) and the value

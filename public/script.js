@@ -206,7 +206,7 @@ socket.on('colorPressed', function(colorNum){
 console.log("Got colorPressed: " + colorNum);
   //disable button --change to grey
   $('#' + 'circle' + colorNum).removeClass('tap');
-  $('#' + 'circle' + colorNum).style.backgroundColor = "gray";
+  $('#' + 'circle' + colorNum).addClass('turnGray');
   $('#' + 'circle' + colorNum).unbind("vmousedown", function(){
 
   });
@@ -218,9 +218,6 @@ console.log("Got colorPressed: " + colorNum);
 socket.on('toClients', function(colorNum){
   //enable button --change to normal color state
   $('#' + 'circle' + colorNum).removeClass('turnGray');
-  $('#' + 'circle' + colorNum).unbind("vmousedown", function(){
-
-  });
   console.log('colorNum: ' + colorNum + ' is no longer taken');
 });
 
