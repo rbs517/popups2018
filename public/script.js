@@ -205,10 +205,10 @@ socket.on('userCount', function(userCount) {
 socket.on('colorPressed', function(colorNum){
 console.log("Got colorPressed: " + colorNum);
   //disable button --change to grey
-  $('#' + 'circle' + colorNum).removeClass('tap');
-  $('#' + 'circle' + colorNum).addClass('turnGray');
-  $('#' + 'circle' + colorNum).unbind("vmousedown", function(){
 
+  $('#' + 'circle' + colorNum).unbind("vmousedown", function(){
+    $('#' + 'circle' + colorNum).removeClass('tap');
+    $('#' + 'circle' + colorNum).addClass('turnGray');
   });
   console.log('colorNum: ' + colorNum + ' is taken!');  
 });
