@@ -84,7 +84,7 @@ function serialEvent() {
       // // var tempVal = int(smoothVal);
       // if (inputValString.length == 1) {inputValString = "00" + inputValString};
       // if (inputValString.length == 2) {inputValString = "0" + inputValString};
-      // colorSelectonString = String(colorSelection);
+      colorSelectonString = String(colorSelection);
       outputString = inputValString + colorSelectonString; //mash together the intended strip (0 -4) and the value
       // outputVal = int(outputString);
       // outboundString = String(outPutVal); //mash together the intended strip (0 -4) and the value
