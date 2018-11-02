@@ -67,7 +67,7 @@ $("div.circleContainer").longclick(250, longClickHandler);
 // On tap add selection border
 $(function() {
   $("div.circleContainer").bind("vmousedown", tapholdHandler);
-  $("div.circleContainer").bind("vmouseup", removeTap);
+  // $("div.circleContainer").bind("vmouseup", removeTap);
 
   function tapholdHandler(event) {
     $(event.target).addClass("tap");
