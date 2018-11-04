@@ -10,6 +10,20 @@ var options = {
 var inData; // for incoming serial data
 var outputString = 10;
 
+function setup(){
+
+}
+
+function draw(){
+  // reset message to each tube 
+      setTimeout(function() {
+        for (var j=0; j<5; j++){
+          serial.write("1"+String(j));
+        }
+      }, 5000);
+
+}
+
 // Get the list of ports:
 function printList(portList) {
   // portList is an array of serial port names
@@ -30,7 +44,7 @@ function connectToSerialPort(port) {
 
   serial.list(); // list the serial ports
   serial.open(port, options); // open a serial port
-  serial.write("1010"); //send a "hello" value to start off the serial communication
+  serial.write("10"); //send a "hello" value to start off the serial communication
 }
 
 function serverConnected() {
