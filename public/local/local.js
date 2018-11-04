@@ -5,7 +5,7 @@
 var serial; // variable to hold an instance of the serialport library
 var portName = '/dev/cu.usbmodem1421'; // fill in your serial port name here -- CHANGE ME!
 var options = {
-  baudrate: 19200 // change the data rate to whatever you wish -- MAKE ME MATCH!
+  baudrate: 9600 // change the data rate to whatever you wish -- MAKE ME MATCH!
 }; 
 var inData; // for incoming serial data
 var outputString = 10;
