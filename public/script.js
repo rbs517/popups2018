@@ -132,7 +132,7 @@ socket.on('toColorPresser', function(colorNum){
 socket.on('colorPressed', function(colorNum){
   // console.log("Got colorPressed: " + colorNum);
   //disable button --change to grey
-  //$('#' + 'circle' + colorNum).addClass('turnGray');
+  $('#' + 'circle' + colorNum).addClass('turnGray');
   $('#' + 'circle' + colorNum).unbind("vmousedown"); 
   $('#' + 'circle' + colorNum).removeClass('tap'); //stop the white rim
 
