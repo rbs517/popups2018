@@ -122,9 +122,8 @@ socket.on('userCount', function(userCount) {
 
 socket.on('toColorPresser', function(colorNum){
   // console.log("This is a private message just to the color-presser");
-  // $('#' + 'circle' + colorNum).unbind("vmousedown", function(){
-  $('#' + 'circle' + colorNum).removeClass('turnGray');
-  // });
+  $('#' + 'circle' + colorNum).unbind("vmousedown", function(){
+  });
     // console.log('colorNum: ' + colorNum + ' is taken by ME!');  
 });
 
