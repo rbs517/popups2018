@@ -73,6 +73,11 @@ function serialEvent() {
   // }
 }
 
+function sendToArduino(){
+  console.log("sending: " + outputString);
+  serial.write(outputString+ '\n'); // write the value - add + '\n' if using arduino uno
+}
+
 function serialError(err) {
   console.log('Something went wrong with the serial port. ' + err);
 }
@@ -101,8 +106,7 @@ let init = () => {
   socket.on('toLocal', function(data){
     //Mic and colorNum value
     outputString = String(data);
-    console.log("sending: " + outputString);
-    // serial.write(outputString+ '\n'); // write the value - add + '\n' if using arduino uno
+    sendToArduino();
   });
 
   // socket.on('toLocal2', function(data){
