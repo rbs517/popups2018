@@ -69,8 +69,8 @@ io.on('connection', function(socket){
 
   function unpressedMsg(colorNum){
     // send pressed data back to client to enable that color button
-    // socket.broadcast.emit('toClients', colorNum);
-    // io.sockets.emit('toLocal2', colorNum);
+    socket.broadcast.emit('toClients', colorNum);
+    io.sockets.emit('toLocal2', colorNum);
 }
 
   // When you receive "testingMic" from the client (js)
