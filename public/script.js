@@ -3,10 +3,13 @@
 
 // Declaring variables
 var mic;
+var vol;
 var micInput;
 var colorNum;
 var idString;
 var sound = [];
+var thisDevice = 12345;
+var buttonStatusList = [];
 
 // Sketch
 
@@ -33,11 +36,6 @@ function setup() {
 function draw() {
   // Get mic volume level/ blow val 
   vol = mic.getLevel();
-  micInput = map(vol, 0, 1, 1, 255); //inputVal is for arduino to control the fan
-
-
-  // tell the server that we want the mic data now 
-  socket.emit('testingMic', micInput);
 }
 
 // Circles placed in a circle design for taphold page
@@ -65,47 +63,104 @@ function longClickHandler(e) {
 
 $("div.circleContainer").longclick(250, longClickHandler);
 
-  
 // On tap add selection border
-// $(function() {
-  // vmousedown and vmouseup become a part of the circle DIVVV
-  // for (var i = 0;  i<10; i++){
-  //   $('#' + 'circle' +i).bind("vmousedown", tapholdHandler);
-  //   // console.log(event.target);
-  // }
+$("div.circleContainer").bind("vmousedown", tapholdHandler);
+// $("div.circleContainer").bind("vmouseup", removeTap);
 
-    $("div.circleContainer").bind("vmousedown", tapholdHandler);
-    // $("div.circleContainer").bind("vmouseup", removeTap);
-    
-    function tapholdHandler(event) {
-      $(event.target).addClass("tap");
+function tapholdHandler(event) {
+  console.log(event.target); // which circle is being pressed?
+  idString = (event.target.id); //take the circle id string
+  colorNum = idString.slice(6); //slice the string so it only prints the circle number
+  // console.log(colorNum); //print button color number
+
+  // STEP 1 //
+
+  // Ask server to give the button colors that are available -- Upon Tap
+  socket.emit('getColorAvail', thisDevice);
+
+  // STEP 2 //
+
+  // If button color is available
+  if (buttonStatusList[colorNum] == true){ 
+    // claim the color, and tell server
+    socket.emit('usingColor', colorNum);
+    // local button status is now false (not available)
+    buttonStatusList[colorNum] = false;
+  }
+
+  // STEP 3 //
+
+  // After button color is claimed, 
+  // Get mic input value 
+  micInput = map(vol, 0, 1, 1, 255); //inputVal is for arduino to control the fan
+
+  // Tell the server that we want the mic data now 
+  socket.emit('testingMic', micInput);
+
+
+  // // set timeout after 8 seconds to release the button 
+  // setTimeout(function() { removeTap(idString); }, 10000);
+}
+
+
+
+
+function removeTap(id) {
+  $('#' + idString).removeClass("tap");
+
+  for (i=0; i<sound.length; i++){
+    sound[i].stop();
+  }
+  // tell the server that the button has been released
+  socket.emit('unpressed', colorNum);
+
+} 
+
+// STEP 2 //
+
+// Update button color statuses 
+function updateButtonsStatus(buttonsStatus){
+  // for the buttonsStatus array, 
+  for (var i=0; i<buttonsStatus.length; i++){
+   
+    // if "i" spot in the array is true,
+    if (buttonsStatus[i] == true){
+      // button is available
+      console.log('button ' + i + ' is available');
+      buttonStatusList[i] = true;
+      
+      //update the button css
+      $('#' + idString).addClass("tap");
       // console.log("i touched the but");
-      console.log(event.target); // which circle is being pressed?
-      idString = (event.target.id); //take the circle id string
-      colorNum = idString.slice(6); //slice the string so it only prints the circle number
-      // console.log(colorNum); //print button color number
-      
-      sound[colorNum].start();
-      
-      // tell the server that the button has been pressed
-      socket.emit('pressed', colorNum);
 
-      // set timeout after 8 seconds to release the button 
-      setTimeout(function() { removeTap(idString); }, 8000);
-    }
-
-    function removeTap(id) {
-      $('#' + idString).removeClass("tap");
-
-      for (i=0; i<sound.length; i++){
-        sound[i].stop();
-      }
-      // tell the server that the button has been released
-      socket.emit('unpressed', colorNum);
-
+      //update the button binding
+      $("div.circleContainer").bind("vmousedown", tapholdHandler);
     } 
 
-// });
+    // if "i" spot in the array is false,
+    else if (buttonsStatus[i] == false){
+      // button is available
+      console.log('button ' + i + ' is not available');
+      buttonStatusList[i] = false;
+      
+      //update the button css
+      $('#' + idString).addClass("turnGray");
+
+      //update the button binding
+      $("div.circleContainer").unbind("vmousedown", tapholdHandler);
+    }
+  }
+}
+
+
+
+  // // tell the server that the button has been pressed
+  // socket.emit('pressed', colorNum);
+
+
+
+  // sound[colorNum].start();
+
 
 
 
@@ -114,30 +169,70 @@ $("div.circleContainer").longclick(250, longClickHandler);
 
 var socket = io();
 
+// Telling server when new user is connected 
 socket.emit('user', 'new user is connected');
 socket.on('userCount', function(userCount) { 
   console.log('total number of users online is: ' + userCount); // console number of users after one goes off;
 });
 
 
-socket.on('toColorPresser', function(colorNum){
+/////////////////////////////////////////////////////////////
+/////////////////////BUTTON CHECK////////////////////////////
+/////////////////////////////////////////////////////////////
+
+// STEP 1 //
+
+// Ask server to give the button colors that are available -- Upon Window Onload
+socket.emit('getColorAvail', thisDevice);
+
+// STEP 2 //
+
+// Getting the button color statuses from the server and update local button status
+socket.on(thisDevice,function(buttonsStatus){
+  console.log(buttonsStatus);
+  updateButtonsStatus(buttonsStatus);
+});
+
+// STEP 3 //
+
+// Broadcasted to all clients that the color number has been claimed, now update
+socket.on('colorStatusUpdate',function(colorNum){
+      // update local button status to taken 
+      buttonStatusList[colorNum] = false;
+      // update button status to the current button status
+      updateButtonsStatus(buttonStatusList);
+});
+
+// STEP 4 //
+
+// Broadcasted to all clients that the color number has been released, now update
+socket.on('colorStatusUpdate2',function(colorSelection){
+      // update local button status to taken 
+      buttonStatusList[colorNum] = true;
+      // update button status to the current button status
+      updateButtonsStatus(buttonStatusList);
+});
+
+
+
+// socket.on('toColorPresser', function(colorNum){
   // console.log("This is a private message just to the color-presser");
   // $('#' + 'circle' + colorNum).unbind("vmousedown", function(){
 
   // });
     // console.log('colorNum: ' + colorNum + ' is taken by ME!');  
-});
+// });
 
 
-socket.on('colorPressed', function(colorNum){
+// socket.on('colorPressed', function(colorNum){
   // console.log("Got colorPressed: " + colorNum);
   //disable button --change to grey
   // $('#' + 'circle' + colorNum).unbind("vmousedown"); //- not a kickoff but disables forever 
-  $('#' + 'circle' + colorNum).addClass('turnGray');
+  // $('#' + 'circle' + colorNum).addClass('turnGray');
 
   // removeTap(colorNum);// kick off --tap on/off 
 
-  setTimeout(function() { addTapBack(colorNum); }, 25000);
+  // setTimeout(function() { addTapBack(colorNum); }, 25000);
 
 
   // $('#' + 'circle' + colorNum).addClass('turnGray');
@@ -145,13 +240,13 @@ socket.on('colorPressed', function(colorNum){
   // setTimeout(function() { turnGray(colorNum); }, 8000);
   // setTimeout(function() { binding(colorNum);}, 8000);
   // console.log('colorNum: ' + colorNum + ' is taken!');  
-});
+// });
 
-function addTapBack(colorNum){
-  $('#' + 'circle' + colorNum).bind("vmousedown"); 
-  $('#' + 'circle' + colorNum).removeClass('turnGray');
+// function addTapBack(colorNum){
+//   $('#' + 'circle' + colorNum).bind("vmousedown"); 
+//   $('#' + 'circle' + colorNum).removeClass('turnGray');
 
-}
+// }
 
 // function binding(colorNum){
 //   $('#' + 'circle' + colorNum).bind("vmousedown"); 

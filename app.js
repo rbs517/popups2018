@@ -32,13 +32,14 @@ var blowData = [[0, 0, 0, 0, 0,0,0,0,0],[0, 0, 0, 0, 0,0,0,0,0],[0, 0, 0, 0, 0,0
 var colorSelectonString, inputValString, outputString;
 var colorSelection = 0;
 var smoothVal = 0;
+var buttonsStatus = [true, true, true]; //true means available
 
 // On connect to socket
 
 var io = require('socket.io')(http);
 
 io.on('connection', function(socket){
-
+  // On user connection
   userCount = userCount + 1;
   console.log('a user connected');
   console.log('number of connected users: ' + userCount);
@@ -52,26 +53,38 @@ io.on('connection', function(socket){
     io.sockets.emit('userCount', userCount); // call userCount function on js side
   });
 
-  // When you receive "pressed" from the client (js)
-  socket.on('pressed', colorMsg);
 
-  function colorMsg(colorNum){
-    io.sockets.emit('toColorPresser', colorNum);
+  /////////////////////////////////////////////////////////////
+  /////////////////////BUTTON CHECK////////////////////////////
+  /////////////////////////////////////////////////////////////
 
-    // send pressed data back to client to disable that color button
-    socket.broadcast.emit('colorPressed', colorNum);
+  // STEP 1 //
 
+  // Responding to client request, checking the color buttons for availability
+  socket.on('getColorAvail', colorButtonCheck);
+
+  
+  // STEP 2 //
+
+  // Once checked, send the button color statuses to the client
+  function colorButtonCheck(thisDevice){
+    socket.emit(thisDevice, buttonsStatus);
+  }
+  
+  // STEP 3 //
+
+  // Color has been claimed
+  socket.on('usingColor', broadcastColStatus);
+
+  // Broadcast color claim to all users
+  function broadcastColStatus(colorNum){
+    buttonsStatus[colorNum] = false;
+    socket.broadcast.emit('colorStatusUpdate', deviceMsg);
     colorSelection = colorNum;
+
   }
 
-  // When you receive "unpressed" from the client (js)
-  socket.on('unpressed', unpressedMsg);
-
-  function unpressedMsg(colorNum){
-    // send pressed data back to client to enable that color button
-    // socket.broadcast.emit('toClients', colorNum);
-    // io.sockets.emit('toLocal2', colorNum);
-}
+  // STEP 4 //
 
   // When you receive "testingMic" from the client (js)
   socket.on('testingMic', micMsg);
@@ -94,7 +107,51 @@ io.on('connection', function(socket){
     outputString = inputValString + colorSelectonString; //mash together the intended strip (0 -4) and the value
     // console.log('emitting ' + outputString + ' to local');
     io.sockets.emit('toLocal', outputString);
+
+    // set timeout after 10 seconds to release the button 
+    setTimeout(function() { timeIsUp(colorSelection); }, 10000);
   }
+
+
+
+  function timeIsUp(colorSelection){
+    buttonsStatus[colorSelection] = true;
+    socket.broadcast.emit('colorStatusUpdate2', deviceMsg);
+  }
+
+
+  // When you receive "pressed" from the client (js)
+  // socket.on('pressed', colorMsg);
+
+  // function colorMsg(colorNum){
+
+  //   for (var i=0; i<buttonsStatus.length; i++){
+  //     if (i == colorNum){
+  //       buttonsStatus[i] == true;
+  //     }else{
+
+  //     }
+       
+  //   }
+
+    // socket.emit('toColorPresser', colorNum);
+
+    // send pressed data back to client to disable that color button
+  //   socket.broadcast.emit('colorPressed', colorNum);
+
+  //   colorSelection = colorNum;
+  // }
+
+  // When you receive "unpressed" from the client (js)
+//   socket.on('unpressed', unpressedMsg);
+
+//   function unpressedMsg(colorNum){
+//     // send pressed data back to client to enable that color button
+//     // socket.broadcast.emit('toClients', colorNum);
+//     // io.sockets.emit('toLocal2', colorNum);
+// }
+
+
 
   function restart (){
     final = 0;
