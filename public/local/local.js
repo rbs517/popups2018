@@ -18,6 +18,7 @@ function draw(){
   // reset message to each tube 
       setTimeout(function() {
         for (var j=0; j<5; j++){
+          console.log("pinging a reset signal to tube number: " + j);
           serial.write("1"+String(j));
         }
       }, 5000);
