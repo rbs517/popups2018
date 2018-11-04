@@ -67,7 +67,7 @@ $("div.circleContainer").longclick(250, longClickHandler);
 
   
   // On tap add selection border
-  $(function() {
+  // $(function() {
       // vmousedown and vmouseup become a part of the circle DIVVV
       for (var i = 0;  i<10; i++){
         $('#' + 'circle' +i).bind("vmousedown", tapholdHandler);
@@ -80,8 +80,8 @@ $("div.circleContainer").longclick(250, longClickHandler);
     function tapholdHandler(event) {
       $(event.target).addClass("tap");
       // console.log("i touched the but");
-      console.log(event.target); // which circle is being pressed?
-      idString = (event.target.id); //take the circle id string
+      // console.log(event.target); // which circle is being pressed?
+      idString = (event.target); //take the circle id string
       colorNum = idString.slice(6); //slice the string so it only prints the circle number
       // console.log(colorNum); //print button color number
       
@@ -95,7 +95,6 @@ $("div.circleContainer").longclick(250, longClickHandler);
     }
 
     function removeTap(id) {
-      pushed = false;
       $('#' + idString).removeClass("tap");
 
       for (i=0; i<sound.length; i++){
@@ -106,7 +105,7 @@ $("div.circleContainer").longclick(250, longClickHandler);
 
     } 
 
-  });
+  // });
 
 
 
@@ -133,7 +132,8 @@ socket.on('toColorPresser', function(colorNum){
 socket.on('colorPressed', function(colorNum){
   console.log("Got colorPressed: " + colorNum);
     //disable button --change to grey
-    $('#' + 'circle' + colorNum).removeClass('tap');
+    removeTap(colorNum);
+    // $('#' + 'circle' + colorNum).removeClass('tap');
     $('#' + 'circle' + colorNum).addClass('turnGray');
     $('#' + 'circle' + colorNum).unbind("vmousedown", function(){
 
