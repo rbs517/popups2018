@@ -80,7 +80,7 @@ io.on('connection', function(socket){
   function broadcastColStatus(colorNum){
     buttonsStatus[colorNum] = false;
     socket.broadcast.emit('colorStatusUpdate', deviceMsg);
-    colorSelection = colorNum;
+    // colorSelection = colorNum;
 
   }
 
@@ -108,16 +108,16 @@ io.on('connection', function(socket){
     // console.log('emitting ' + outputString + ' to local');
     io.sockets.emit('toLocal', outputString);
 
-    // set timeout after 10 seconds to release the button 
-    setTimeout(function() { timeIsUp(colorSelection); }, 10000);
+    // // set timeout after 10 seconds to release the button 
+    // setTimeout(function() { timeIsUp(colorSelection); }, 10000);
   }
 
 
 
-  function timeIsUp(colorSelection){
-    buttonsStatus[colorSelection] = true;
-    socket.broadcast.emit('colorStatusUpdate2', deviceMsg);
-  }
+  // function timeIsUp(colorSelection){
+  //   buttonsStatus[colorSelection] = true;
+  //   socket.broadcast.emit('colorStatusUpdate2', deviceMsg);
+  // }
 
 
   // When you receive "pressed" from the client (js)
