@@ -103,6 +103,11 @@ let init = () => {
     outputString = String(data);
   });
 
+  // socket.on('toLocal2', function(data){
+  //   //Mic and colorNum value
+  //   outputString = "1" + String(data);
+  // });
+
 	connectToSerialPort(portName);
 };
 

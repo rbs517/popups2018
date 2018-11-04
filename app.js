@@ -68,6 +68,7 @@ io.on('connection', function(socket){
   function unpressedMsg(colorNum){
     // send pressed data back to client to enable that color button
     socket.broadcast.emit('toClients', colorNum);
+    // io.sockets.emit('toLocal2', colorNum);
 }
 
   // When you receive "testingMic" from the client (js)
@@ -81,10 +82,10 @@ io.on('connection', function(socket){
     console.log('...and a color selection of ' + colorSelection);
     // LED testing workaround
         if (smoothVal > 50) {
-        smoothVal = 3;
+        smoothVal = 2;
         inputValString = smoothVal.toString();
     } else {
-      smoothVal = 2;
+      smoothVal = 0;
       inputValString = smoothVal.toString();
     }
 
