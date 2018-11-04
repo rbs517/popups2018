@@ -36,6 +36,10 @@ function setup() {
 function draw() {
   // Get mic volume level/ blow val 
   vol = mic.getLevel();
+  micInput = map(vol, 0, 1, 1, 255); //inputVal is for arduino to control the fan
+
+  // Tell the server that we want the mic data now 
+  socket.emit('testingMic', micInput);
 }
 
 // Circles placed in a circle design for taphold page
@@ -92,10 +96,10 @@ function tapholdHandler(event) {
 
   // After button color is claimed, 
   // Get mic input value 
-  micInput = map(vol, 0, 1, 1, 255); //inputVal is for arduino to control the fan
+  // micInput = map(vol, 0, 1, 1, 255); //inputVal is for arduino to control the fan
 
-  // Tell the server that we want the mic data now 
-  socket.emit('testingMic', micInput);
+  // // Tell the server that we want the mic data now 
+  // socket.emit('testingMic', micInput);
 
 
   // // set timeout after 8 seconds to release the button 
@@ -136,7 +140,7 @@ function updateButtonsStatus(buttonsStatus){
       // //update the button binding
       // $('#' + idString).bind("vmousedown", tapholdHandler);
 
-      
+
     } 
 
     // if "i" spot in the array is false,
