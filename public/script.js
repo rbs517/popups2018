@@ -105,16 +105,16 @@ function tapholdHandler(event) {
 
 
 
-function removeTap(id) {
-  $('#' + idString).removeClass("tap");
+// function removeTap(id) {
+//   $('#' + idString).removeClass("tap");
 
-  for (i=0; i<sound.length; i++){
-    sound[i].stop();
-  }
-  // tell the server that the button has been released
-  socket.emit('unpressed', colorNum);
+//   for (i=0; i<sound.length; i++){
+//     sound[i].stop();
+//   }
+//   // tell the server that the button has been released
+//   socket.emit('unpressed', colorNum);
 
-} 
+// } 
 
 // STEP 2 //
 
@@ -133,8 +133,10 @@ function updateButtonsStatus(buttonsStatus){
       $('#' + idString).addClass("tap");
       // console.log("i touched the but");
 
-      //update the button binding
-      $("div.circleContainer").bind("vmousedown", tapholdHandler);
+      // //update the button binding
+      // $('#' + idString).bind("vmousedown", tapholdHandler);
+
+      
     } 
 
     // if "i" spot in the array is false,
@@ -146,8 +148,8 @@ function updateButtonsStatus(buttonsStatus){
       //update the button css
       $('#' + idString).addClass("turnGray");
 
-      //update the button binding
-      $("div.circleContainer").unbind("vmousedown", tapholdHandler);
+      // //update the button binding
+      // $('#' + idString).unbind("vmousedown", tapholdHandler);
     }
   }
 }
@@ -206,12 +208,12 @@ socket.on('colorStatusUpdate',function(colorNum){
 // STEP 4 //
 
 // Broadcasted to all clients that the color number has been released, now update
-socket.on('colorStatusUpdate2',function(colorSelection){
-      // update local button status to taken 
-      buttonStatusList[colorNum] = true;
-      // update button status to the current button status
-      updateButtonsStatus(buttonStatusList);
-});
+// socket.on('colorStatusUpdate2',function(colorSelection){
+//       // update local button status to taken 
+//       buttonStatusList[colorNum] = true;
+//       // update button status to the current button status
+//       updateButtonsStatus(buttonStatusList);
+// });
 
 
 
