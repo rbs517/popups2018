@@ -32,7 +32,7 @@ var blowData = [[0, 0, 0, 0, 0,0,0,0,0],[0, 0, 0, 0, 0,0,0,0,0],[0, 0, 0, 0, 0,0
 var colorSelectonString, inputValString, outputString;
 var colorSelection = 0;
 var smoothVal = 0;
-var buttonsStatus = [true, true, true]; //true means available
+var buttonsStatus = [true, false, true]; //true means available
 
 // On connect to socket
 
@@ -66,6 +66,7 @@ io.on('connection', function(socket){
   
   // Once checked, send the button color statuses to the client
   function colorButtonCheck(thisDevice){
+    console.log('got a color check request from ' + thisDevice);
     socket.emit(thisDevice, buttonsStatus);
   }
   
@@ -77,7 +78,8 @@ io.on('connection', function(socket){
   // Broadcast color claim to all users
   function broadcastColStatus(colorNum){
     buttonsStatus[colorNum] = false;
-    socket.broadcast.emit('colorStatusUpdate', deviceMsg);
+    console.log('got a request to reserve color ' + colorNum + " now broadcasting this reservation to all others")
+    socket.broadcast.emit('colorStatusUpdate', colorNum);
     // colorSelection = colorNum;
 
   }

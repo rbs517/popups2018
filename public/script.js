@@ -35,11 +35,11 @@ function setup() {
 
 function draw() {
   // Get mic volume level/ blow val 
-  vol = mic.getLevel();
-  micInput = map(vol, 0, 1, 1, 255); //inputVal is for arduino to control the fan
+  // vol = mic.getLevel();
+  // micInput = map(vol, 0, 1, 1, 255); //inputVal is for arduino to control the fan
 
-  // Tell the server that we want the mic data now 
-  socket.emit('testingMic', micInput);
+  // // Tell the server that we want the mic data now 
+  // socket.emit('testingMic', micInput);
 }
 
 // Circles placed in a circle design for taphold page
@@ -85,32 +85,35 @@ function tapholdHandler(event) {
   // STEP 2 //
 
   // If button color is available
-  if (buttonStatusList[colorNum] == true){ 
-    // claim the color, and tell server
+  if (buttonStatusList[colorNum] == true){
+    console.log("asking the server to restrict color " + colorNum + ' for me');
+    // claim the color by tellling the server
     socket.emit('usingColor', colorNum);
     // local button status is now false (not available)
     buttonStatusList[colorNum] = false;
+  } else {
+    console.log("that color number is not available");
   }
 
   // STEP 3 //
 
   // After button color is claimed, 
-  // Get mic input value 
+  //Get mic input value 
   // micInput = map(vol, 0, 1, 1, 255); //inputVal is for arduino to control the fan
 
-
-  socket.emit('pressed', colorNum);
-
-  // // Tell the server that we want the mic data now 
-  // socket.emit('testingMic', micInput);
-
-
-  // // set timeout after 8 seconds to release the button 
-  // setTimeout(function() { removeTap(idString); }, 10000);
 }
+  // // Tell the server that we want the mic data now 
+  // socket.emit('liveData', [micInput,colorNum]);
 
 
+//   // // set timeout after 8 seconds to release the button 
+//   setTimeout(function() { sendingData(micInput); }, 10000);
+// }
 
+
+// sendingData function () {
+
+// }
 
 // function removeTap(id) {
 //   $('#' + idString).removeClass("tap");
@@ -133,11 +136,11 @@ function updateButtonsStatus(buttonsStatus){
     // if "i" spot in the array is true,
     if (buttonsStatus[i] == true){
       // button is available
-      console.log('button ' + i + ' is available');
+      console.log('button ' + i + ' is available, updating my local list');
       buttonStatusList[i] = true;
       
       //update the button css
-      $('#' + idString).addClass("tap");
+      // $('#' + idString).addClass("tap");
       // console.log("i touched the but");
 
       // //update the button binding
@@ -153,8 +156,7 @@ function updateButtonsStatus(buttonsStatus){
       buttonStatusList[i] = false;
       
       //update the button css
-      $('#' + idString).addClass("turnGray");
-
+      $('#' + idString).css("background-color", "gray");
       // //update the button binding
       // $('#' + idString).unbind("vmousedown", tapholdHandler);
     }
@@ -206,6 +208,7 @@ socket.on(thisDevice,function(buttonsStatus){
 
 // Broadcasted to all clients that the color number has been claimed, now update
 socket.on('colorStatusUpdate',function(colorNum){
+      console.log("got an update from the server - " + buttonStatusList[colorNum] + "is now taken");
       // update local button status to taken 
       buttonStatusList[colorNum] = false;
       // update button status to the current button status
