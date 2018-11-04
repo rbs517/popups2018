@@ -137,13 +137,13 @@ socket.on('colorPressed', function(colorNum){
 
   // set timeout after 8 seconds to release the button 
   // setTimeout(function() { turnGray(colorNum); }, 8000);
-  // setTimeout(function() { removeTap(colorNum); }, 8000);
+  setTimeout(function() { removeTap(colorNum); }, 8000);
   // console.log('colorNum: ' + colorNum + ' is taken!');  
 });
 
-function turnGray(colorNum){
-    $('#' + 'circle' + colorNum).addClass('turnGray');
-}
+// function turnGray(colorNum){
+//     $('#' + 'circle' + colorNum).addClass('turnGray');
+// }
 
 // socket.on('toClients', function(colorNum){
 //   //enable button --change to normal color state
