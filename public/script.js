@@ -69,13 +69,18 @@ $("div.circleContainer").longclick(250, longClickHandler);
   // On tap add selection border
   $(function() {
       // vmousedown and vmouseup become a part of the circle DIVVV
-      $("div.circleContainer").bind("vmousedown", tapholdHandler);
+      for (var i = 0;  i<10; i++){
+        $('#' + 'circle' +i).bind("vmousedown", tapholdHandler);
+        // console.log(event.target);
+      }
+
+      // $("div.circleContainer").bind("vmousedown", tapholdHandler);
       // $("div.circleContainer").bind("vmouseup", removeTap);
     
     function tapholdHandler(event) {
       $(event.target).addClass("tap");
       // console.log("i touched the but");
-      // console.log(event.target.id); // which circle is being pressed?
+      console.log(event.target); // which circle is being pressed?
       idString = (event.target.id); //take the circle id string
       colorNum = idString.slice(6); //slice the string so it only prints the circle number
       // console.log(colorNum); //print button color number
@@ -97,6 +102,7 @@ $("div.circleContainer").longclick(250, longClickHandler);
       }
       // tell the server that the button has been released
       socket.emit('unpressed', colorNum);
+
     } 
 
   });
@@ -129,12 +135,12 @@ socket.on('colorPressed', function(colorNum){
 
 socket.on('toClients', function(colorNum){
   //enable button --change to normal color state
-  //     $('#' + 'circle' + colorNum).removeClass('tap');
-  // $('#' + 'circle' + colorNum).removeClass('turnGray');
+      $('#' + 'circle' + colorNum).removeClass('tap');
+  $('#' + 'circle' + colorNum).removeClass('turnGray');
   console.log('colorNum: ' + colorNum + ' is no longer taken');
-  // $('#' + 'circle' + colorNum).unbind("vmousedown", function(){
+  $('#' + 'circle' + colorNum).unbind("vmousedown", function(){
 
-  // });
+  });
 });
 
 // ********************************************************** 

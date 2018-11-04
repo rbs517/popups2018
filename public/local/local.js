@@ -18,6 +18,7 @@ function setup(){
         serial.write("1"+String(j));
       }
     }, 5000);
+
 }
 
 function draw(){
