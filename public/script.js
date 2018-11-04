@@ -148,7 +148,7 @@ socket.on('colorPressed', function(colorNum){
 });
 
 function addTapBack(colorNum){
-  $('#' + 'circle' + colorNum).addClass('tap');
+  $('#' + 'circle' + colorNum).bind("vmousedown"); 
 }
 
 // function binding(colorNum){
