@@ -133,9 +133,9 @@ socket.on('colorPressed', function(colorNum){
   // console.log("Got colorPressed: " + colorNum);
   //disable button --change to grey
   // $('#' + 'circle' + colorNum).unbind("vmousedown"); //- not a kickoff but disables forever 
-  // $('#' + 'circle' + colorNum).addClass('turnGray');
+  $('#' + 'circle' + colorNum).addClass('turnGray');
 
-  removeTap(colorNum);// kick off --tap on/off 
+  // removeTap(colorNum);// kick off --tap on/off 
 
   setTimeout(function() { addTapBack(colorNum); }, 8000);
 
@@ -149,6 +149,8 @@ socket.on('colorPressed', function(colorNum){
 
 function addTapBack(colorNum){
   $('#' + 'circle' + colorNum).bind("vmousedown"); 
+  $('#' + 'circle' + colorNum).removeClass('turnGray');
+
 }
 
 // function binding(colorNum){
