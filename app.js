@@ -69,7 +69,7 @@ io.on('connection', function(socket){
 
   function unpressedMsg(colorNum){
     // send pressed data back to client to enable that color button
-    socket.broadcast.emit('toClients', colorNum);
+    // socket.broadcast.emit('toClients', colorNum);
     // io.sockets.emit('toLocal2', colorNum);
 }
 
