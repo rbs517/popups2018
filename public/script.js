@@ -134,20 +134,20 @@ socket.on('colorPressed', function(colorNum){
   //disable button --change to grey
   // $('#' + 'circle' + colorNum).addClass('turnGray');
   // $('#' + 'circle' + colorNum).unbind("vmousedown", tapholdHandler); 
-  removeTap(colorNum);
-  $('#' + 'circle' + colorNum).addClass('turnGray');
+  // removeTap(colorNum);
+  // $('#' + 'circle' + colorNum).addClass('turnGray');
   // set timeout after 8 seconds to release the button 
   // setTimeout(function() { turnGray(colorNum); }, 8000);
-  // setTimeout(function() { removeTap(colorNum); turnGray(colorNum); }, 8000);
+  setTimeout(function() { removeTap(colorNum);}, 8000);
   // console.log('colorNum: ' + colorNum + ' is taken!');  
 });
 
-socket.on('toClients', function(colorNum){
+// socket.on('toClients', function(colorNum){
 //   //enable button --change to normal color state
 //   $('#' + 'circle' + colorNum).bind("vmousedown", tapholdHandler); 
-  $('#' + 'circle' + colorNum).removeClass('turnGray');
+  // $('#' + 'circle' + colorNum).removeClass('turnGray');
 //   // console.log('colorNum: ' + colorNum + ' is no longer taken');
-});
+// });
 
 // ********************************************************** 
 // BOOTSTRAP 
