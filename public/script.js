@@ -129,8 +129,12 @@ socket.on('colorPressed', function(colorNum){
 
 socket.on('toClients', function(colorNum){
   //enable button --change to normal color state
+      $('#' + 'circle' + colorNum).removeClass('tap');
   $('#' + 'circle' + colorNum).removeClass('turnGray');
   console.log('colorNum: ' + colorNum + ' is no longer taken');
+  $('#' + 'circle' + colorNum).unbind("vmousedown", function(){
+
+  });
 });
 
 // ********************************************************** 
