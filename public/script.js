@@ -72,7 +72,7 @@ $("div.circleContainer").bind("vmousedown", tapholdHandler);
 // $("div.circleContainer").bind("vmouseup", removeTap);
 
 function tapholdHandler(event) {
-  console.log(event.target); // which circle is being pressed?
+  // console.log(event.target); // which circle is being pressed?
   idString = (event.target.id); //take the circle id string
   colorNum = idString.slice(6); //slice the string so it only prints the circle number
   // console.log(colorNum); //print button color number
@@ -97,6 +97,9 @@ function tapholdHandler(event) {
   // After button color is claimed, 
   // Get mic input value 
   // micInput = map(vol, 0, 1, 1, 255); //inputVal is for arduino to control the fan
+
+
+  socket.emit('pressed', colorNum);
 
   // // Tell the server that we want the mic data now 
   // socket.emit('testingMic', micInput);
@@ -208,6 +211,18 @@ socket.on('colorStatusUpdate',function(colorNum){
       // update button status to the current button status
       updateButtonsStatus(buttonStatusList);
 });
+
+
+socket.on('colorPressed', function(colorNum){
+       // update local button status to taken 
+      buttonStatusList[colorNum] = true;
+      // update button status to the current button status
+      updateButtonsStatus(buttonStatusList);
+});
+
+
+
+
 
 // STEP 4 //
 

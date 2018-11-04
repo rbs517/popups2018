@@ -64,14 +64,12 @@ io.on('connection', function(socket){
   socket.on('getColorAvail', colorButtonCheck);
 
   
-  // STEP 2 //
-
   // Once checked, send the button color statuses to the client
   function colorButtonCheck(thisDevice){
     socket.emit(thisDevice, buttonsStatus);
   }
   
-  // STEP 3 //
+  // STEP 2 //
 
   // Color has been claimed
   socket.on('usingColor', broadcastColStatus);
@@ -80,7 +78,7 @@ io.on('connection', function(socket){
   function broadcastColStatus(colorNum){
     buttonsStatus[colorNum] = false;
     socket.broadcast.emit('colorStatusUpdate', deviceMsg);
-    colorSelection = colorNum;
+    // colorSelection = colorNum;
 
   }
 
@@ -121,18 +119,14 @@ io.on('connection', function(socket){
 
 
   // When you receive "pressed" from the client (js)
-  // socket.on('pressed', colorMsg);
+  socket.on('pressed', colorMsg);
 
-  // function colorMsg(colorNum){
+  function colorMsg(colorNum){
+    socket.broadcast.emit('colorPressed', colorNum);
 
-  //   for (var i=0; i<buttonsStatus.length; i++){
-  //     if (i == colorNum){
-  //       buttonsStatus[i] == true;
-  //     }else{
-
-  //     }
-       
-  //   }
+    colorSelection = colorNum;
+         
+  }
 
     // socket.emit('toColorPresser', colorNum);
 
