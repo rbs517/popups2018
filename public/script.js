@@ -66,22 +66,22 @@ function longClickHandler(e) {
 $("div.circleContainer").longclick(250, longClickHandler);
 
   
-  // On tap add selection border
-  // $(function() {
-      // vmousedown and vmouseup become a part of the circle DIVVV
-      for (var i = 0;  i<10; i++){
-        $('#' + 'circle' +i).bind("vmousedown", tapholdHandler);
-        // console.log(event.target);
-      }
+// On tap add selection border
+// $(function() {
+  // vmousedown and vmouseup become a part of the circle DIVVV
+  // for (var i = 0;  i<10; i++){
+  //   $('#' + 'circle' +i).bind("vmousedown", tapholdHandler);
+  //   // console.log(event.target);
+  // }
 
-      // $("div.circleContainer").bind("vmousedown", tapholdHandler);
-      // $("div.circleContainer").bind("vmouseup", removeTap);
+    $("div.circleContainer").bind("vmousedown", tapholdHandler);
+    // $("div.circleContainer").bind("vmouseup", removeTap);
     
     function tapholdHandler(event) {
       $(event.target).addClass("tap");
       // console.log("i touched the but");
-      // console.log(event.target); // which circle is being pressed?
-      idString = (event.target); //take the circle id string
+      console.log(event.target); // which circle is being pressed?
+      idString = (event.target.id); //take the circle id string
       colorNum = idString.slice(6); //slice the string so it only prints the circle number
       // console.log(colorNum); //print button color number
       
@@ -105,7 +105,7 @@ $("div.circleContainer").longclick(250, longClickHandler);
 
     } 
 
-  // });
+// });
 
 
 
@@ -121,11 +121,11 @@ socket.on('userCount', function(userCount) {
 
 
 socket.on('toColorPresser', function(colorNum){
-  console.log("This is a private message just to the color-presser");
-  $('#' + 'circle' + colorNum).unbind("vmousedown", function(){
+  // console.log("This is a private message just to the color-presser");
+  // $('#' + 'circle' + colorNum).unbind("vmousedown", function(){
 
-  });
-    console.log('colorNum: ' + colorNum + ' is taken by ME!');  
+  // });
+    // console.log('colorNum: ' + colorNum + ' is taken by ME!');  
 });
 
 
