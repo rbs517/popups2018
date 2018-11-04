@@ -136,7 +136,7 @@ socket.on('colorPressed', function(colorNum){
   // $('#' + 'circle' + colorNum).addClass('turnGray');
 
 
-  removeTap(colorNum);// kick off --tap on/off
+  // removeTap(colorNum);// kick off --tap on/off
 
 
   // $('#' + 'circle' + colorNum).addClass('turnGray');
