@@ -134,7 +134,7 @@ socket.on('colorPressed', function(colorNum){
   //disable button --change to grey
   $('#' + 'circle' + colorNum).unbind("vmousedown", tapholdHandler); 
   // $('#' + 'circle' + colorNum).addClass('turnGray');
-  removeTap(colorNum);
+  // removeTap(colorNum);
   // $('#' + 'circle' + colorNum).addClass('turnGray');
   // set timeout after 8 seconds to release the button 
   // setTimeout(function() { turnGray(colorNum); }, 8000);
