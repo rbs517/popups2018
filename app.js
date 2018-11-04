@@ -56,8 +56,10 @@ io.on('connection', function(socket){
   socket.on('pressed', colorMsg);
 
   function colorMsg(colorNum){
+    io.sockets.emit('userCount', userCount);
+
     // send pressed data back to client to disable that color button
-    socket.broadcast.emit('colorPressed', colorNum);
+    socket.broadcast.emit('toColorPresser', colorNum);
 
     colorSelection = colorNum;
   }
