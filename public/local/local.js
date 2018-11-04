@@ -8,14 +8,7 @@ var options = {
   baudrate: 19200 // change the data rate to whatever you wish -- MAKE ME MATCH!
 }; 
 var inData; // for incoming serial data
-var inputVal = 1;
-var colorSelection=0;
-var colorSelectonString;
 var outputString = 10;
-var outputVal;
-var smoothVal;
-var inputValString;
-var blowData = [[0, 0, 0, 0, 0,0,0,0,0],[0, 0, 0, 0, 0,0,0,0,0],[0, 0, 0, 0, 0,0,0,0,0],[0, 0, 0, 0, 0,0,0,0,0],[0, 0, 0, 0, 0,0,0,0,0],[0, 0, 0, 0, 0,0,0,0,0],[0, 0, 0, 0, 0,0,0,0,0],[0, 0, 0, 0, 0,0,0,0,0],[0, 0, 0, 0, 0,0,0,0,0],[0, 0, 0, 0, 0,0,0,0,0]]; // an array of recent microphone readings (for moving average)
 
 // Get the list of ports:
 function printList(portList) {
@@ -48,22 +41,6 @@ function portOpen() {
   console.log('the serial port opened.');
 }
 
-// Data smoothing function
-function updateArray(newReading) {
-  blowData.shift();
-  blowData.push(newReading);
-  // maybe use math.floor and do more elegant control on the arduino side
-}
-
-function average(array) {
-    var total = 0;
-  for (var i = 0; i < array.length; i++) {
-    total += array[i];
-  }
-  var avg = total / array.length;
-  return avg;
-}
-
 function serialEvent() {
   var inString = serial.readStringUntil('\r\n');
   //check to see that there's actually a string there:
@@ -93,9 +70,6 @@ function serialEvent() {
       console.log("sending: " + outputString);
       serial.write(outputString+ '\n'); // write the value - add + '\n' if using arduino uno
     }
-    // else {serial.clear();
-    //   serial.write(valToSend + '\n'); // write the value
-    // }
   }
 }
 
@@ -124,17 +98,8 @@ let init = () => {
 // ********************************************************** 
 // WHEN RECEIVE DATA FROM SOCKET.IO, SEND THE DATA TO SERIALPORT 
 
-	// socket.on('toLocal', function(data){
-	// 	// this is the function got long press data from socket.io server
-	// 	// console.log(data); // colorNum data
- //    // console.log('color choice from phone: ' + data);
- //    colorSelection = data;
-	// });
-
-  socket.on('toLocal2', function(data){
-    // console.log(data); // mic data
-    // console.log('mic value from phone: ' + data);
-    // updateArray(Math.floor(data));
+  socket.on('toLocal', function(data){
+    //Mic and colorNum value
     outputString = String(data);
   });
 

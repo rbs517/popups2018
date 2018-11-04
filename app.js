@@ -9,11 +9,6 @@ var PORT = process.env.PORT || 5000;
 var request = require('request');
 var http = require('http').Server(app);
 
-var blowData = [[0, 0, 0, 0, 0,0,0,0,0],[0, 0, 0, 0, 0,0,0,0,0],[0, 0, 0, 0, 0,0,0,0,0],[0, 0, 0, 0, 0,0,0,0,0],[0, 0, 0, 0, 0,0,0,0,0],[0, 0, 0, 0, 0,0,0,0,0],[0, 0, 0, 0, 0,0,0,0,0],[0, 0, 0, 0, 0,0,0,0,0],[0, 0, 0, 0, 0,0,0,0,0],[0, 0, 0, 0, 0,0,0,0,0]]; // an array of recent microphone readings (for moving average)
-var colorSelectonString, inputValString, outputString;
-var colorSelection = 0;
-var smoothVal = 0;
-
 // File path
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -31,10 +26,17 @@ console.log("App is served on localhost: " + PORT);
 // **********************************************************
 // SOCKET COMMUNICATION ON SERVER SIDE
 
-var io = require('socket.io')(http);
+// Declare variables
 var userCount = 0;
+var blowData = [[0, 0, 0, 0, 0,0,0,0,0],[0, 0, 0, 0, 0,0,0,0,0],[0, 0, 0, 0, 0,0,0,0,0],[0, 0, 0, 0, 0,0,0,0,0],[0, 0, 0, 0, 0,0,0,0,0],[0, 0, 0, 0, 0,0,0,0,0],[0, 0, 0, 0, 0,0,0,0,0],[0, 0, 0, 0, 0,0,0,0,0],[0, 0, 0, 0, 0,0,0,0,0],[0, 0, 0, 0, 0,0,0,0,0]]; // an array of recent microphone readings (for moving average)
+var colorSelectonString, inputValString, outputString;
+var colorSelection = 0;
+var smoothVal = 0;
 
 // On connect to socket
+
+var io = require('socket.io')(http);
+
 io.on('connection', function(socket){
 
   userCount = userCount + 1;
@@ -57,25 +59,18 @@ io.on('connection', function(socket){
     // send pressed data back to client to disable that color button
     socket.broadcast.emit('colorPressed', colorNum);
 
-    // send pressed data to Local.js which is used to talk to serialport
     colorSelection = colorNum;
-
-    // io.sockets.emit('toLocal', colorNum);
-    console.log('color selection from client is: '+ colorSelection);
-
-    // // send pressed data back to client to disable that color button
-    // socket.broadcast.emit('colorPressed', colorNum);
   }
 
   // When you receive "unpressed" from the client (js)
   socket.on('unpressed', unpressedMsg);
 
   function unpressedMsg(colorNum){
-  // send pressed data back to client to enable that color button
-  socket.broadcast.emit('toClients', colorNum);
+    // send pressed data back to client to enable that color button
+    socket.broadcast.emit('toClients', colorNum);
 }
 
-
+  // When you receive "testingMic" from the client (js)
   socket.on('testingMic', micMsg);
 
   function micMsg(micInput){
@@ -95,9 +90,7 @@ io.on('connection', function(socket){
 
     outputString = inputValString + colorSelectonString; //mash together the intended strip (0 -4) and the value
     console.log('emitting ' + outputString + ' to local');
-    io.sockets.emit('toLocal2', outputString);
-    // console.log(micInput);
-    // add another emit here that the phones will listen for 'notifyAllUsers'
+    io.sockets.emit('toLocal', outputString);
   }
 
   function restart (){

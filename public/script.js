@@ -7,6 +7,7 @@ var micInput;
 var colorNum;
 var idString;
 var sound = [];
+var amPressed = false;
 
 // Sketch
 
@@ -34,7 +35,7 @@ function draw() {
   // Get mic volume level/ blow val 
   vol = mic.getLevel();
   micInput = map(vol, 0, 1, 1, 255); //inputVal is for arduino to control the fan
-  
+
 
   // tell the server that we want the mic data now 
   socket.emit('testingMic', micInput);
@@ -65,30 +66,34 @@ function longClickHandler(e) {
 
 $("div.circleContainer").longclick(250, longClickHandler);
 
-// On tap add selection border
-$(function() {
-  // vmousedown and vmouseup become a part of the circle DIVVV
-  $("div.circleContainer").bind("vmousedown", tapholdHandler);
-  // $("div.circleContainer").bind("vmouseup", removeTap);
+  
+  // On tap add selection border
+  $(function() {
+    if (amPressed == false){
+      // vmousedown and vmouseup become a part of the circle DIVVV
+      $("div.circleContainer").bind("vmousedown", tapholdHandler);
+      // $("div.circleContainer").bind("vmouseup", removeTap);
+    }
+    function tapholdHandler(event) {
+      $(event.target).addClass("tap");
+      amPressed = true;
+      // console.log("i touched the but");
+      // console.log(event.target.id); // which circle is being pressed?
+      idString = (event.target.id); //take the circle id string
+      colorNum = idString.slice(6); //slice the string so it only prints the circle number
+      // console.log(colorNum); //print button color number
+      
+      sound[colorNum].start();
+      
+      // tell the server that the button has been pressed
+      socket.emit('pressed', colorNum);
 
-  function tapholdHandler(event) {
-    $(event.target).addClass("tap");
-    // console.log("i touched the but");
-    // console.log(event.target.id); // which circle is being pressed?
-    idString = (event.target.id); //take the circle id string
-    colorNum = idString.slice(6); //slice the string so it only prints the circle number
-    // console.log(colorNum); //print button color number
-    
-    sound[colorNum].start();
-
-    // tell the server that the button has been pressed
-    socket.emit('pressed', colorNum);
-
-    // set timeout after 5 seconds to release the button 
-    setTimeout(function() { removeTap(idString); }, 8000);
-  }
+      // set timeout after 8 seconds to release the button 
+      setTimeout(function() { removeTap(idString); }, 8000);
+    }
 
     function removeTap(id) {
+      amPressed == false;
       $('#' + idString).removeClass("tap");
 
       for (i=0; i<sound.length; i++){
@@ -98,99 +103,9 @@ $(function() {
       socket.emit('unpressed', colorNum);
     } 
 
-});
+  });
 
-// ********************************************************** 
-// OTHER MICROPHONE OPTION OTHER THAN P5
-// var webaudio_tooling_obj = function () {
 
-//     var audioContext = new AudioContext();
-
-//     var BUFF_SIZE = 16384;
-
-//     var audioInput = null,
-//         microphone_stream = null,
-//         gain_node = null,
-//         script_processor_node = null,
-//         script_processor_fft_node = null,
-//         analyserNode = null;
-
-//     if (!navigator.getUserMedia)
-//             navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia ||
-//                           navigator.mozGetUserMedia || navigator.msGetUserMedia;
-
-//     if (navigator.getUserMedia){
-
-//         navigator.getUserMedia({audio:true}, 
-//           function(stream) {
-//               start_microphone(stream);
-//           },
-//           function(e) {
-//             alert('Error capturing audio.');
-//           }
-//         );
-
-//     } else { alert('getUserMedia not supported in this browser.'); }
-
-//     // ---
-
-//     function show_some_data(given_typed_array, num_row_to_display, label) {
-
-//         var size_buffer = given_typed_array.length;
-//         var index = 0;
-//         var max_index = num_row_to_display;
-
-//         // console.log("__________ " + label);
-
-//         for (; index < max_index && index < size_buffer; index += 1) {
-
-//             // console.log(given_typed_array[index]);
-//             micInput = given_typed_array[index];
-//             // socket.emit('testingMic', micInput);
-//             inputVal = map(micInput, 0, 150, 1, 255);
-//             // console.log(inputVal);
-//         }
-//     }
-
-//     function start_microphone(stream){
-
-//       gain_node = audioContext.createGain();
-//       gain_node.connect( audioContext.destination );
-
-//       microphone_stream = audioContext.createMediaStreamSource(stream);
-//       // microphone_stream.connect(gain_node); 
-
-//       script_processor_node = audioContext.createScriptProcessor(BUFF_SIZE, 1, 1);
-//       // script_processor_node.onaudioprocess = process_microphone_buffer;
-
-//       microphone_stream.connect(script_processor_node);
-
-//       script_processor_fft_node = audioContext.createScriptProcessor(2048, 1, 1);
-//       script_processor_fft_node.connect(gain_node);
-
-//       analyserNode = audioContext.createAnalyser();
-//       analyserNode.smoothingTimeConstant = 0;
-//       analyserNode.fftSize = 2048;
-
-//       microphone_stream.connect(analyserNode);
-
-//       analyserNode.connect(script_processor_fft_node);
-
-//       script_processor_fft_node.onaudioprocess = function() {
-
-//         // get the average for the first channel
-//         var array = new Uint8Array(analyserNode.frequencyBinCount);
-//         analyserNode.getByteFrequencyData(array);
-
-//         // draw the spectrogram
-//         if (microphone_stream.playbackState == microphone_stream.PLAYING_STATE) {
-
-//             show_some_data(array, 5, "from fft");
-//         }
-//       };
-//     }
-
-//   }(); //  webaudio_tooling_obj = function()
 
 // ********************************************************** 
 // SOCKET COMMUNICATION ON CLIENT SIDE
@@ -204,19 +119,21 @@ socket.on('userCount', function(userCount) {
 
 
 socket.on('colorPressed', function(colorNum){
-console.log("Got colorPressed: " + colorNum);
-  //disable button --change to grey
-  $('#' + 'circle' + colorNum).removeClass('tap');
-  $('#' + 'circle' + colorNum).addClass('turnGray');
-  $('#' + 'circle' + colorNum).unbind("vmousedown", function(){
+  console.log("Got colorPressed: " + colorNum);
+  amPressed = true;
+    //disable button --change to grey
+    $('#' + 'circle' + colorNum).removeClass('tap');
+    $('#' + 'circle' + colorNum).addClass('turnGray');
+    $('#' + 'circle' + colorNum).unbind("vmousedown", function(){
 
   });
+
   console.log('colorNum: ' + colorNum + ' is taken!');  
 });
 
 
-// if not pressed
 socket.on('toClients', function(colorNum){
+  amPressed = false;
   //enable button --change to normal color state
   $('#' + 'circle' + colorNum).removeClass('turnGray');
   console.log('colorNum: ' + colorNum + ' is no longer taken');
