@@ -132,11 +132,11 @@ socket.on('toColorPresser', function(colorNum){
 socket.on('colorPressed', function(colorNum){
   // console.log("Got colorPressed: " + colorNum);
   //disable button --change to grey
-  $('#' + 'circle' + colorNum).unbind("vmousedown", tapholdHandler); 
+  $('#' + 'circle' + colorNum).unbind("vmousedown", tapholdHandler); //- not a kickoff but disables forever 
   // $('#' + 'circle' + colorNum).addClass('turnGray');
 
 
-  // removeTap(colorNum);// kick off --tap on/off
+  // removeTap(colorNum);// kick off --tap on/off 
 
 
   // $('#' + 'circle' + colorNum).addClass('turnGray');
@@ -150,12 +150,12 @@ socket.on('colorPressed', function(colorNum){
 //   $('#' + 'circle' + colorNum).bind("vmousedown", tapholdHandler); 
 // }
 
-// socket.on('toClients', function(colorNum){
-//   //enable button --change to normal color state
-//   $('#' + 'circle' + colorNum).bind("vmousedown", tapholdHandler); 
+socket.on('toClients', function(colorNum){
+  //enable button --change to normal color state
+  $('#' + 'circle' + colorNum).bind("vmousedown", tapholdHandler); 
   // $('#' + 'circle' + colorNum).removeClass('turnGray');
-//   // console.log('colorNum: ' + colorNum + ' is no longer taken');
-// });
+  // console.log('colorNum: ' + colorNum + ' is no longer taken');
+});
 
 // ********************************************************** 
 // BOOTSTRAP 
