@@ -67,8 +67,8 @@ function serialEvent() {
       // outboundString = String(outPutVal); //mash together the intended strip (0 -4) and the value
       // outboundString = String(colorSelection) + String(outPutVal); //mash together the intended strip (0 -4) and the value
       // outBoundInt = int(outboundString); //convert it to a string
-      console.log("sending: " + outputString);
-      serial.write(outputString+ '\n'); // write the value - add + '\n' if using arduino uno
+      // console.log("sending: " + outputString);
+      // serial.write(outputString+ '\n'); // write the value - add + '\n' if using arduino uno
   //   }
   // }
 }
@@ -101,6 +101,8 @@ let init = () => {
   socket.on('toLocal', function(data){
     //Mic and colorNum value
     outputString = String(data);
+    console.log("sending: " + outputString);
+    // serial.write(outputString+ '\n'); // write the value - add + '\n' if using arduino uno
   });
 
   // socket.on('toLocal2', function(data){
