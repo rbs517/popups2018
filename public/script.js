@@ -132,17 +132,18 @@ socket.on('toColorPresser', function(colorNum){
 socket.on('colorPressed', function(colorNum){
   // console.log("Got colorPressed: " + colorNum);
   //disable button --change to grey
+  $('#' + 'circle' + colorNum).unbind("vmousedown", tapholdHandler); 
   // $('#' + 'circle' + colorNum).addClass('turnGray');
   // removeTap(colorNum);
   // $('#' + 'circle' + colorNum).addClass('turnGray');
   // set timeout after 8 seconds to release the button 
   // setTimeout(function() { turnGray(colorNum); }, 8000);
-  setTimeout(function() { removeTap(colorNum); unbind(colorNum);}, 8000);
+  setTimeout(function() { removeTap(colorNum); binding(colorNum);}, 8000);
   // console.log('colorNum: ' + colorNum + ' is taken!');  
 });
 
-function unbind(colorNum){
-  $('#' + 'circle' + colorNum).unbind("vmousedown", tapholdHandler); 
+function binding(colorNum){
+  $('#' + 'circle' + colorNum).bind("vmousedown", tapholdHandler); 
 }
 
 // socket.on('toClients', function(colorNum){
