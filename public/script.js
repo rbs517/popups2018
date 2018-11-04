@@ -130,12 +130,11 @@ socket.on('toColorPresser', function(colorNum){
 
 
 socket.on('colorPressed', function(colorNum){
-  console.log("Got colorPressed: " + colorNum);
-    //disable button --change to grey
-    $('#' + 'circle' + colorNum).unbind("vmousedown", function(){
-      $('#' + 'circle' + colorNum).addClass('turnGray');
-      $('#' + 'circle' + colorNum).removeClass('tap');
-  });
+  // console.log("Got colorPressed: " + colorNum);
+  //disable button --change to grey
+  $('#' + 'circle' + colorNum).unbind("vmousedown");
+  $('#' + 'circle' + colorNum).addClass('turnGray');
+  $('#' + 'circle' + colorNum).removeClass('tap');
   removeTap(colorNum);
 
   console.log('colorNum: ' + colorNum + ' is taken!');  
