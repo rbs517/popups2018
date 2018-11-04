@@ -85,7 +85,7 @@ io.on('connection', function(socket){
         smoothVal = 2;
         inputValString = smoothVal.toString();
     } else {
-      smoothVal = 0;
+      smoothVal = 1;
       inputValString = smoothVal.toString();
     }
 
