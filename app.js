@@ -77,9 +77,9 @@ io.on('connection', function(socket){
   function micMsg(micInput){
     updateArray(micInput,colorSelection);
     smoothVal = average(blowData[colorSelection]); // prepare the value to send
-    console.log('preparing emission with a avg micVal of: ' + smoothVal);
+    // console.log('preparing emission with a avg micVal of: ' + smoothVal);
     colorSelectonString = colorSelection.toString();
-    console.log('...and a color selection of ' + colorSelection);
+    // console.log('...and a color selection of ' + colorSelection);
     // LED testing workaround
         if (smoothVal > 50) {
         smoothVal = 2;
@@ -90,7 +90,7 @@ io.on('connection', function(socket){
     }
 
     outputString = inputValString + colorSelectonString; //mash together the intended strip (0 -4) and the value
-    console.log('emitting ' + outputString + ' to local');
+    // console.log('emitting ' + outputString + ' to local');
     io.sockets.emit('toLocal', outputString);
   }
 

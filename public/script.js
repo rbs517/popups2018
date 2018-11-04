@@ -7,7 +7,6 @@ var micInput;
 var colorNum;
 var idString;
 var sound = [];
-var amPressed = false;
 
 // Sketch
 
@@ -69,14 +68,12 @@ $("div.circleContainer").longclick(250, longClickHandler);
   
   // On tap add selection border
   $(function() {
-    if (amPressed == false){
       // vmousedown and vmouseup become a part of the circle DIVVV
       $("div.circleContainer").bind("vmousedown", tapholdHandler);
       // $("div.circleContainer").bind("vmouseup", removeTap);
-    }
+    
     function tapholdHandler(event) {
       $(event.target).addClass("tap");
-      amPressed = true;
       // console.log("i touched the but");
       // console.log(event.target.id); // which circle is being pressed?
       idString = (event.target.id); //take the circle id string
@@ -93,7 +90,6 @@ $("div.circleContainer").longclick(250, longClickHandler);
     }
 
     function removeTap(id) {
-      amPressed == false;
       $('#' + idString).removeClass("tap");
 
       for (i=0; i<sound.length; i++){
@@ -120,7 +116,6 @@ socket.on('userCount', function(userCount) {
 
 socket.on('colorPressed', function(colorNum){
   console.log("Got colorPressed: " + colorNum);
-  amPressed = true;
     //disable button --change to grey
     $('#' + 'circle' + colorNum).removeClass('tap');
     $('#' + 'circle' + colorNum).addClass('turnGray');
@@ -133,7 +128,6 @@ socket.on('colorPressed', function(colorNum){
 
 
 socket.on('toClients', function(colorNum){
-  amPressed = false;
   //enable button --change to normal color state
   $('#' + 'circle' + colorNum).removeClass('turnGray');
   console.log('colorNum: ' + colorNum + ' is no longer taken');
