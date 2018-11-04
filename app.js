@@ -80,7 +80,7 @@ io.on('connection', function(socket){
   function broadcastColStatus(colorNum){
     buttonsStatus[colorNum] = false;
     socket.broadcast.emit('colorStatusUpdate', deviceMsg);
-    // colorSelection = colorNum;
+    colorSelection = colorNum;
 
   }
 
