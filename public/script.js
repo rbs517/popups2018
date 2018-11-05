@@ -105,16 +105,13 @@ function tapholdHandler(event) {
   // Get mic input value 
   micInput = map(vol, 0, 1, 1, 255); //inputVal is for arduino to control the fan
 
-    $('#' + idString).addClass("tap");
-    console.log("i touched the but");
+  // Tell the server that we want the mic and color data now 
+  socket.emit('liveData', micInput, colorNum);
 
-    // Tell the server that we want the mic and color data now 
-    socket.emit('liveData', micInput, colorNum);
-
-    // setTimeout(function() { updateButtonsStatus(buttonsStatus); }, 10000);
+  $('#' + idString).addClass("tap");
+  console.log("i touched the but");
 
 }
-
 
 
 
@@ -164,14 +161,14 @@ function updateButtonsStatus(buttonsStatus){
 
     // if "i" spot in the array is false,
     else if (buttonsStatus[i] == false){
-      // button is available
+      // button is not available
       console.log('button ' + i + ' is not available');
       buttonStatusList[i] = false;
       
       //update the button css
       $('#' + idString).css("background-color", "gray");
       $('#' + idString).removeClass("tap");
-      // //update the button binding
+      // update the button binding
       $('#' + idString).unbind("vmousedown", tapholdHandler);
     }
   }
@@ -245,6 +242,8 @@ socket.on('colorStatusUpdate',function(colorNum){
 
 //Broadcasted to all clients that the color number has been released, now update
 socket.on('colorStatusUpdate2',function(colorNum){
+      $('#' + 'class' + colorNum).removeClass("tap");
+      $('#' + 'class' + colorNum).unbind("vmousedown", tapholdHandler);
       // update local button status to taken 
       buttonStatusList[colorNum] = true;
       setTimeout(function() { updateButtonsStatus(buttonStatusList); }, 10000);
