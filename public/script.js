@@ -176,20 +176,10 @@ function updateButtonElements(localButtonStatus){
       // button is not available
       console.log('setting button ' + i + ' as inactive');
       //update the button css
-
-      var disableButton = function(){
-      
       $('#' + circleNumber).css("background-color", "gray");
       $('#' + circleNumber).removeClass("tap");
       // update the button binding
       $('#' + circleNumber).unbind("vmousedown", tapholdHandler); 
-      
-      };
-
-
-      setTimeout(disableButton, 8000);
-
-
    
     }
   }
