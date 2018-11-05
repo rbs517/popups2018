@@ -142,23 +142,11 @@ function tapholdHandler(event) {
 function updateButtonsStatus(buttonsStatus){
   // for the buttonsStatus array, 
   for (var i=0; i<buttonsStatus.length; i++){
-   
     // if "i" spot in the array is true,
     if (buttonsStatus[i] == true){
       // button is available
       console.log('button ' + i + ' is available, updating my local list');
       buttonStatusList[i] = true;
-      
-      //update the button css
-      // $('#' + idString).addClass("tap");
-      // console.log("i touched the but");
-
-      $('#' + idString).css("background-color");
-
-      // //update the button binding
-      $('#' + idString).bind("vmousedown", tapholdHandler);
-
-
     } 
 
     // if "i" spot in the array is false,
@@ -166,15 +154,36 @@ function updateButtonsStatus(buttonsStatus){
       // button is not available
       console.log('button ' + i + ' is not available');
       buttonStatusList[i] = false;
-      
-      //update the button css
-      $('#' + idString).css("background-color", "gray");
-      $('#' + idString).removeClass("tap");
-      // update the button binding
-      $('#' + idString).unbind("vmousedown", tapholdHandler);
     }
   }
 }
+
+function updateButtonsStatus(localButtonStatus){
+  // for the buttonsStatus array, 
+  for (var i=0; i<localButtonStatus.length; i++){
+    // if "i" spot in the array is true,
+    if (buttonsStatus[i] == true){
+      // button is available
+      console.log('setting button ' + i + ' as active');
+      $('#' + idString).css("background-color");
+
+      // //update the button binding
+      $('#' + idString).bind("vmousedown", tapholdHandler);
+          } 
+
+    // if "i" spot in the array is false,
+    else if (buttonsStatus[i] == false){
+      // button is not available
+      console.log('setting button ' + i + ' as inactive');
+            //update the button css
+      $('#' + idString).css("background-color", "gray");
+      $('#' + idString).removeClass("tap");
+      // update the button binding
+      $('#' + idString).unbind("vmousedown", tapholdHandler);    }
+  }
+}
+
+
 
 
 
@@ -217,6 +226,7 @@ socket.emit('getColorAvail', thisDevice);
 socket.on(thisDevice,function(buttonsStatus){
   console.log(buttonsStatus);
   updateButtonsStatus(buttonsStatus);
+  updateButtonElements(buttonStatusList);
 });
 
 // STEP 3 //
@@ -227,7 +237,7 @@ socket.on('colorStatusUpdate',function(colorNum){
       // update local button status to taken 
       buttonStatusList[colorNum] = false;
       // update button status to the current button status
-      updateButtonsStatus(buttonStatusList);
+      updateButtonElements(buttonStatusList);
 });
 
 
@@ -237,6 +247,7 @@ socket.on('colorStatusUpdate',function(colorNum){
 //       // update button status to the current button status
 //       updateButtonsStatus(buttonStatusList);
 // });
+
 
 
 
