@@ -121,8 +121,9 @@ function tapholdHandler(event) {
 
   var stopActiveTimer = setTimeout(function(colorNum){
   console.log("timing out my emissions of mic data");
-  clearInterval(activeTimer);
   socket.emit('usingColor', currentColors[0], true);
+  clearInterval(activeTimer);
+
   myActiveButtons[currentColors[0]] = false;
   currentColors.shift();
   $('#' + idString).removeClass("tap");
