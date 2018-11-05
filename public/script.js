@@ -105,16 +105,17 @@ function tapholdHandler(event) {
   // Get mic input value 
   micInput = map(vol, 0, 1, 1, 255); //inputVal is for arduino to control the fan
 
-  // Set timeout after 10 seconds to release the button 
-  setTimeout(function() { sendingData(micInput, colorNum); }, 10000);
+    $('#' + idString).addClass("tap");
+    console.log("i touched the but");
 
-  function sendingData(micInput, colorNum){
-    // Tell the server that we want the mic data now 
+    // Tell the server that we want the mic and color data now 
     socket.emit('liveData', micInput, colorNum);
-  }
 
+    // setTimeout(function() { updateButtonsStatus(buttonsStatus); }, 10000);
 
 }
+
+
 
 
 
@@ -245,8 +246,7 @@ socket.on('colorStatusUpdate',function(colorNum){
 socket.on('colorStatusUpdate2',function(colorNum){
       // update local button status to taken 
       buttonStatusList[colorNum] = true;
-      // update button status to the current button status
-      updateButtonsStatus(buttonStatusList);
+      setTimeout(function() { updateButtonsStatus(buttonStatusList); }, 10000);
 });
 
 
