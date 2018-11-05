@@ -153,6 +153,8 @@ function updateButtonsStatus(buttonsStatus){
       // $('#' + idString).addClass("tap");
       // console.log("i touched the but");
 
+      $('#' + idString).css("background-color");
+
       // //update the button binding
       $('#' + idString).bind("vmousedown", tapholdHandler);
 
