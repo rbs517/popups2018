@@ -145,11 +145,12 @@ function updateButtonElements(localButtonStatus){
   // for the buttonsStatus array, 
   for (var i=0; i<localButtonStatus.length; i++){
     var circleNumber = "circle" + i;
+    
     // if "i" spot in the array is true,
     if (localButtonStatus[i] == true){
       // button is available
       console.log('setting button ' + i + ' as active');
-      $('#' + circleNumber).css("background-color");
+      // $('#' + circleNumber).css("background-color");
 
       // //update the button binding
       $('#' + circleNumber).bind("vmousedown", tapholdHandler);
