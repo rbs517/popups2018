@@ -11,7 +11,7 @@ var sound = [];
 var thisDevice;
 var buttonStatusList = [];
 var myActiveButtons = [false,false,false,false,false,false,false,false,false,false]; 
-// var buttonColors = [maroon, red, orange, yellow, green, lime, teal, aqua, blue, purple];
+var buttonColors = ['maroon', 'red', 'orange', 'yellow', 'green', 'lime', 'teal', 'aqua', 'blue', 'purple'];
 var currentColors= [];
 // Sketch
 
@@ -165,9 +165,8 @@ function updateButtonElements(localButtonStatus){
     if (localButtonStatus[i] == true){
       // button is available
       console.log('setting button ' + i + ' as active');
-
+      $('#' + circleNumber).css("background-color", buttonColors[i]);
       // update the button css
-      $('#' + circleNumber).css("background-color");
       //update the button binding
       $('#' + circleNumber).bind("vmousedown", tapholdHandler);
     } 
