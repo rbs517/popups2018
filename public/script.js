@@ -162,7 +162,7 @@ function updateButtonsStatus(localButtonStatus){
   // for the buttonsStatus array, 
   for (var i=0; i<localButtonStatus.length; i++){
     // if "i" spot in the array is true,
-    if (buttonsStatus[i] == true){
+    if (localButtonStatus[i] == true){
       // button is available
       console.log('setting button ' + i + ' as active');
       $('#' + idString).css("background-color");
@@ -172,7 +172,7 @@ function updateButtonsStatus(localButtonStatus){
           } 
 
     // if "i" spot in the array is false,
-    else if (buttonsStatus[i] == false){
+    else if (localButtonStatus[i] == false){
       // button is not available
       console.log('setting button ' + i + ' as inactive');
             //update the button css
