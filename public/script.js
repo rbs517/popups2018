@@ -90,12 +90,11 @@ function tapholdHandler(event) {
     console.log("asking the server to restrict color " + colorNum + ' for me');
     // claim the color by tellling the server
     socket.emit('usingColor', colorNum);
-    // local button status is now false (not available)
-    // buttonStatusList[colorNum] = false;
 
-
-    //REBECCA!!! DONT FORGET TO CHANGE THIS WHEN THE USER IS DONE WITH THE BUTTON
+    //REBECCA!!! DONT FORGET TO CHANGE THIS BACK WHEN THE USER IS DONE WITH THE BUTTON
+    // The color number that corresponds to the number in my array (of active buttons) is true
     myActiveButtons[colorNum] = true;
+
   } else {
     console.log("that color number is not available");
   }
@@ -119,28 +118,6 @@ function tapholdHandler(event) {
 }
 
 
-
-
-//   // // set timeout after 8 seconds to release the button 
-//   setTimeout(function() { sendingData(micInput); }, 10000);
-// }
-
-
-// sendingData function () {
-
-// }
-
-// function removeTap(id) {
-//   $('#' + idString).removeClass("tap");
-
-//   for (i=0; i<sound.length; i++){
-//     sound[i].stop();
-//   }
-//   // tell the server that the button has been released
-//   socket.emit('unpressed', colorNum);
-
-// } 
-
 // STEP 2 //
 
 // Update button color statuses 
@@ -163,6 +140,7 @@ function updateButtonsStatus(buttonsStatus){
   }
 }
 
+// After color has been claimed
 function updateButtonElements(localButtonStatus){
   // for the buttonsStatus array, 
   for (var i=0; i<localButtonStatus.length; i++){
@@ -181,26 +159,13 @@ function updateButtonElements(localButtonStatus){
     else if (localButtonStatus[i] == false){
       // button is not available
       console.log('setting button ' + i + ' as inactive');
-            //update the button css
+      //update the button css
       $('#' + circleNumber).css("background-color", "gray");
       $('#' + circleNumber).removeClass("tap");
       // update the button binding
       $('#' + circleNumber).unbind("vmousedown", tapholdHandler);    }
   }
 }
-
-
-
-
-
-  // // tell the server that the button has been pressed
-  // socket.emit('pressed', colorNum);
-
-
-
-  // sound[colorNum].start();
-
-
 
 
 // ********************************************************** 
@@ -247,76 +212,16 @@ socket.on('colorStatusUpdate',function(colorNum){
 });
 
 
-// socket.on('colorPressed', function(colorNum){
-//        // update local button status to taken 
-//       buttonStatusList[colorNum] = true;
-//       // update button status to the current button status
-//       updateButtonsStatus(buttonStatusList);
-// });
-
-
-
-
-
-
 // STEP 4 //
 
 //Broadcasted to all clients that the color number has been released, now update
 socket.on('colorStatusUpdate2',function(colorNum){
       // update local button status to taken 
       buttonStatusList[colorNum] = true;
-      setTimeout(function() { changeCSS(colorNum); updateButtonsStatus(buttonStatusList); }, 10000);
+      setTimeout(function() { updateButtonElements(buttonStatusList); }, 10000);
 });
 
-function changeCSS(colorNum){
-  $('#' + 'class' + colorNum).removeClass("tap");
-  $('#' + 'class' + colorNum).unbind("vmousedown", tapholdHandler);
-}
 
-
-// socket.on('toColorPresser', function(colorNum){
-  // console.log("This is a private message just to the color-presser");
-  // $('#' + 'circle' + colorNum).unbind("vmousedown", function(){
-
-  // });
-    // console.log('colorNum: ' + colorNum + ' is taken by ME!');  
-// });
-
-
-// socket.on('colorPressed', function(colorNum){
-  // console.log("Got colorPressed: " + colorNum);
-  //disable button --change to grey
-  // $('#' + 'circle' + colorNum).unbind("vmousedown"); //- not a kickoff but disables forever 
-  // $('#' + 'circle' + colorNum).addClass('turnGray');
-
-  // removeTap(colorNum);// kick off --tap on/off 
-
-  // setTimeout(function() { addTapBack(colorNum); }, 25000);
-
-
-  // $('#' + 'circle' + colorNum).addClass('turnGray');
-  // set timeout after 8 seconds to release the button 
-  // setTimeout(function() { turnGray(colorNum); }, 8000);
-  // setTimeout(function() { binding(colorNum);}, 8000);
-  // console.log('colorNum: ' + colorNum + ' is taken!');  
-// });
-
-// function addTapBack(colorNum){
-//   $('#' + 'circle' + colorNum).bind("vmousedown"); 
-//   $('#' + 'circle' + colorNum).removeClass('turnGray');
-
-// }
-
-// function binding(colorNum){
-//   $('#' + 'circle' + colorNum).bind("vmousedown"); 
-// }
-
-// socket.on('toClients', function(colorNum){
-  //enable button --change to normal color state
-  // $('#' + 'circle' + colorNum).bind("vmousedown"); 
-  // $('#' + 'circle' + colorNum).removeClass('turnGray');
-  // console.log('colorNum: ' + colorNum + ' is no longer taken');
-// });
 
 // ********************************************************** 
 // BOOTSTRAP 
@@ -340,7 +245,7 @@ function changeCSS(colorNum){
 
 }(jQuery);
 
-//Thanks mdn
+// Thanks mdn
 function getRandomIntInclusive(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
