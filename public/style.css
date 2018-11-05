@@ -148,9 +148,6 @@ div.circleContainer.tap{
   /*background-color: gray;*/
 /*}*/
 
-div.circleContainer.layer {
-  background-color: rgba(104, 100, 102, 0.7);
-}
 
 ul {
   display: flex;

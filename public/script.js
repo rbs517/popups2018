@@ -162,7 +162,8 @@ function updateButtonElements(localButtonStatus){
       console.log('setting button ' + i + ' as inactive');
       //update the button css
 
-      $('#' + circleNumber).addClass("layer");
+
+      $('#' + circleNumber).css("background-color", "rgba(104, 100, 102, 0.7)");
       // $('#' + circleNumber).css("background-color", "gray");
       $('#' + circleNumber).removeClass("tap");
       // update the button binding
