@@ -223,7 +223,7 @@ socket.on(thisDevice,function(buttonsStatus){
 
 // Broadcasted to all clients that the color number has been claimed, now update
 socket.on('colorStatusUpdate',function(colorNum){
-      console.log("got an update from the server - " + buttonStatusList[colorNum] + "is now taken");
+      console.log("got an update from the server - " + colorNum + "is now taken");
       // update local button status to taken 
       buttonStatusList[colorNum] = false;
       // update button status to the current button status
