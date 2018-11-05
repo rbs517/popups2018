@@ -11,7 +11,8 @@ var sound = [];
 var thisDevice;
 var buttonStatusList = [];
 var myActiveButtons = [false,false,false,false,false,false,false,false,false,false]; 
-
+// var buttonColors = [maroon, red, orange, yellow, green, lime, teal, aqua, blue, purple];
+var currentColor;
 // Sketch
 
 // p5.js function protocol
@@ -164,19 +165,31 @@ function updateButtonElements(localButtonStatus){
       // button is available
       console.log('setting button ' + i + ' as active');
 
-      // //update the button binding
-      $('#' + circleNumber).bind("vmousedown", tapholdHandler);
-          } 
+      // update the button css
+      $('#' + circleNumber).css("background-color");
+      //update the button binding
+      $('#' + circleNumber).bind("vmousedown", currentColor);
+    } 
 
     // if "i" spot in the array is false,
     else if (localButtonStatus[i] == false){
       // button is not available
       console.log('setting button ' + i + ' as inactive');
       //update the button css
+
+      var disableButton = function(){
+      
       $('#' + circleNumber).css("background-color", "gray");
       $('#' + circleNumber).removeClass("tap");
       // update the button binding
       $('#' + circleNumber).unbind("vmousedown", tapholdHandler); 
+      
+      };
+
+
+      setTimeout(disableButton, 8000);
+
+
    
     }
   }
