@@ -244,13 +244,15 @@ socket.on('colorStatusUpdate',function(colorNum){
 
 //Broadcasted to all clients that the color number has been released, now update
 socket.on('colorStatusUpdate2',function(colorNum){
-      $('#' + 'class' + colorNum).removeClass("tap");
-      $('#' + 'class' + colorNum).unbind("vmousedown", tapholdHandler);
       // update local button status to taken 
       buttonStatusList[colorNum] = true;
-      setTimeout(function() { updateButtonsStatus(buttonStatusList); }, 10000);
+      setTimeout(function() { changeCSS(colorNum); updateButtonsStatus(buttonStatusList); }, 10000);
 });
 
+function changeCSS(colorNum){
+  $('#' + 'class' + colorNum).removeClass("tap");
+  $('#' + 'class' + colorNum).unbind("vmousedown", tapholdHandler);
+}
 
 
 // socket.on('toColorPresser', function(colorNum){
