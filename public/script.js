@@ -13,6 +13,7 @@ var buttonStatusList = [];
 var myActiveButtons = [false,false,false,false,false,false,false,false,false,false]; 
 var buttonColors = ['maroon', 'red', 'orange', 'yellow', 'green', 'lime', 'teal', 'aqua', 'blue', 'purple'];
 var currentColors= [];
+var circleNumber;
 // Sketch
 
 // p5.js function protocol
@@ -118,14 +119,14 @@ function tapholdHandler(event) {
       console.log("gonna send " + micInput + ' and ' + currentColors[0] + " to the server");
     },500);
 
-    var stopActiveTimer = setTimeout(function(colorNum){
-    console.log("timing out my emissions of mic data");
-    clearInterval(activeTimer);
-    socket.emit('usingColor', currentColors[0], true);
-    myActiveButtons[currentColors[0]] = false;
-    currentColors.shift();
-    $('#' + idString).removeClass("tap");
-
+  var stopActiveTimer = setTimeout(function(colorNum){
+  console.log("timing out my emissions of mic data");
+  clearInterval(activeTimer);
+  socket.emit('usingColor', currentColors[0], true);
+  myActiveButtons[currentColors[0]] = false;
+  currentColors.shift();
+  //console.log("this is a test console.log","idsteing:","circle #" )
+  $('#' + circleNumber).removeClass("tap");
       // socket.emit('');
   }, 4000);
 
@@ -160,7 +161,11 @@ function updateButtonsStatus(buttonsStatus){
 function updateButtonElements(localButtonStatus){
   // for the buttonsStatus array, 
   for (var i=0; i<localButtonStatus.length; i++){
-    var circleNumber = "circle" + i;
+    circleNumber = "circle" + i;
+
+    // set a variable counter
+    // evertime when you set a button grey, the counter +1
+    // at the end of the loop, if the counter == 10, do a alert
 
     // if "i" spot in the array is true,
     if (localButtonStatus[i] == true){
