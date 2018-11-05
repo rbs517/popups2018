@@ -8,7 +8,7 @@ var micInput;
 var colorNum;
 var idString;
 var sound = [];
-var thisDevice = 12345;
+var thisDevice;
 var buttonStatusList = [];
 
 // Sketch
@@ -204,6 +204,8 @@ socket.on('userCount', function(userCount) {
 /////////////////////BUTTON CHECK////////////////////////////
 /////////////////////////////////////////////////////////////
 
+thisDevice = getRandomIntInclusive(1,1000);
+
 // STEP 1 //
 
 // Ask server to give the button colors that are available -- Upon Window Onload
@@ -320,3 +322,10 @@ function changeCSS(colorNum){
   a(),e(window).scroll(a);
 
 }(jQuery);
+
+//Thanks mdn
+function getRandomIntInclusive(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive 
+}

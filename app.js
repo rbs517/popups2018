@@ -66,7 +66,10 @@ io.on('connection', function(socket){
   
   // Once checked, send the button color statuses to the client
   function colorButtonCheck(thisDevice){
-    console.log('got a color check request from ' + thisDevice);
+    console.log('got a color check request from ' + thisDevice + "sending them the array I have: ");
+    for (var i = 0; i < buttonsStatus ;i++) {
+    console.log("button " +i + ": " +buttonsStatus[i]);
+  }
     socket.emit(thisDevice, buttonsStatus);
   }
   
