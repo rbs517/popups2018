@@ -105,8 +105,6 @@ function tapholdHandler(event) {
     console.log("i touched the but");
 
   } else {
-    // socket.emit('NotusingColor', colorNum);
-    // myActiveButtons[colorNum] = false;
     console.log("that color number is not available");
   }
 
@@ -146,7 +144,8 @@ function updateButtonsStatus(buttonsStatus){
     } 
 
     // if "i" spot in the array is false,
-    else if (buttonsStatus[i] == false && myActiveButtons[i] == false){
+    // else if (buttonsStatus[i] == false && myActiveButtons[i] == false){
+    else if ( myActiveButtons[i] == false){
       // button is not available
       console.log('button ' + i + ' is not available');
       buttonStatusList[i] = false;
