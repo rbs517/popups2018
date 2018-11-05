@@ -35,6 +35,12 @@ function setup() {
 }
 
 function draw() {
+    // Get mic volume level/ blow val 
+  vol = mic.getLevel();
+  
+  // Get mic input value 
+  micInput = map(vol, 0, 1, 1, 255); //inputVal is for arduino to control the fan
+
   // Get mic volume level/ blow val 
   // vol = mic.getLevel();
   // micInput = map(vol, 0, 1, 1, 255); //inputVal is for arduino to control the fan
@@ -94,27 +100,34 @@ function tapholdHandler(event) {
     //REBECCA!!! DONT FORGET TO CHANGE THIS BACK WHEN THE USER IS DONE WITH THE BUTTON
     // The color number that corresponds to the number in my array (of active buttons) is true
     myActiveButtons[colorNum] = true;
+    $('#' + idString).addClass("tap");
+    console.log("i touched the but");
 
   } else {
+    // socket.emit('NotusingColor', colorNum);
+    // myActiveButtons[colorNum] = false;
     console.log("that color number is not available");
   }
 
   // STEP 3 //
 
-  // After button color is claimed, 
+  // After button color is claimed, send data for x seconds
+  var activeTimer = setInterval(function(colorNum){
+      // // Tell the server that we want the mic and color data now 
+      // socket.emit('liveData', micInput, colorNum);
+      console.log("gonna send " + micInput + ' and ' + colorNum + "to the server");
+    },500);
 
-  // Get mic volume level/ blow val 
-  vol = mic.getLevel();
-  
-  // Get mic input value 
-  micInput = map(vol, 0, 1, 1, 255); //inputVal is for arduino to control the fan
+    var stopActiveTimer = setTimeout(function(colorNum){
+    console.log("timing out my emissions of mic data");
+    clearInterval(activeTimer);
+    $('#' + idString).removeClass("tap");
 
-  // Tell the server that we want the mic and color data now 
-  socket.emit('liveData', micInput, colorNum);
+      // socket.emit('');
+  }, 4000);
 
-  $('#' + idString).addClass("tap");
-  console.log("i touched the but");
-
+  micTimer(colorNum);
+  stopMicTimer(colorNum);
 }
 
 
@@ -150,7 +163,6 @@ function updateButtonElements(localButtonStatus){
     if (localButtonStatus[i] == true){
       // button is available
       console.log('setting button ' + i + ' as active');
-      // $('#' + circleNumber).css("background-color");
 
       // //update the button binding
       $('#' + circleNumber).bind("vmousedown", tapholdHandler);
@@ -161,13 +173,12 @@ function updateButtonElements(localButtonStatus){
       // button is not available
       console.log('setting button ' + i + ' as inactive');
       //update the button css
-
-
-      $('#' + circleNumber).css("background-color", "rgba(104, 100, 102, 0.7)");
-      // $('#' + circleNumber).css("background-color", "gray");
+      $('#' + circleNumber).css("background-color", "gray");
       $('#' + circleNumber).removeClass("tap");
       // update the button binding
-      $('#' + circleNumber).unbind("vmousedown", tapholdHandler);    }
+      $('#' + circleNumber).unbind("vmousedown", tapholdHandler); 
+   
+    }
   }
 }
 
@@ -219,12 +230,12 @@ socket.on('colorStatusUpdate',function(colorNum){
 // STEP 4 //
 
 //Broadcasted to all clients that the color number has been released, now update
-socket.on('colorStatusUpdate2',function(colorNum){
-      console.log("color: " + colorNum + " is now released");
-      // update local button status to taken 
-      buttonStatusList[colorNum] = true;
-      updateButtonElements(buttonStatusList);
-});
+// socket.on('colorStatusUpdate2',function(colorNum){
+//       console.log("color: " + colorNum + " is now released");
+//       // update local button status to taken 
+//       buttonStatusList[colorNum] = true;
+//       updateButtonElements(buttonStatusList);
+// });
 
 
 

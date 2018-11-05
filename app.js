@@ -83,9 +83,23 @@ io.on('connection', function(socket){
     buttonsStatus[colorNum] = false;
     console.log('got a request to reserve color ' + colorNum + " now broadcasting this reservation to all others")
     socket.broadcast.emit('colorStatusUpdate', colorNum);
-    // colorSelection = colorNum;
-
   }
+
+  // Color has not yet been claimed
+  // socket.on('NotusingColor', broadcastColStatus2);
+
+  // // Broadcast color claim to all users
+  // function broadcastColStatus2(colorNum){
+  //   buttonsStatus[colorNum] = true;
+  //   console.log('got a request to release color ' + colorNum + " now broadcasting this release to all others");
+  //   socket.broadcast.emit('colorStatusUpdate2', colorNum);
+  //   // colorSelection = colorNum;
+
+  // }
+
+
+
+
 
   // STEP 4 //
 
@@ -110,19 +124,8 @@ io.on('connection', function(socket){
     outputString = inputValString + colorSelectonString; //mash together the intended strip (0 -4) and the value
     // console.log('emitting ' + outputString + ' to local');
     io.sockets.emit('toLocal', outputString);
-
-    setTimeout(function() { broadcastColStatus2(colorNum); }, 10000);
   }
 
-
-  // Broadcast color claim to all users
-  function broadcastColStatus2(colorNum){
-    buttonsStatus[colorNum] = true;
-    console.log('got a request to release color ' + colorNum + " now broadcasting this release to all others");
-    socket.broadcast.emit('colorStatusUpdate2', colorNum);
-    // colorSelection = colorNum;
-
-  }
 
     // socket.emit('toColorPresser', colorNum);
 
