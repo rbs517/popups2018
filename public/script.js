@@ -114,7 +114,7 @@ function tapholdHandler(event) {
   // After button color is claimed, send data for x seconds
   var activeTimer = setInterval(function(colorNum){
       // // Tell the server that we want the mic and color data now 
-      socket.emit('liveData', micInput, colorNum);
+      // socket.emit('liveData', micInput, colorNum);
       console.log("gonna send " + micInput + ' and ' + currentColors[0] + " to the server");
     },500);
 
@@ -122,6 +122,7 @@ function tapholdHandler(event) {
     console.log("timing out my emissions of mic data");
     clearInterval(activeTimer);
     socket.emit('usingColor', currentColors[0], true);
+    myActiveButtons[currentColors[0]] = false;
     currentColors.shift();
     $('#' + idString).removeClass("tap");
 
