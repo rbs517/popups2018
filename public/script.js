@@ -170,6 +170,7 @@ function updateButtonsStatus(buttonsStatus){
       
       //update the button css
       $('#' + idString).css("background-color", "gray");
+      $('#' + idString).removeClass("tap");
       // //update the button binding
       $('#' + idString).unbind("vmousedown", tapholdHandler);
     }
