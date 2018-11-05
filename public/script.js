@@ -144,8 +144,7 @@ function updateButtonsStatus(buttonsStatus){
     } 
 
     // if "i" spot in the array is false,
-    // else if (buttonsStatus[i] == false && myActiveButtons[i] == false){
-    else if ( myActiveButtons[i] == false){
+    else if (buttonsStatus[i] == false && myActiveButtons[i] == false){
       // button is not available
       console.log('button ' + i + ' is not available');
       buttonStatusList[i] = false;
@@ -167,13 +166,14 @@ function updateButtonElements(localButtonStatus){
       // update the button css
       $('#' + circleNumber).css("background-color");
       //update the button binding
-      $('#' + circleNumber).bind("vmousedown", currentColor);
+      $('#' + circleNumber).bind("vmousedown", tapholdHandler);
     } 
 
     // if "i" spot in the array is false,
     else if (localButtonStatus[i] == false){
       // button is not available
       console.log('setting button ' + i + ' as inactive');
+      
       //update the button css
       $('#' + circleNumber).css("background-color", "gray");
       $('#' + circleNumber).removeClass("tap");
