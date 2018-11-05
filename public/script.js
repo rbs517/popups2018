@@ -121,12 +121,13 @@ function tapholdHandler(event) {
 
   var stopActiveTimer = setTimeout(function(colorNum){
   console.log("timing out my emissions of mic data");
+  $('#' + idString).removeClass("tap");
   clearInterval(activeTimer);
   socket.emit('usingColor', currentColors[0], true);
   myActiveButtons[currentColors[0]] = false;
   currentColors.shift();
   //console.log("this is a test console.log","idsteing:","circle #" )
-  $('#' + circleNumber).removeClass("tap");
+  // $('#' + idString).removeClass("tap");
       // socket.emit('');
   }, 4000);
 
