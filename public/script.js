@@ -114,7 +114,7 @@ function tapholdHandler(event) {
   // After button color is claimed, send data for x seconds
   var activeTimer = setInterval(function(colorNum){
       // // Tell the server that we want the mic and color data now 
-      // socket.emit('liveData', micInput, colorNum);
+      socket.emit('liveData', micInput, colorNum);
       console.log("gonna send " + micInput + ' and ' + currentColors[0] + " to the server");
     },500);
 
@@ -229,19 +229,6 @@ socket.on('colorStatusUpdate',function(colorNum, colorStatus){
       // update button status to the current button status
       updateButtonElements(buttonStatusList);
 });
-
-
-
-
-// STEP 4 //
-
-//Broadcasted to all clients that the color number has been released, now update
-// socket.on('colorStatusUpdate2',function(colorNum){
-//       console.log("color: " + colorNum + " is now released");
-//       // update local button status to taken 
-//       buttonStatusList[colorNum] = true;
-//       updateButtonElements(buttonStatusList);
-// });
 
 
 
