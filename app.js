@@ -110,7 +110,8 @@ io.on('connection', function(socket){
     outputString = inputValString + colorSelectonString; //mash together the intended strip (0 -4) and the value
     // console.log('emitting ' + outputString + ' to local');
     io.sockets.emit('toLocal', outputString);
-    // broadcastColStatus2(colorNum);
+
+    setTimeout(function() { broadcastColStatus2(colorNum); }, 10000);
   }
 
 

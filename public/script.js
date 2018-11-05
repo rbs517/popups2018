@@ -204,7 +204,7 @@ socket.on(thisDevice,function(buttonsStatus){
 
 // Broadcasted to all clients that the color number has been claimed, now update
 socket.on('colorStatusUpdate',function(colorNum){
-      console.log("got an update from the server - " + colorNum + "is now taken");
+      console.log("color: " + colorNum + " is now taken");
       // update local button status to taken 
       buttonStatusList[colorNum] = false;
       // update button status to the current button status
@@ -216,9 +216,10 @@ socket.on('colorStatusUpdate',function(colorNum){
 
 //Broadcasted to all clients that the color number has been released, now update
 socket.on('colorStatusUpdate2',function(colorNum){
+      console.log("color: " + colorNum + " is now released");
       // update local button status to taken 
       buttonStatusList[colorNum] = true;
-      setTimeout(function() { updateButtonElements(buttonStatusList); }, 10000);
+      updateButtonElements(buttonStatusList);
 });
 
 
