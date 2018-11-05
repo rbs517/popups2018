@@ -32,7 +32,7 @@ var blowData = [[0, 0, 0, 0, 0,0,0,0,0],[0, 0, 0, 0, 0,0,0,0,0],[0, 0, 0, 0, 0,0
 var colorSelectonString, inputValString, outputString;
 var colorSelection = 0;
 var smoothVal = 0;
-var buttonsStatus = [true, false, true]; //true means available
+var buttonsStatus = [true, true, true]; //true means available
 
 // On connect to socket
 
@@ -87,13 +87,13 @@ io.on('connection', function(socket){
   // STEP 4 //
 
   // When you receive "testingMic" from the client (js)
-  socket.on('testingMic', micMsg);
+  socket.on('liveData', colorMicMsg);
 
-  function micMsg(micInput){
-    updateArray(micInput,colorSelection);
-    smoothVal = average(blowData[colorSelection]); // prepare the value to send
+  function colorMicMsg(micInput, colorNum){
+    updateArray(micInput, colorNum);
+    smoothVal = average(blowData[colorNum]); // prepare the value to send
     // console.log('preparing emission with a avg micVal of: ' + smoothVal);
-    colorSelectonString = colorSelection.toString();
+    colorSelectonString = colorNum.toString();
     // console.log('...and a color selection of ' + colorSelection);
     // LED testing workaround
         if (smoothVal > 50) {
@@ -107,27 +107,17 @@ io.on('connection', function(socket){
     outputString = inputValString + colorSelectonString; //mash together the intended strip (0 -4) and the value
     // console.log('emitting ' + outputString + ' to local');
     io.sockets.emit('toLocal', outputString);
-
-    // // set timeout after 10 seconds to release the button 
-    // setTimeout(function() { timeIsUp(colorSelection); }, 10000);
+    broadcastColStatus2(colorNum);
   }
 
 
+  // Broadcast color claim to all users
+  function broadcastColStatus2(colorNum){
+    buttonsStatus[colorNum] = true;
+    console.log('got a request to release color ' + colorNum + " now broadcasting this release to all others");
+    socket.broadcast.emit('colorStatusUpdate2', colorNum);
+    // colorSelection = colorNum;
 
-  // function timeIsUp(colorSelection){
-  //   buttonsStatus[colorSelection] = true;
-  //   socket.broadcast.emit('colorStatusUpdate2', deviceMsg);
-  // }
-
-
-  // When you receive "pressed" from the client (js)
-  socket.on('pressed', colorMsg);
-
-  function colorMsg(colorNum){
-    socket.broadcast.emit('colorPressed', colorNum);
-
-    colorSelection = colorNum;
-         
   }
 
     // socket.emit('toColorPresser', colorNum);

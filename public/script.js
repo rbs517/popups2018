@@ -98,12 +98,24 @@ function tapholdHandler(event) {
   // STEP 3 //
 
   // After button color is claimed, 
-  //Get mic input value 
-  // micInput = map(vol, 0, 1, 1, 255); //inputVal is for arduino to control the fan
+
+  // Get mic volume level/ blow val 
+  vol = mic.getLevel();
+  
+  // Get mic input value 
+  micInput = map(vol, 0, 1, 1, 255); //inputVal is for arduino to control the fan
+
+  // Set timeout after 10 seconds to release the button 
+  setTimeout(function() { sendingData(micInput, colorNum); }, 10000);
+
+  function sendingData(micInput, colorNum){
+    // Tell the server that we want the mic data now 
+    socket.emit('liveData', micInput, colorNum);
+  }
+
 
 }
-  // // Tell the server that we want the mic data now 
-  // socket.emit('liveData', [micInput,colorNum]);
+
 
 
 //   // // set timeout after 8 seconds to release the button 
@@ -144,7 +156,7 @@ function updateButtonsStatus(buttonsStatus){
       // console.log("i touched the but");
 
       // //update the button binding
-      // $('#' + idString).bind("vmousedown", tapholdHandler);
+      $('#' + idString).bind("vmousedown", tapholdHandler);
 
 
     } 
@@ -158,7 +170,7 @@ function updateButtonsStatus(buttonsStatus){
       //update the button css
       $('#' + idString).css("background-color", "gray");
       // //update the button binding
-      // $('#' + idString).unbind("vmousedown", tapholdHandler);
+      $('#' + idString).unbind("vmousedown", tapholdHandler);
     }
   }
 }
@@ -216,26 +228,15 @@ socket.on('colorStatusUpdate',function(colorNum){
 });
 
 
-socket.on('colorPressed', function(colorNum){
-       // update local button status to taken 
+// STEP 4 //
+
+//Broadcasted to all clients that the color number has been released, now update
+socket.on('colorStatusUpdate2',function(colorNum){
+      // update local button status to taken 
       buttonStatusList[colorNum] = true;
       // update button status to the current button status
       updateButtonsStatus(buttonStatusList);
 });
-
-
-
-
-
-// STEP 4 //
-
-// Broadcasted to all clients that the color number has been released, now update
-// socket.on('colorStatusUpdate2',function(colorSelection){
-//       // update local button status to taken 
-//       buttonStatusList[colorNum] = true;
-//       // update button status to the current button status
-//       updateButtonsStatus(buttonStatusList);
-// });
 
 
 
