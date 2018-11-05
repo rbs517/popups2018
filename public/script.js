@@ -10,6 +10,7 @@ var idString;
 var sound = [];
 var thisDevice;
 var buttonStatusList = [];
+var myActiveButtons = [false,false,false,false,false,false,false,false,false,false]; 
 
 // Sketch
 
@@ -90,7 +91,11 @@ function tapholdHandler(event) {
     // claim the color by tellling the server
     socket.emit('usingColor', colorNum);
     // local button status is now false (not available)
-    buttonStatusList[colorNum] = false;
+    // buttonStatusList[colorNum] = false;
+
+
+    //REBECCA!!! DONT FORGET TO CHANGE THIS WHEN THE USER IS DONE WITH THE BUTTON
+    myActiveButtons[colorNum] = true;
   } else {
     console.log("that color number is not available");
   }
@@ -150,7 +155,7 @@ function updateButtonsStatus(buttonsStatus){
     } 
 
     // if "i" spot in the array is false,
-    else if (buttonsStatus[i] == false){
+    else if (buttonsStatus[i] == false && myActiveButtons[i] == false){
       // button is not available
       console.log('button ' + i + ' is not available');
       buttonStatusList[i] = false;
@@ -158,17 +163,18 @@ function updateButtonsStatus(buttonsStatus){
   }
 }
 
-function updateButtonsStatus(localButtonStatus){
+function updateButtonElements(localButtonStatus){
   // for the buttonsStatus array, 
   for (var i=0; i<localButtonStatus.length; i++){
+    var circleNumber = "circle" + i;
     // if "i" spot in the array is true,
     if (localButtonStatus[i] == true){
       // button is available
       console.log('setting button ' + i + ' as active');
-      $('#' + idString).css("background-color");
+      $('#' + circleNumber).css("background-color");
 
       // //update the button binding
-      $('#' + idString).bind("vmousedown", tapholdHandler);
+      $('#' + circleNumber).bind("vmousedown", tapholdHandler);
           } 
 
     // if "i" spot in the array is false,
@@ -176,10 +182,10 @@ function updateButtonsStatus(localButtonStatus){
       // button is not available
       console.log('setting button ' + i + ' as inactive');
             //update the button css
-      $('#' + idString).css("background-color", "gray");
-      $('#' + idString).removeClass("tap");
+      $('#' + circleNumber).css("background-color", "gray");
+      $('#' + circleNumber).removeClass("tap");
       // update the button binding
-      $('#' + idString).unbind("vmousedown", tapholdHandler);    }
+      $('#' + circleNumber).unbind("vmousedown", tapholdHandler);    }
   }
 }
 

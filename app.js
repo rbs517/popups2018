@@ -32,7 +32,7 @@ var blowData = [[0, 0, 0, 0, 0,0,0,0,0],[0, 0, 0, 0, 0,0,0,0,0],[0, 0, 0, 0, 0,0
 var colorSelectonString, inputValString, outputString;
 var colorSelection = 0;
 var smoothVal = 0;
-var buttonsStatus = [true, true, true, true, true, true, true, false, true, true]; //true means available
+var buttonsStatus = [true, true, true, true, true, true, true, true, true, true]; //true means available
 
 // On connect to socket
 
