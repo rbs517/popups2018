@@ -228,6 +228,17 @@ socket.on('colorStatusUpdate',function(colorNum){
 });
 
 
+// socket.on('colorPressed', function(colorNum){
+//        // update local button status to taken 
+//       buttonStatusList[colorNum] = true;
+//       // update button status to the current button status
+//       updateButtonsStatus(buttonStatusList);
+// });
+
+
+
+
+
 // STEP 4 //
 
 //Broadcasted to all clients that the color number has been released, now update
