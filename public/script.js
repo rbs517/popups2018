@@ -125,7 +125,6 @@ function tapholdHandler(event) {
   socket.emit('usingColor', currentColors[0], true);
   myActiveButtons[currentColors[0]] = false;
   currentColors.shift();
-  console.log("this is a test console.log","idString:" + idString + "," + " circleNumber:"  + circleNumber);
   $('#' + idString).removeClass("tap");
       // socket.emit('');
   }, 4000);
@@ -184,7 +183,7 @@ function updateButtonElements(localButtonStatus){
       
       //update the button css
       $('#' + circleNumber).css("background-color", "gray");
-      $('#' + circleNumber).removeClass("tap");
+      $('#' + idString).removeClass("tap");
       // update the button binding
       $('#' + circleNumber).unbind("vmousedown", tapholdHandler); 
    
