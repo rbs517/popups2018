@@ -142,10 +142,14 @@ div.circleContainer.tap{
   -webkit-user-select: none !important;
 }
 
-div.circleContainer.turnGray {
+/*div.circleContainer.turnGray {
   border: 6px solid green;
-  -webkit-user-select: none !important;
+  -webkit-user-select: none !important;*/
   /*background-color: gray;*/
+/*}*/
+
+div.circleContainer.layer {
+  background-color: rgba(104, 100, 102, 0.7);
 }
 
 ul {

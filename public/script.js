@@ -145,7 +145,7 @@ function updateButtonElements(localButtonStatus){
   // for the buttonsStatus array, 
   for (var i=0; i<localButtonStatus.length; i++){
     var circleNumber = "circle" + i;
-    
+
     // if "i" spot in the array is true,
     if (localButtonStatus[i] == true){
       // button is available
@@ -161,7 +161,9 @@ function updateButtonElements(localButtonStatus){
       // button is not available
       console.log('setting button ' + i + ' as inactive');
       //update the button css
-      $('#' + circleNumber).css("background-color", "gray");
+
+      $('#' + circleNumber).addClass("layer");
+      // $('#' + circleNumber).css("background-color", "gray");
       $('#' + circleNumber).removeClass("tap");
       // update the button binding
       $('#' + circleNumber).unbind("vmousedown", tapholdHandler);    }
