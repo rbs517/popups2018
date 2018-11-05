@@ -69,7 +69,7 @@ io.on('connection', function(socket){
     console.log('got a color check request from ' + thisDevice + " sending them the array I have: ");
     for (var i = 0; i < buttonsStatus.length ;i++) {
     console.log("button " +i + ": " +buttonsStatus[i]);
-  };
+  }
     socket.emit(thisDevice, buttonsStatus);
   }
   
@@ -79,10 +79,10 @@ io.on('connection', function(socket){
   socket.on('usingColor', broadcastColStatus);
 
   // Broadcast color claim to all users
-  function broadcastColStatus(colorNum){
-    buttonsStatus[colorNum] = false;
-    console.log('got a request to reserve color ' + colorNum + " now broadcasting this reservation to all others")
-    socket.broadcast.emit('colorStatusUpdate', colorNum);
+  function broadcastColStatus(colorNum, colorStatus){
+    buttonsStatus[colorNum] = colorStatus;
+    console.log('got a request to reserve (or release) color ' + colorNum + " now broadcasting this reservation/release to all others");
+    socket.broadcast.emit('colorStatusUpdate', colorNum, colorStatus);
   }
 
   // Color has not yet been claimed

@@ -12,7 +12,7 @@ var thisDevice;
 var buttonStatusList = [];
 var myActiveButtons = [false,false,false,false,false,false,false,false,false,false]; 
 // var buttonColors = [maroon, red, orange, yellow, green, lime, teal, aqua, blue, purple];
-var currentColor;
+var currentColors= [];
 // Sketch
 
 // p5.js function protocol
@@ -96,11 +96,12 @@ function tapholdHandler(event) {
   if (buttonStatusList[colorNum] == true){
     console.log("asking the server to restrict color " + colorNum + ' for me');
     // claim the color by tellling the server
-    socket.emit('usingColor', colorNum);
+    socket.emit('usingColor', colorNum, false);
 
     //REBECCA!!! DONT FORGET TO CHANGE THIS BACK WHEN THE USER IS DONE WITH THE BUTTON
     // The color number that corresponds to the number in my array (of active buttons) is true
     myActiveButtons[colorNum] = true;
+    currentColors.push(colorNum);
     $('#' + idString).addClass("tap");
     console.log("i touched the but");
 
@@ -114,19 +115,21 @@ function tapholdHandler(event) {
   var activeTimer = setInterval(function(colorNum){
       // // Tell the server that we want the mic and color data now 
       // socket.emit('liveData', micInput, colorNum);
-      console.log("gonna send " + micInput + ' and ' + colorNum + "to the server");
+      console.log("gonna send " + micInput + ' and ' + currentColors[0] + " to the server");
     },500);
 
     var stopActiveTimer = setTimeout(function(colorNum){
     console.log("timing out my emissions of mic data");
     clearInterval(activeTimer);
+    socket.emit('usingColor', currentColors[0], true);
+    currentColors.shift();
     $('#' + idString).removeClass("tap");
 
       // socket.emit('');
   }, 4000);
 
   micTimer(colorNum);
-  stopMicTimer(colorNum);
+  stopActiveTimer(colorNum);
 }
 
 
@@ -220,13 +223,15 @@ socket.on(thisDevice,function(buttonsStatus){
 // STEP 3 //
 
 // Broadcasted to all clients that the color number has been claimed, now update
-socket.on('colorStatusUpdate',function(colorNum){
-      console.log("color: " + colorNum + " is now taken");
+socket.on('colorStatusUpdate',function(colorNum, colorStatus){
+      console.log("color: " + colorNum + " is now taken or released");
       // update local button status to taken 
-      buttonStatusList[colorNum] = false;
+      buttonStatusList[colorNum] = colorStatus;
       // update button status to the current button status
       updateButtonElements(buttonStatusList);
 });
+
+
 
 
 // STEP 4 //
