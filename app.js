@@ -104,7 +104,7 @@ io.on('connection', function(socket){
   // STEP 4 //
 
   // When you receive "testingMic" from the client (js)
-  socket.on('liveData', colorMicMsg);
+  // socket.on('liveData', colorMicMsg);
 
   function colorMicMsg(micInput, colorNum){
     updateArray(micInput, colorNum);
