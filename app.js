@@ -114,19 +114,20 @@ io.on('connection', function(socket){
   // socket.on('liveData', colorMicMsg);
 
   function sendLiveDataToLocal(micInput, colorNum){
-    updateArray(micInput, colorNum);
-    smoothVal = average(blowData[colorNum]); // prepare the value to send
+    // updateArray(micInput, colorNum);
+    // smoothVal = average(blowData[colorNum]); // prepare the value to send
     // console.log('preparing emission with a avg micVal of: ' + smoothVal);
+    inputValString = micInput.toString();
     colorSelectonString = colorNum.toString();
     // console.log('...and a color selection of ' + colorSelection);
     // LED testing workaround
-    if (smoothVal > 50) {
-        smoothVal = 2;
-        inputValString = smoothVal.toString();
-    } else {
-      smoothVal = 1;
-      inputValString = smoothVal.toString();
-    }
+    // if (smoothVal > 50) {
+    //     smoothVal = 2;
+    //     inputValString = smoothVal.toString();
+    // } else {
+    //   smoothVal = 1;
+    //   inputValString = smoothVal.toString();
+    // }
 
     outputString = inputValString + colorSelectonString; //mash together the intended strip (0 -4) and the value
     console.log('emitting ' + outputString + ' to local');
