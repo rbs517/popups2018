@@ -180,7 +180,7 @@ function sendMicData(micInput,colorNum) {
   var interval = setInterval(function(){
       console.log("gonna send micVal " + micInput + " and colorNum " + colorNum + " to the server");
       socket.emit('liveData', micInput, colorNum);
-    },250);
+    },100);
 
   var timeout = setTimeout(function() {
       console.log("circle " + colorNum +" timing out now");
