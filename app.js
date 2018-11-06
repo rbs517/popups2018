@@ -138,7 +138,7 @@ io.on('connection', function(socket){
         //reset the array of blow values for that tube
         blowData[colorNum] = [0,0,0,0,0,0,0,0,0,0];
         var colorNumString = colorNum.toString();
-        var killMessage = "0" + colorNumString;
+        var killMessage = "1" + colorNumString;
         console.log("emitting " + killMessage + " to Local");
         io.sockets.emit('toLocal', killMessage);
   }
