@@ -123,7 +123,7 @@ function sendMicData(colorNum) {
 
         console.log("gonna send micVal " + micInput + " and colorNum " + colorNum + " to the server");
       socket.emit('liveData', micInput, colorNum);
-    },50);
+    },250);
 
   var timeout = setTimeout(function() {
         console.log("circle " + colorNum +" timing out now");
