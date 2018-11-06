@@ -3,7 +3,7 @@
 
 // Declaring variables
 var mic;
-var vol;
+var vol = 0;
 var micInput = 2;
 var colorNum;
 var idString;
@@ -36,12 +36,12 @@ function setup() {
 }
 
 function draw() {
-    // Get mic volume level/ blow val 
-  vol = mic.getLevel();
+  //   // Get mic volume level/ blow val 
+  // vol = mic.getLevel();
   
-  // Get mic input value 
-  var micMapped = map(vol, 0, 0.2, 2, 9); //inputVal is for arduino to control the fan
-  micInput = Math.floor(micMapped);
+  // // Get mic input value 
+  // var micMapped = map(vol, 0, 0.2, 2, 9); //inputVal is for arduino to control the fan
+  // micInput = Math.floor(micMapped);
 }
 
 // Circles placed in a circle design for taphold page
@@ -114,7 +114,7 @@ function tapholdHandler(event) {
   }
 
   // STEP 3 //
-  sendMicData(micInput,colorNum);
+  sendMicData(colorNum);
 
   // micTimer(colorNum);
   // stopActiveTimer(colorNum);
@@ -180,9 +180,17 @@ function updateButtonElements(localButtonStatus){
   }
 }
 
-function sendMicData(micInput,colorNum) {
+function sendMicData(colorNum) {
+
     // After button color is claimed, send data for x seconds
   var interval = setInterval(function(){
+      // Get mic volume level/ blow val 
+      vol = mic.getLevel();
+  
+      // Get mic input value 
+      var micMapped = map(vol, 0, 1, 2, 9); //inputVal is for arduino to control the fan
+      micInput = Math.floor(micMapped);
+
       console.log("gonna send micVal " + micInput + " and colorNum " + colorNum + " to the server");
       socket.emit('liveData', micInput, colorNum);
     },100);
@@ -202,7 +210,7 @@ function sendMicData(micInput,colorNum) {
       // tell the server to send a kill message to the fans (via /local)
       socket.emit('killData',colorNum);
 
-  },2000);
+  },5000);
 
   // setTimeout(function(){ clearInterval(interval); console.log('cleared'); sendColorData(micInput,colorNum);}, 4000);
 }
