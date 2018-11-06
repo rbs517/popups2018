@@ -75,7 +75,7 @@ function longClickHandler(e) {
 // });
 
 // Keep portrait orientation locked on mobile devices
-lockedAllowed = window.screen.lockOrientation(portrait);
+screen.orientation.lock("portrait-primary");
 
 
 $("div.circleContainer").longclick(250, longClickHandler);
