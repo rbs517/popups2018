@@ -101,6 +101,8 @@ function tapholdHandler(event) {
     $('#' + idString).addClass("tap");
     console.log("i touched the but");
 
+    sound[colorNum].start();
+
   } else {
     console.log("that color number is not available");
   }
@@ -201,6 +203,8 @@ function sendMicData(colorNum) {
         myActiveButtons[colorNum] = false;
         // remove the tap css from it
       $('#circle' + colorNum).removeClass("tap");
+
+      sound[colorNum].stop();
 
       // tell the server we're done with the color
       socket.emit('usingColor', colorNum, true);
