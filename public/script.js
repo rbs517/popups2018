@@ -40,7 +40,7 @@ function draw() {
   vol = mic.getLevel();
   
   // Get mic input value 
-  var micMapped = map(vol, 0, 1, 2, 9); //inputVal is for arduino to control the fan
+  var micMapped = map(vol, 0, 1, 2, 255); //inputVal is for arduino to control the fan
   micInput = Math.floor(micMapped);
 }
 
