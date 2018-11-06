@@ -74,8 +74,8 @@ function longClickHandler(e) {
 //   // This line still calls the standard click event, in case the user needs to interact with the element that is being clicked on, but still avoids zooming in cases of double clicking.
 // });
 
-// // Keep portrait orientation locked on mobile devices
-// lockedAllowed = window.screen.lockOrientation(portrait);
+// Keep portrait orientation locked on mobile devices
+lockedAllowed = window.screen.lockOrientation(portrait);
 
 
 $("div.circleContainer").longclick(250, longClickHandler);
