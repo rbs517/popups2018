@@ -4,7 +4,7 @@
 // Declaring variables
 var mic;
 var vol;
-var micInput;
+var micInput = 2;
 var colorNum;
 var idString;
 var sound = [];
@@ -12,7 +12,6 @@ var thisDevice;
 var buttonStatusList = [];
 var myActiveButtons = [false,false,false,false,false,false,false,false,false,false]; 
 var buttonColors = ['maroon', 'red', 'orange', 'yellow', 'green', 'lime', 'teal', 'aqua', 'blue', 'purple'];
-var currentColors= [];
 var circleNumber;
 // Sketch
 
@@ -41,7 +40,7 @@ function draw() {
   vol = mic.getLevel();
   
   // Get mic input value 
-  micInput = map(vol, 0, 1, 1, 255); //inputVal is for arduino to control the fan
+  // micInput = map(vol, 0, 1, 1, 255); //inputVal is for arduino to control the fan
 
   // Get mic volume level/ blow val 
   // vol = mic.getLevel();
@@ -102,7 +101,6 @@ function tapholdHandler(event) {
     //REBECCA!!! DONT FORGET TO CHANGE THIS BACK WHEN THE USER IS DONE WITH THE BUTTON
     // The color number that corresponds to the number in my array (of active buttons) is true
     myActiveButtons[colorNum] = true;
-    currentColors.push(colorNum);
     $('#' + idString).addClass("tap");
     console.log("i touched the but");
 
@@ -111,27 +109,10 @@ function tapholdHandler(event) {
   }
 
   // STEP 3 //
+  sendMicData(micInput,colorNum);
 
-  // After button color is claimed, send data for x seconds
-  var activeTimer = setInterval(function(colorNum){
-      // // Tell the server that we want the mic and color data now 
-      // socket.emit('liveData', micInput, colorNum);
-      console.log("gonna send " + micInput + ' and ' + currentColors[0] + " to the server");
-    },500);
-
-  var stopActiveTimer = setTimeout(function(colorNum){
-  console.log("timing out my emissions of mic data");
-  socket.emit('usingColor', currentColors[0], true);
-  clearInterval(activeTimer);
-
-  myActiveButtons[currentColors[0]] = false;
-  currentColors.shift();
-  $('#' + idString).removeClass("tap");
-      // socket.emit('');
-  }, 4000);
-
-  micTimer(colorNum);
-  stopActiveTimer(colorNum);
+  // micTimer(colorNum);
+  // stopActiveTimer(colorNum);
 }
 
 
@@ -163,6 +144,8 @@ function updateButtonElements(localButtonStatus){
   for (var i=0; i<localButtonStatus.length; i++){
     circleNumber = "circle" + i;
 
+    $('#' + circleNumber).unbind("vmousedown", tapholdHandler);
+
     // set a variable counter
     // evertime when you set a button grey, the counter +1
     // at the end of the loop, if the counter == 10, do a alert
@@ -184,12 +167,39 @@ function updateButtonElements(localButtonStatus){
       
       //update the button css
       $('#' + circleNumber).css("background-color", "gray");
-      $('#' + idString).removeClass("tap");
+      $('#' + circleNumber).removeClass("tap");
       // update the button binding
       $('#' + circleNumber).unbind("vmousedown", tapholdHandler); 
    
     }
   }
+}
+
+function sendMicData(micInput,colorNum) {
+    // After button color is claimed, send data for x seconds
+  var interval = setInterval(function(){
+      console.log("gonna send micVal " + micInput + " and colorNum " + colorNum + " to the server");
+      socket.emit('liveData', micInput, colorNum);
+    },250);
+
+  var timeout = setTimeout(function() {
+      console.log("circle " + colorNum +" timing out now");
+      clearInterval(interval);
+
+      // removing the color number from the local list of active buttons
+        myActiveButtons[colorNum] = false;
+        // remove the tap css from it
+      $('#circle' + colorNum).removeClass("tap");
+
+      // tell the server we're done with the color
+      socket.emit('usingColor', colorNum, true);
+
+      // tell the server to send a kill message to the fans (via /local)
+      socket.emit('killData',colorNum);
+
+  },2000);
+
+  // setTimeout(function(){ clearInterval(interval); console.log('cleared'); sendColorData(micInput,colorNum);}, 4000);
 }
 
 
@@ -203,6 +213,15 @@ socket.emit('user', 'new user is connected');
 socket.on('userCount', function(userCount) { 
   console.log('total number of users online is: ' + userCount); // console number of users after one goes off;
 });
+
+// On disconnect
+// socket.on('disconnect', (reason) => {
+//   if (reason === 'io server disconnect') {
+//     // the disconnection was initiated by the server, you need to reconnect manually
+//     socket.connect();
+//   }
+//   // else the socket will automatically try to reconnect
+// });
 
 
 /////////////////////////////////////////////////////////////
@@ -266,3 +285,13 @@ function getRandomIntInclusive(min, max) {
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive 
 }
+
+
+// function alertFunc(){
+//  alert("You have timed out of Fluto");
+// }
+
+
+// window.onload = function() {
+//   setTimeout(function(){ window.close(); alertFunc(); }, 30000);
+// };

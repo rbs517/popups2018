@@ -88,7 +88,7 @@ function serialEvent() {
   // }
 }
 
-function sendToArduino(){
+function sendToArduino(outputString){
   console.log("sending: " + outputString);
   serial.write(outputString+ '\n'); // write the value - add + '\n' if using arduino uno
 }
@@ -118,11 +118,7 @@ let init = () => {
 // ********************************************************** 
 // WHEN RECEIVE DATA FROM SOCKET.IO, SEND THE DATA TO SERIALPORT 
 
-  socket.on('toLocal', function(data){
-    //Mic and colorNum value
-    outputString = String(data);
-    sendToArduino();
-  });
+  socket.on('toLocal', sendToArduino);
 
   // socket.on('toLocal2', function(data){
   //   //Mic and colorNum value

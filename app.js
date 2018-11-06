@@ -85,6 +85,13 @@ io.on('connection', function(socket){
     socket.broadcast.emit('colorStatusUpdate', colorNum, colorStatus);
   }
 
+
+  // STEP 3 //
+
+  socket.on('liveData',sendLiveDataToLocal);
+
+  socket.on('killData',sendKillMesageToLocal);
+
   // Color has not yet been claimed
   // socket.on('NotusingColor', broadcastColStatus2);
 
@@ -106,14 +113,14 @@ io.on('connection', function(socket){
   // When you receive "testingMic" from the client (js)
   // socket.on('liveData', colorMicMsg);
 
-  function colorMicMsg(micInput, colorNum){
+  function sendLiveDataToLocal(micInput, colorNum){
     updateArray(micInput, colorNum);
     smoothVal = average(blowData[colorNum]); // prepare the value to send
     // console.log('preparing emission with a avg micVal of: ' + smoothVal);
     colorSelectonString = colorNum.toString();
     // console.log('...and a color selection of ' + colorSelection);
     // LED testing workaround
-        if (smoothVal > 50) {
+    if (smoothVal > 50) {
         smoothVal = 2;
         inputValString = smoothVal.toString();
     } else {
@@ -122,8 +129,17 @@ io.on('connection', function(socket){
     }
 
     outputString = inputValString + colorSelectonString; //mash together the intended strip (0 -4) and the value
-    // console.log('emitting ' + outputString + ' to local');
+    console.log('emitting ' + outputString + ' to local');
     io.sockets.emit('toLocal', outputString);
+  }
+
+  function sendKillMesageToLocal(colorNum) {
+        //reset the array of blow values for that tube
+        blowData[colorNum] = [0,0,0,0,0,0,0,0,0,0];
+        var colorNumString = colorNum.toString();
+        var killMessage = "0" + colorNumString;
+        console.log("emitting " + killMessage + " to Local");
+        io.sockets.emit('toLocal', killMessage);
   }
 
 
