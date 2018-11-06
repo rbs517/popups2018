@@ -164,15 +164,15 @@ function updateButtonElements(localButtonStatus){
       // update the button binding
       $('#' + circleNumber).unbind("vmousedown", tapholdHandler); 
 
-      // set a variable counter
-      counter++;
+      // // set a variable counter
+      // counter++;
 
-      // when counter is at 10, send alert to everyone to try again soon.
-      if (counter == 10){
-        socket.emit('countedTen', counter);
-      } else{
+      // // when counter is at 10, send alert to everyone to try again soon.
+      // if (counter == 10){
+      //   socket.emit('countedTen', counter);
+      // } else{
 
-      }
+      // }
    
     }
   }
@@ -240,10 +240,10 @@ socket.on('disconnect', function(){
   alertFunc();
 });
 
-socket.on('fullHouse', function(){
-  alert("All buttons are being used. Please try again soon");
+// socket.on('fullHouse', function(){
+//   alert("All buttons are being used. Please try again soon");
 
-});
+// });
 
 // On disconnect
 // socket.on('disconnect', (reason) => {
