@@ -66,16 +66,12 @@ $elements.each(function(i) {
 function longClickHandler(e) {
   e.preventDefault();
 }
-// // Disable double tap and zoom on mobile devices
-// $('.no-zoom').bind('touchend', function(e) {
-//   e.preventDefault();
-//   // Add your code here. 
-//   $(this).click();
-//   // This line still calls the standard click event, in case the user needs to interact with the element that is being clicked on, but still avoids zooming in cases of double clicking.
-// });
 
-// Keep portrait orientation locked on mobile devices
-screen.orientation.lock("portrait-primary");
+// Disable double tap and zoom on mobile devices
+$('.no-zoom').bind('touchend', function(e) {
+  e.preventDefault();
+  
+});
 
 
 $("div.circleContainer").longclick(250, longClickHandler);
