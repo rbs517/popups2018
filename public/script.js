@@ -13,6 +13,8 @@ var buttonStatusList = [];
 var myActiveButtons = [false,false,false,false,false,false,false,false,false,false]; 
 var buttonColors = ['maroon', 'red', 'orange', 'yellow', 'green', 'lime', 'teal', 'aqua', 'blue', 'purple'];
 var circleNumber;
+var counter = 0;
+
 // Sketch
 
 // p5.js function protocol
@@ -141,10 +143,6 @@ function updateButtonElements(localButtonStatus){
 
     $('#' + circleNumber).unbind("vmousedown", tapholdHandler);
 
-    // set a variable counter
-    // evertime when you set a button grey, the counter +1
-    // at the end of the loop, if the counter == 10, do a alert
-
     // if "i" spot in the array is true,
     if (localButtonStatus[i] == true){
       // button is available
@@ -165,6 +163,16 @@ function updateButtonElements(localButtonStatus){
       $('#' + circleNumber).removeClass("tap");
       // update the button binding
       $('#' + circleNumber).unbind("vmousedown", tapholdHandler); 
+
+      // set a variable counter
+      counter++;
+
+      // when counter is at 10, send alert to everyone to try again soon.
+      if (counter == 10){
+        socket.emit('countedTen', counter);
+      } else{
+
+      }
    
     }
   }
@@ -183,7 +191,7 @@ function sendMicData(colorNum) {
 
       console.log("gonna send micVal " + micInput + " and colorNum " + colorNum + " to the server");
       socket.emit('liveData', micInput, colorNum);
-    },100);
+    },50);
 
   var timeout = setTimeout(function() {
       console.log("circle " + colorNum +" timing out now");
@@ -232,6 +240,10 @@ socket.on('disconnect', function(){
   alertFunc();
 });
 
+socket.on('fullHouse', function(){
+  alert("All buttons are being used. Please try again soon");
+
+});
 
 // On disconnect
 // socket.on('disconnect', (reason) => {

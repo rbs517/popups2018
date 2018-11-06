@@ -104,8 +104,11 @@ io.on('connection', function(socket){
 
   // }
 
-
-
+  socket.on('countedTen', sendFullHouse);
+  
+  function sendFullHouse (){
+    socket.broadcast.emit('fullHouse', alert);
+  }
 
 
   // STEP 4 //
