@@ -90,7 +90,7 @@ io.on('connection', function(socket){
 
   socket.on('liveData',sendLiveDataToLocal);
 
-  // socket.on('killData',sendKillMesageToLocal);
+  socket.on('killData',sendKillMesageToLocal);
 
   // Color has not yet been claimed
   // socket.on('NotusingColor', broadcastColStatus2);
