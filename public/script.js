@@ -67,12 +67,6 @@ function longClickHandler(e) {
   e.preventDefault();
 }
 
-// Disable double tap and zoom on mobile devices
-$('.no-zoom').bind('touchend', function(e) {
-  e.preventDefault();
-  
-});
-
 
 $("div.circleContainer").longclick(250, longClickHandler);
 
