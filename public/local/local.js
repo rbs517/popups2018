@@ -7,14 +7,15 @@ var portName = '/dev/cu.usbmodem14131'; // fill in your serial port name here --
 var options = {
   baudrate: 9600 // change the data rate to whatever you wish -- MAKE ME MATCH!
 }; 
-var inData; // for incoming serial data
 var outputString = 10;
 
+
+// p5.js function protocol
 function setup(){
     // reset message to each tube 
     setTimeout(function() {
       for (var j=0; j<5; j++){
-        console.log("pinging a reset signal to tube number: " + j);
+          console.log("pinging a reset signal to tube number: " + j);
         serial.write("1"+String(j));
       }
     }, 5000);
@@ -30,10 +31,11 @@ function printList(portList) {
   // portList is an array of serial port names
   for (var i = 0; i < portList.length; i++) {
     // Display the list the console:
-    console.log(i + " " + portList[i]);
+      console.log(i + " " + portList[i]);
   }
 }
 
+// Functions upon connection to Serialport
 function connectToSerialPort(port) {
   serial = new p5.SerialPort(); // make a new instance of the serialport library
   serial.on('list', printList); // set a callback function for the serialport list event
@@ -49,11 +51,11 @@ function connectToSerialPort(port) {
 }
 
 function serverConnected() {
-  console.log('connected to server.');
+    console.log('connected to server.');
 }
 
 function portOpen() {
-  console.log('the serial port opened.');
+    console.log('the serial port opened.');
 }
 
 function serialEvent() {
@@ -88,17 +90,18 @@ function serialEvent() {
   // }
 }
 
+// Send values received from server to arduino
 function sendToArduino(outputString){
-  console.log("sending: " + outputString);
+    console.log("sending: " + outputString);
   serial.write(outputString+ '\n'); // write the value - add + '\n' if using arduino uno
 }
 
 function serialError(err) {
-  console.log('Something went wrong with the serial port. ' + err);
+    console.log('Something went wrong with the serial port. ' + err);
 }
 
 function portClose() {
-  console.log('The serial port closed.');
+    console.log('The serial port closed.');
 }
 
 // ********************************************************** 
@@ -110,20 +113,15 @@ let init = () => {
 
 	socket.emit('user', 'new user is connected');
 	socket.on('userCount', function(userCount) { 
-  console.log('total number of users online is: ' + userCount); //console number of users after one goes off;
+    console.log('total number of users online is: ' + userCount); //console number of users after one goes off;
 	});
 	
-  console.log("init done");
+    console.log("init done");
 
 // ********************************************************** 
 // WHEN RECEIVE DATA FROM SOCKET.IO, SEND THE DATA TO SERIALPORT 
 
   socket.on('toLocal', sendToArduino);
-
-  // socket.on('toLocal2', function(data){
-  //   //Mic and colorNum value
-  //   outputString = "1" + String(data);
-  // });
 
 	connectToSerialPort(portName);
 };

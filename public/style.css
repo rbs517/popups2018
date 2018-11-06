@@ -11,12 +11,11 @@ section.masthead {
   color: white;
   z-index: 1;
   -webkit-user-select: none !important;
-/*  background-image margin-right: 900px;*/
 }
 
 img {
   position: relative;
-    top: -290px; /*for example purposes only*/
+    top: -290px;
     right: 50;
   padding: 0;
   -webkit-user-select: none !important;
@@ -52,29 +51,24 @@ section h2{
   -webkit-user-select: none !important;
 }
 
-section.page2{
-
-}
-
 #download{
   background-color: black;
   color: white;
   -webkit-user-select: none !important;
 }
 
-
 #download h2{
   font-size: 90px;
   padding-bottom: 50;
   text-align: center;
   position: relative;
-    top: -150px; /*for example purposes only*/
+    top: -150px; 
   -webkit-user-select: none !important;
 }
 
 #download p{
   position: relative;
-    top: 110px; /*for example purposes only*/
+    top: 110px; 
   padding-bottom: 400;
   font-size: 64px;
   text-align: center;
@@ -83,7 +77,7 @@ section.page2{
 
 #blowText{
   position: relative;
-    top: -45px; /*for example purposes only*/
+    top: -45px; 
   -webkit-user-select: none !important;
 }
 
@@ -103,10 +97,8 @@ div.circleContainer {
   width: 10em;
   height: 10em;
   border-radius: 50%;
-/*  background-color: #108040;*/
   -webkit-touch-callout: none !important;
 }
-
 
 #circle0 {
   background-color: maroon;
@@ -153,23 +145,17 @@ div.circleContainer.tap{
   -webkit-user-select: none !important;
 }
 
-/*div.circleContainer.turnGray {
-  border: 6px solid green;
-  -webkit-user-select: none !important;*/
-  /*background-color: gray;*/
-/*}*/
-
-
 ul {
   display: flex;
   justify-content: center;
   position: relative;
-    top: -480px; /*for example purposes only*/
+    top: -480px; 
   list-style-type: none;
   margin: 0;
   padding: 0;
   -webkit-user-select: none !important;
 }
+
 li {
   display: flex;
   position: absolute;
@@ -189,15 +175,13 @@ li {
 
 .btn{
   position: relative;
-    top: -1050px; /*for example purposes only*/
-/*  margin-top: 50;*/
+    top: -1050px; 
   border-radius: 380px;
   border: 6px solid white;
   font-family:"Avenir Next", sans-serif;letter-spacing:6px;
   text-transform:uppercase;
   z-index: 1;
   -webkit-user-select: none !important;
-
 }
 
 .btn-xl{

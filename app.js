@@ -54,9 +54,7 @@ io.on('connection', function(socket){
   });
 
 
-  /////////////////////////////////////////////////////////////
-  /////////////////////BUTTON CHECK////////////////////////////
-  /////////////////////////////////////////////////////////////
+  // BUTTON CHECK
 
   // STEP 1 //
 
@@ -88,33 +86,8 @@ io.on('connection', function(socket){
 
   // STEP 3 //
 
+  // Send live data of mic and color button values to local.js (serialport)
   socket.on('liveData',sendLiveDataToLocal);
-
-  socket.on('killData',sendKillMesageToLocal);
-
-  // Color has not yet been claimed
-  // socket.on('NotusingColor', broadcastColStatus2);
-
-  // // Broadcast color claim to all users
-  // function broadcastColStatus2(colorNum){
-  //   buttonsStatus[colorNum] = true;
-  //   console.log('got a request to release color ' + colorNum + " now broadcasting this release to all others");
-  //   socket.broadcast.emit('colorStatusUpdate2', colorNum);
-  //   // colorSelection = colorNum;
-
-  // }
-
-  socket.on('countedTen', sendFullHouse);
-  
-  function sendFullHouse (){
-    socket.broadcast.emit('fullHouse', alert);
-  }
-
-
-  // STEP 4 //
-
-  // When you receive "testingMic" from the client (js)
-  // socket.on('liveData', colorMicMsg);
 
   function sendLiveDataToLocal(micInput, colorNum){
     // updateArray(micInput, colorNum);
@@ -137,6 +110,11 @@ io.on('connection', function(socket){
     io.sockets.emit('toLocal', outputString);
   }
 
+  // STEP 4 //
+  
+  // Send kill data message to local.js (serialport) to reset values/ clear the data after no activity
+  socket.on('killData',sendKillMesageToLocal);
+  
   function sendKillMesageToLocal(colorNum) {
         //reset the array of blow values for that tube
         blowData[colorNum] = [0,0,0,0,0,0,0,0,0,0];
@@ -147,23 +125,11 @@ io.on('connection', function(socket){
   }
 
 
-    // socket.emit('toColorPresser', colorNum);
-
-    // send pressed data back to client to disable that color button
-  //   socket.broadcast.emit('colorPressed', colorNum);
-
-  //   colorSelection = colorNum;
+  // socket.on('countedTen', sendFullHouse);
+  
+  // function sendFullHouse (){
+  //   socket.broadcast.emit('fullHouse', alert);
   // }
-
-  // When you receive "unpressed" from the client (js)
-//   socket.on('unpressed', unpressedMsg);
-
-//   function unpressedMsg(colorNum){
-//     // send pressed data back to client to enable that color button
-//     // socket.broadcast.emit('toClients', colorNum);
-//     // io.sockets.emit('toLocal2', colorNum);
-// }
-
 
 
   function restart (){
@@ -171,7 +137,9 @@ io.on('connection', function(socket){
     console.log('restarting...');
   }
 
+
 });
+
 
 // Data smoothing function
 function updateArray(newReading,tube) {
@@ -180,6 +148,7 @@ function updateArray(newReading,tube) {
   // maybe use math.floor and do more elegant control on the arduino side
 }
 
+// Getting average of array
 function average(array) {
     var total = 0;
   for (var i = 0; i < array.length; i++) {
