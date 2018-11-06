@@ -40,14 +40,8 @@ function draw() {
   vol = mic.getLevel();
   
   // Get mic input value 
-  // micInput = map(vol, 0, 1, 1, 255); //inputVal is for arduino to control the fan
-
-  // Get mic volume level/ blow val 
-  // vol = mic.getLevel();
-  // micInput = map(vol, 0, 1, 1, 255); //inputVal is for arduino to control the fan
-
-  // // Tell the server that we want the mic data now 
-  // socket.emit('testingMic', micInput);
+  var micMapped = map(vol, 0, 1, 2, 9); //inputVal is for arduino to control the fan
+  micInput = Math.floor(micMapped);
 }
 
 // Circles placed in a circle design for taphold page
@@ -72,6 +66,17 @@ $elements.each(function(i) {
 function longClickHandler(e) {
   e.preventDefault();
 }
+// // Disable double tap and zoom on mobile devices
+// $('.no-zoom').bind('touchend', function(e) {
+//   e.preventDefault();
+//   // Add your code here. 
+//   $(this).click();
+//   // This line still calls the standard click event, in case the user needs to interact with the element that is being clicked on, but still avoids zooming in cases of double clicking.
+// });
+
+// // Keep portrait orientation locked on mobile devices
+// lockedAllowed = window.screen.lockOrientation(portrait);
+
 
 $("div.circleContainer").longclick(250, longClickHandler);
 
@@ -202,6 +207,16 @@ function sendMicData(micInput,colorNum) {
   // setTimeout(function(){ clearInterval(interval); console.log('cleared'); sendColorData(micInput,colorNum);}, 4000);
 }
 
+function alertFunc(){
+  alert("You have timed out of Fluto. Please refresh page to begin again");
+}
+
+
+window.onload = function(){
+  // set timeout and alert for after 5 minutes 
+  setTimeout(function(){ alertFunc(); }, 300000);
+};
+
 
 // ********************************************************** 
 // SOCKET COMMUNICATION ON CLIENT SIDE
@@ -213,6 +228,12 @@ socket.emit('user', 'new user is connected');
 socket.on('userCount', function(userCount) { 
   console.log('total number of users online is: ' + userCount); // console number of users after one goes off;
 });
+
+// On disconnect
+socket.on('disconnect', function(){
+  alertFunc();
+});
+
 
 // On disconnect
 // socket.on('disconnect', (reason) => {
@@ -256,6 +277,12 @@ socket.on('colorStatusUpdate',function(colorNum, colorStatus){
 });
 
 
+// Thanks mdn
+function getRandomIntInclusive(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive 
+}
 
 // ********************************************************** 
 // BOOTSTRAP 
@@ -278,20 +305,3 @@ socket.on('colorStatusUpdate',function(colorNum, colorStatus){
   a(),e(window).scroll(a);
 
 }(jQuery);
-
-// Thanks mdn
-function getRandomIntInclusive(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive 
-}
-
-
-// function alertFunc(){
-//  alert("You have timed out of Fluto");
-// }
-
-
-// window.onload = function() {
-//   setTimeout(function(){ window.close(); alertFunc(); }, 30000);
-// };

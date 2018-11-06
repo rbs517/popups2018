@@ -159,6 +159,7 @@ ul {
   padding: 0;
 }
 li {
+  display: flex;
   position: absolute;
   -webkit-transition: all 2s linear;
   -moz-transition: all 2s linear;
