@@ -4,6 +4,7 @@
 // Declare Global Variables
 var serial; // variable to hold an instance of the serialport library
 var portName = '/dev/cu.usbmodemFA131'; // fill in your serial port name here -- CHANGE ME!
+var portName = '/dev/cu.usbmodem1421';
 var options = {
   baudrate: 9600 // change the data rate to whatever you wish -- MAKE ME MATCH!
 }; 
@@ -98,6 +99,8 @@ function sendToArduino(outputString){
 
 function serialError(err) {
     console.log('Something went wrong with the serial port. ' + err);
+    connectToSerialPort(portName);
+
 }
 
 function portClose() {
@@ -123,7 +126,7 @@ let init = () => {
 
   socket.on('toLocal', sendToArduino);
 
-	connectToSerialPort(portName);
+	connectToSerialPort(portName2);
 };
 
 
