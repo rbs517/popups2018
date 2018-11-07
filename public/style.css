@@ -162,7 +162,7 @@ ul {
 li {
   -webkit-backface-visibility: hidden;
   position: absolute;
-    right: 1060px; 
+    right: 480px; 
   -webkit-transition: all 2s linear;
   -moz-transition: all 2s linear;
   transition: all 2s linear;
