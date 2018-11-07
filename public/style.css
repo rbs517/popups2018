@@ -98,9 +98,6 @@ div.circleContainer {
   height: 10em;
   border-radius: 50%;
   -webkit-touch-callout: none !important;
-  display: flex;
-  justify-content: center;
-  text-align: center;
 }
 
 #circle0 {
@@ -170,7 +167,7 @@ li {
   transition: all 2s linear;
   list-style-type: none;
   -webkit-user-select: none !important;
-
+  
 }
 
 .btn-outline.active,.btn-outline:active,.btn-outline:focus,.btn-outline:hover{
