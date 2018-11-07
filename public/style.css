@@ -155,6 +155,7 @@ ul {
   margin: 0;
   padding: 0;
   -webkit-user-select: none !important;
+  -webkit-backface-visibility: hidden;
 }
 
 li {
@@ -167,6 +168,7 @@ li {
   transition: all 2s linear;
   list-style-type: none;
   -webkit-user-select: none !important;
+  -webkit-backface-visibility: hidden;
 }
 
 .btn-outline.active,.btn-outline:active,.btn-outline:focus,.btn-outline:hover{
