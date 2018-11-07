@@ -3,7 +3,7 @@
 
 // Declare Global Variables
 var serial; // variable to hold an instance of the serialport library
-var portName = '/dev/cu.usbmodem14131'; // fill in your serial port name here -- CHANGE ME!
+var portName = '/dev/cu.usbmodemFA131'; // fill in your serial port name here -- CHANGE ME!
 var options = {
   baudrate: 9600 // change the data rate to whatever you wish -- MAKE ME MATCH!
 }; 
