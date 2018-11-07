@@ -11,7 +11,7 @@ var sound = [];
 var thisDevice;
 var buttonStatusList = [];
 var myActiveButtons = [false,false,false,false,false,false,false,false,false,false]; 
-var buttonColors = ['maroon', 'red', 'orange', 'yellow', 'green', 'lime', 'teal', 'aqua', 'blue', 'purple'];
+var buttonColors = ['#FA556B', '#F96DAC', '#F67460', '#FEED91', '#b0f442', '#9724F3', '#D053F1', '#639EFC', '#7DD7FA', '#B2FFFA'];
 var circleNumber;
 var counter = 0;
 

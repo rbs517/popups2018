@@ -3,7 +3,7 @@
 
 // Declare Global Variables
 var serial; // variable to hold an instance of the serialport library
-var portName = '/dev/cu.usbmodem1441'; // Left window (warm side of rainbow)
+var portName2 = '/dev/cu.usbmodemFA131'; // Right window (cool side of rainbow)
 var options = {
   baudrate: 9600 // change the data rate to whatever you wish -- MAKE ME MATCH!
 }; 
@@ -121,10 +121,9 @@ let init = () => {
 // ********************************************************** 
 // WHEN RECEIVE DATA FROM SOCKET.IO, SEND THE DATA TO SERIALPORT 
 
-  socket.on('toLocal', sendToArduino);
+  socket.on('toLocal2', sendToArduino);
 
-	connectToSerialPort(portName);
-
+  connectToSerialPort(portName2);
 };
 
 

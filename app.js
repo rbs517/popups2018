@@ -17,11 +17,11 @@ app.set('port', PORT);
 
 // Get request to me from index.html
 app.get('/', function(req, res){
-  console.log('user enters..');
+    console.log('user enters..');
   res.render('index');
 });
 
-console.log("App is served on localhost: " + PORT);
+  console.log("App is served on localhost: " + PORT);
 
 // **********************************************************
 // SOCKET COMMUNICATION ON SERVER SIDE
@@ -41,15 +41,15 @@ var io = require('socket.io')(http);
 io.on('connection', function(socket){
   // On user connection
   userCount = userCount + 1;
-  console.log('a user connected');
-  console.log('number of connected users: ' + userCount);
+    console.log('a user connected');
+    console.log('number of connected users: ' + userCount);
   io.emit('this', {will: 'be received by everyone'});
 
   // On disconnect to socket
   socket.on('disconnect', function(){
     userCount = userCount - 1;
-    console.log('user disconnected');
-    console.log('number of connected users: ' + userCount);
+      console.log('user disconnected');
+      console.log('number of connected users: ' + userCount);
     io.sockets.emit('userCount', userCount); // call userCount function on js side
   });
 
@@ -64,9 +64,9 @@ io.on('connection', function(socket){
   
   // Once checked, send the button color statuses to the client
   function colorButtonCheck(thisDevice){
-    console.log('got a color check request from ' + thisDevice + " sending them the array I have: ");
+      console.log('got a color check request from ' + thisDevice + " sending them the array I have: ");
     for (var i = 0; i < buttonsStatus.length ;i++) {
-    console.log("button " +i + ": " +buttonsStatus[i]);
+      console.log("button " +i + ": " +buttonsStatus[i]);
   }
     socket.emit(thisDevice, buttonsStatus);
   }
@@ -79,7 +79,7 @@ io.on('connection', function(socket){
   // Broadcast color claim to all users
   function broadcastColStatus(colorNum, colorStatus){
     buttonsStatus[colorNum] = colorStatus;
-    console.log('got a request to reserve (or release) color ' + colorNum + " now broadcasting this reservation/release to all others");
+      console.log('got a request to reserve (or release) color ' + colorNum + " now broadcasting this reservation/release to all others");
     socket.broadcast.emit('colorStatusUpdate', colorNum, colorStatus);
   }
 
@@ -106,8 +106,9 @@ io.on('connection', function(socket){
     // }
 
     outputString = inputValString + colorSelectonString; //mash together the intended strip (0 -4) and the value
-    console.log('emitting ' + outputString + ' to local');
+      console.log('emitting ' + outputString + ' to local');
     io.sockets.emit('toLocal', outputString);
+    io.sockets.emit('toLocal2', outputString);
   }
 
   // STEP 4 //
@@ -120,7 +121,7 @@ io.on('connection', function(socket){
         blowData[colorNum] = [0,0,0,0,0,0,0,0,0,0];
         var colorNumString = colorNum.toString();
         var killMessage = "1" + colorNumString;
-        console.log("emitting " + killMessage + " to Local");
+          console.log("emitting " + killMessage + " to Local");
         io.sockets.emit('toLocal', killMessage);
   }
 
@@ -134,7 +135,7 @@ io.on('connection', function(socket){
 
   function restart (){
     final = 0;
-    console.log('restarting...');
+      console.log('restarting...');
   }
 
 
