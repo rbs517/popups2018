@@ -25,16 +25,16 @@ function setup() {
   mic.start();
   
   // load sounds
-  sound[0] = new p5.Oscillator(220.00, 'sine');
-  sound[1] = new p5.Oscillator(246.94, 'sine');
-  sound[2] = new p5.Oscillator(277.18, 'sine');
-  sound[3] = new p5.Oscillator(329.63, 'sine');
-  sound[4] = new p5.Oscillator(349.23, 'sine');
-  sound[5] = new p5.Oscillator(207.65, 'sine');
-  sound[6] = new p5.Oscillator(293.66, 'sine');
-  sound[7] = new p5.Oscillator(253.22, 'sine');
-  sound[8] = new p5.Oscillator(270.66, 'sine');
-  sound[9] = new p5.Oscillator(300.50, 'sine');
+  // sound[0] = new p5.Oscillator(220.00, 'sine');
+  // sound[1] = new p5.Oscillator(246.94, 'sine');
+  // sound[2] = new p5.Oscillator(277.18, 'sine');
+  // sound[3] = new p5.Oscillator(329.63, 'sine');
+  // sound[4] = new p5.Oscillator(349.23, 'sine');
+  // sound[5] = new p5.Oscillator(207.65, 'sine');
+  // sound[6] = new p5.Oscillator(293.66, 'sine');
+  // sound[7] = new p5.Oscillator(253.22, 'sine');
+  // sound[8] = new p5.Oscillator(270.66, 'sine');
+  // sound[9] = new p5.Oscillator(300.50, 'sine');
 }
 
 function draw() {
@@ -96,7 +96,7 @@ function tapholdHandler(event) {
     $('#' + idString).addClass("tap");
       console.log("i touched the but");
 
-    sound[colorNum].start();
+    // sound[colorNum].start();
 
   } else {
       console.log("that color number is not available");
@@ -134,7 +134,7 @@ function sendMicData(colorNum) {
       // remove the tap css from it
       $('#circle' + colorNum).removeClass("tap");
 
-      sound[colorNum].stop();
+      // sound[colorNum].stop();
 
       // tell the server we're done with the color
       socket.emit('usingColor', colorNum, true);
@@ -142,7 +142,7 @@ function sendMicData(colorNum) {
       // tell the server to send a kill message to the fans (via /local)
       socket.emit('killData',colorNum);
 
-  },13000);
+  },11000);
 
 }
 
