@@ -99,8 +99,6 @@ function sendToArduino(outputString){
 
 function serialError(err) {
     console.log('Something went wrong with the serial port. ' + err);
-    connectToSerialPort(portName2);
-
 }
 
 function portClose() {
@@ -127,6 +125,7 @@ let init = () => {
   socket.on('toLocal', sendToArduino);
 
 	connectToSerialPort(portName);
+  connectToSerialPort(portName2);
 };
 
 
