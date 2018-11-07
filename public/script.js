@@ -215,6 +215,16 @@ function updateButtonElements(localButtonStatus){
 // Window onload timeout and alert 
 function alertFunc(){
   alert("You have timed out of Fluto. Please refresh page to begin again");
+  for (var i = 0; i<myActiveButtons.length; i++){
+    if (myActiveButtons[i] == true){
+
+      // tell the server we're done with the color
+      socket.emit('usingColor', i, true);
+    }
+  }
+
+    
+
 }
 
 
