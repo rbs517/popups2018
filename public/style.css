@@ -155,6 +155,7 @@ ul {
   margin: 0;
   padding: 0;
   -webkit-user-select: none !important;
+  -webkit-backface-visibility: hidden;
 }
 
 li {
@@ -162,7 +163,6 @@ li {
   justify-content: center;
   text-align: center;
   position: absolute;
-  -webkit-backface-visibility: hidden;
   -webkit-transition: all 2s linear;
   -moz-transition: all 2s linear;
   transition: all 2s linear;
