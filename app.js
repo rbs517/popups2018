@@ -108,7 +108,6 @@ io.on('connection', function(socket){
     outputString = inputValString + colorSelectonString; //mash together the intended strip (0 -4) and the value
       console.log('emitting ' + outputString + ' to local');
     io.sockets.emit('toLocal', outputString);
-    io.sockets.emit('toLocal2', outputString);
   }
 
   // STEP 4 //
@@ -121,8 +120,20 @@ io.on('connection', function(socket){
         blowData[colorNum] = [0,0,0,0,0,0,0,0,0,0];
         var colorNumString = colorNum.toString();
         var killMessage = "1" + colorNumString;
-          console.log("emitting " + killMessage + " to Local");
-        io.sockets.emit('toLocal', killMessage);
+        killForTime(colorNum, 1500);
+  }
+    
+  function killForTime(colorNum, time) {
+      var colorNumString = colorNum.toString();
+      var killMessage = "1" + colorNumString;
+      var interval = setInterval(function(){
+      console.log("emitting " + killMessage + " to Locals");
+      io.sockets.emit('toLocal', killMessage);
+    },500);
+    var timeout = setTimeout(function(){
+        console.log("done killing tube " + colorNum);
+      clearInterval(interval);
+    },time);
   }
 
 

@@ -121,7 +121,7 @@ let init = () => {
 // ********************************************************** 
 // WHEN RECEIVE DATA FROM SOCKET.IO, SEND THE DATA TO SERIALPORT 
 
-  socket.on('toLocal2', sendToArduino);
+  socket.on('toLocal', sendToArduino);
 
   connectToSerialPort(portName2);
 };
