@@ -126,7 +126,7 @@ let init = () => {
 
   socket.on('toLocal', sendToArduino);
 
-	connectToSerialPort(portName2);
+	connectToSerialPort(portName);
 };
 
 
