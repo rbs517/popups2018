@@ -118,7 +118,7 @@ function sendMicData(colorNum) {
       vol = mic.getLevel();
   
       // Get mic input value 
-      var micMapped = map(vol, 0, 1, 2, 9); // inputVal is for arduino to control the fan
+      var micMapped = map(vol, 0, 1, 3, 9); // inputVal is for arduino to control the fan
       micInput = Math.floor(micMapped);
 
         console.log("gonna send micVal " + micInput + " and colorNum " + colorNum + " to the server");
