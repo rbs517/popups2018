@@ -4,6 +4,7 @@
 // Declaring variables
 var mic;
 var vol = 0;
+var avgVol = 0;
 var micInput = 2;
 var colorNum;
 var idString;
@@ -14,16 +15,18 @@ var myActiveButtons = [false,false,false,false,false,false,false,false,false,fal
 var buttonColors = ['#ff0019', '#ed2157', '#ff5900', '#ffe500', '#b0f442', '#00ffcb','#00f6ff', '#639EFC', '#D053F1', '#8c00ff'];
 var circleNumber;
 var counter = 0;
+var instantMeter;
+var slowMeter;
+var AudioContext;
+var SoundMeter;
+
 
 // Sketch
 
 // p5.js function protocol
 function setup() {
   noCanvas();
-  // mic setup
-  // mic = new p5.AudioIn();
-  // mic.start();
-  
+
   // load sounds
   sound[0] = new p5.Oscillator(220.00, 'sine');
   sound[1] = new p5.Oscillator(369.99, 'sine');
@@ -35,37 +38,38 @@ function setup() {
   sound[7] = new p5.Oscillator(196.00, 'sine');
   sound[8] = new p5.Oscillator(270.66, 'sine');
   sound[9] = new p5.Oscillator(300.50, 'sine');
-}
-
-function draw() {
 
 }
 
-// Allow Chrome to access microphone 
+// Allow Chrome to access microphone
 
-/*
- *  Copyright (c) 2015 The WebRTC project authors. All Rights Reserved.
- *
- *  Use of this source code is governed by a BSD-style license
- *  that can be found in the LICENSE file in the root of the source
- *  tree.
- */
-
-/* global AudioContext, SoundMeter */
+  /*
+   *  Copyright (c) 2015 The WebRTC project authors. All Rights Reserved.
+   *
+   *  Use of this source code is governed by a BSD-style license
+   *  that can be found in the LICENSE file in the root of the source
+   *  tree.
+   */
 
 'use strict';
 
 var instantMeter = document.querySelector('#instant meter');
 var slowMeter = document.querySelector('#slow meter');
 
+
 var instantValueDisplay = document.querySelector('#instant .value');
 var slowValueDisplay = document.querySelector('#slow .value');
+
+instantMeter.style.display = "none";
+slowMeter.style.display = "none";
+instantValueDisplay.style.display = "none";
+slowValueDisplay.style.display = "none";
 
 try {
   window.AudioContext = window.AudioContext || window.webkitAudioContext;
   window.audioContext = new AudioContext();
 } catch (e) {
-  alert('Web Audio API not supported.');
+  alert('Web Audio API not supported');
 }
 
 // Put variables in global scope to make them available to the browser console.
@@ -74,28 +78,31 @@ var constraints = window.constraints = {
   video: false
 };
 
+
 function handleSuccess(stream) {
   // Put variables in global scope to make them available to the
   // browser console.
   window.stream = stream;
-  var soundMeter = window.soundMeter = new SoundMeter(window.audioContext);
+  soundMeter = window.soundMeter = new SoundMeter(window.audioContext);
   soundMeter.connectToSource(stream, function(e) {
     if (e) {
       alert(e);
-      console.log(e);
       return;
     }
-
-setInterval(() => {
+    setInterval(() => {
       instantMeter.value = instantValueDisplay.innerText =
         soundMeter.instant.toFixed(2);
-      
       slowMeter.value = slowValueDisplay.innerText =
         soundMeter.slow.toFixed(2);
 
-        console.log('instant :' + instantMeter.value);
-        console.log('slow :' + slowMeter.value);
- }, 200);
+        // console.log('instant :' + instantMeter.value );
+        // console.log('slow :'+ slowMeter.value);
+
+        vol = instantMeter.value;
+        avgVol = slowMeter.value;
+
+
+    }, 200);
   });
 }
 
@@ -104,6 +111,12 @@ function handleError(error) {
 }
 
 navigator.mediaDevices.getUserMedia(constraints).then(handleSuccess).catch(handleError);
+
+
+
+function draw() {
+
+}
 
 
 
@@ -182,9 +195,12 @@ function sendMicData(colorNum) {
   var interval = setInterval(function(){
       // Get mic volume level/ blow val 
       // vol = mic.getLevel();
+
+      console.log('volume :' + vol);
+      console.log('avg volume :' + avgVol);
   
       // Get mic input value 
-      var micMapped = map(vol, 0, 1, 4, 9); // inputVal is for arduino to control the fan
+      var micMapped = map(vol, 0, 0.5, 4, 9); // inputVal is for arduino to control the fan
       micInput = Math.floor(micMapped);
 
         console.log("gonna send micVal " + micInput + " and colorNum " + colorNum + " to the server");
@@ -280,7 +296,7 @@ function updateButtonElements(localButtonStatus){
 
 // Window onload timeout and alert 
 function alertFunc(){
-  alert("You have timed out of Fluto. Please refresh page to begin again");
+  // alert("You have timed out of Fluto. Please refresh page to begin again");
   for (var i = 0; i<myActiveButtons.length; i++){
     if (myActiveButtons[i] == true){
 
@@ -296,7 +312,7 @@ function alertFunc(){
 
 window.onload = function(){
   // set timeout and alert for after 5 minutes 
-  setTimeout(function(){ alertFunc(); }, 300000);
+  // setTimeout(function(){ alertFunc(); }, 300000);
 };
 
 
