@@ -54,6 +54,33 @@
         <div class= "flex-center"><li><div class= "circleContainer" id= "circle5"></div></li></div>
       </ul>
 
+
+    <div id="meters">
+        <div id="instant">
+            <div class="label">Instant:</div>
+            <meter high="0.25" max="1" value="0"></meter>
+            <div class="value"></div>
+        </div>
+        <div id="slow">
+            <div class="label">Slow:</div>
+            <meter high="0.25" max="1" value="0"></meter>
+            <div class="value"></div>
+        </div>
+        <div id="clip">
+            <div class="label">Clip:</div>
+            <meter max="1" value="0"></meter>
+            <div class="value"></div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+
+
       <div class= "flex-center" id= "blowText">
         <p>Now blow into your<br>phone's mic below</br></p>
       </div>
@@ -87,7 +114,8 @@
     <footer>
         <p>&copy; FLUTO 2018. All Rights Reserved.</p> <!-- copyright -->
     </footer>
-    
+    <!-- soundmeter -->
+    <script src="soundmeter.js"></script>
     <!-- longclick js plugin -->
     <script type="text/javascript" src="longclick.js"></script>
     <!-- sketch file -->
