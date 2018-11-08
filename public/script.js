@@ -21,20 +21,20 @@ var counter = 0;
 function setup() {
   noCanvas();
   // mic setup
-  mic = new p5.AudioIn();
-  mic.start();
+  // mic = new p5.AudioIn();
+  // mic.start();
   
   // load sounds
-  sound[0] = new p5.Oscillator(220.00, 'triangle');
-  sound[1] = new p5.Oscillator(369.99, 'triangle');
-  sound[2] = new p5.Oscillator(277.18, 'triangle');
-  sound[3] = new p5.Oscillator(329.63, 'triangle');
-  sound[4] = new p5.Oscillator(349.23, 'triangle');
-  sound[5] = new p5.Oscillator(207.65, 'triangle');
-  sound[6] = new p5.Oscillator(293.66, 'triangle');
-  sound[7] = new p5.Oscillator(196.00, 'triangle');
-  sound[8] = new p5.Oscillator(270.66, 'triangle');
-  sound[9] = new p5.Oscillator(300.50, 'triangle');
+  sound[0] = new p5.Oscillator(220.00, 'sine');
+  sound[1] = new p5.Oscillator(369.99, 'sine');
+  sound[2] = new p5.Oscillator(277.18, 'sine');
+  sound[3] = new p5.Oscillator(329.63, 'sine');
+  sound[4] = new p5.Oscillator(349.23, 'sine');
+  sound[5] = new p5.Oscillator(207.65, 'sine');
+  sound[6] = new p5.Oscillator(293.66, 'sine');
+  sound[7] = new p5.Oscillator(196.00, 'sine');
+  sound[8] = new p5.Oscillator(270.66, 'sine');
+  sound[9] = new p5.Oscillator(300.50, 'sine');
 }
 
 function draw() {
@@ -57,11 +57,9 @@ function draw() {
 
 var instantMeter = document.querySelector('#instant meter');
 var slowMeter = document.querySelector('#slow meter');
-var clipMeter = document.querySelector('#clip meter');
 
 var instantValueDisplay = document.querySelector('#instant .value');
 var slowValueDisplay = document.querySelector('#slow .value');
-var clipValueDisplay = document.querySelector('#clip .value');
 
 try {
   window.AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -84,16 +82,20 @@ function handleSuccess(stream) {
   soundMeter.connectToSource(stream, function(e) {
     if (e) {
       alert(e);
+      console.log(e);
       return;
     }
-    setInterval(() => {
+
+setInterval(() => {
       instantMeter.value = instantValueDisplay.innerText =
         soundMeter.instant.toFixed(2);
+      
       slowMeter.value = slowValueDisplay.innerText =
         soundMeter.slow.toFixed(2);
-      clipMeter.value = clipValueDisplay.innerText =
-        soundMeter.clip;
-    }, 200);
+
+        console.log('instant :' + instantMeter.value);
+        console.log('slow :' + slowMeter.value);
+ }, 200);
   });
 }
 
@@ -179,7 +181,7 @@ function sendMicData(colorNum) {
     // After button color is claimed, send data for x seconds
   var interval = setInterval(function(){
       // Get mic volume level/ blow val 
-      vol = mic.getLevel();
+      // vol = mic.getLevel();
   
       // Get mic input value 
       var micMapped = map(vol, 0, 1, 4, 9); // inputVal is for arduino to control the fan

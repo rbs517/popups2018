@@ -31,45 +31,34 @@ var userCount = 0;
 var colorSelectonString, inputValString, outputString;
 var colorSelection = 0;
 var buttonsStatus = [true, true, true, true, true, true, true, true, true, true]; //a list to keep track of which buttons are currently available - true means available
-var userDict = []; //a list to keep track of the users and which buttons they are using
-// On connect to socket
+var userDict = {}; //an object to keep track of the users and which buttons they are using
 
 var io = require('socket.io')(http);
 
-// On user connection
 io.on('connection', function(socket) {
-
-  // Add the user to the userDict
-  userDict.push({
-    id: socket.id,
-    activeColors: buttonsStatus
-  });
+  // On user connection
+  // Add the user to the userDict with the fact that they are not using any buttons (true = free)
+  userDict[socket.id] = [true, true, true, true, true, true, true, true, true, true];
+  console.log('user ' + socket.id + ' has connected');
+  // console.log("the dictionary now looks like this: " + userDict);
 
   // Add to the userCount
   userCount = userCount + 1;
-  console.log('user ' + socket.id + ' has connected');
   console.log('number of connected users: ' + userCount);
 
   // On disconnect to socket
   socket.on('disconnect', function() {
-
-    // Check which user it was and free up their colors
-    for (user in userDict) { // loop through the userDict
-      if (userDict[user].id = socket.id) { // find the user that just disconnected
-        // console.log("their active colors were: " + userDict[user].activeColors);
-        for (color in userDict[user].activeColors) { // loop through the colors that they had active
-          if (userDict[user].activeColors[color] == false) { // if they were using a color
-            buttonsStatus[color] = true; // release the color/button on the app side
-            socket.broadcast.emit('colorStatusUpdate', color, true); // announce that update
-          }
-        }
-        //Remove the user from userDict
-        console.log("removing user " + userDict[user].id + " from the user dictionary");
-        delete userDict[user];
+    // console.log("this is the current dictionary: " + userDict);
+    //loop through the color statuses in the userDictionary
+    for (color in userDict[socket.id]) {
+      // console.log(userDict[socket.id][color]);
+      if (userDict[socket.id][color] === false) { //if it was taken
+          buttonsStatus[color] = true; // release the color/button on the app side
+          socket.broadcast.emit('colorStatusUpdate', color, true); //announce that update
       }
     }
 
-    //Remove from the userCount
+    //remove from the userCount
     userCount = userCount - 1;
     console.log('user ' + socket.id + ' has disconnected');
     console.log('number of connected users: ' + userCount);
@@ -86,10 +75,10 @@ io.on('connection', function(socket) {
 
   // Send the button/color statuses to the client
   function colorButtonCheck(thisDevice) {
-    console.log('got a color check request from ' + thisDevice + " sending them the array I have: ");
-    for (var i = 0; i < buttonsStatus.length; i++) {
-      console.log("button " + i + ": " + buttonsStatus[i]);
-    }
+    // console.log('got a color check request from ' + socket.id + " sending them the array I have");
+    // for (var i = 0; i < buttonsStatus.length; i++) {
+    //   console.log("button " + i + ": " + buttonsStatus[i]);
+    // }
     socket.emit(thisDevice, buttonsStatus);
   }
 
@@ -101,8 +90,10 @@ io.on('connection', function(socket) {
   // Broadcast color claim to all users
   function broadcastColStatus(colorNum, colorStatus) {
     buttonsStatus[colorNum] = colorStatus;
+    userDict[socket.id][colorNum] = colorStatus;
+    console.log("updated " + socket.id + "dictionary listing to " + userDict[socket.id])
     // console.log(buttonsStatus);
-    console.log('got a request to reserve (or release) color ' + colorNum + " now broadcasting this reservation/release to all others");
+    // console.log('got a request from ' + socket.id + ' to reserve (or release) color ' + colorNum + " now broadcasting this reservation/release to all others");
     socket.broadcast.emit('colorStatusUpdate', colorNum, colorStatus);
   }
 
@@ -116,7 +107,7 @@ io.on('connection', function(socket) {
     inputValString = micInput.toString();
     colorSelectonString = colorNum.toString();
     outputString = inputValString + colorSelectonString; //mash together the intended strip (0 -4) and the value
-    console.log('emitting ' + outputString + ' to local');
+    // console.log('emitting ' + outputString + ' to local');
     io.sockets.emit('toLocal', outputString);
   }
 
