@@ -22,6 +22,7 @@ function setup() {
   noCanvas();
   // mic setup
   mic = new p5.AudioIn();
+  hasGetUserMedia();
   mic.start();
   
   // load sounds
@@ -39,6 +40,17 @@ function setup() {
 
 function draw() {
 
+}
+
+function hasGetUserMedia() {
+  return !!(navigator.mediaDevices &&
+    navigator.mediaDevices.getUserMedia);
+}
+
+if (hasGetUserMedia()) {
+  console.log('Good to go!');
+} else {
+  alert('getUserMedia() is not supported by your browser');
 }
 
 // Circles placed in a circle design for taphold page
@@ -96,7 +108,7 @@ function tapholdHandler(event) {
     $('#' + idString).addClass("tap");
       console.log("i touched the but");
 
-    // sound[colorNum].start();
+    sound[colorNum].start();
 
   } else {
       console.log("that color number is not available");
@@ -134,7 +146,7 @@ function sendMicData(colorNum) {
       // remove the tap css from it
       $('#circle' + colorNum).removeClass("tap");
 
-      // sound[colorNum].stop();
+      sound[colorNum].stop();
 
       // tell the server we're done with the color
       socket.emit('usingColor', colorNum, true);

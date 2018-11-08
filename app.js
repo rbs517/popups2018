@@ -1,9 +1,9 @@
-//  ********************************************************** 
-// CREATING A NODE.JS SERVER 
+//  **********************************************************
+// CREATING A NODE.JS SERVER
 
 // Require dependencies
 var express = require('express');
-var app = express ();
+var app = express();
 var path = require('path');
 var PORT = process.env.PORT || 5000;
 var request = require('request');
@@ -16,70 +16,93 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set('port', PORT);
 
 // Get request to me from index.html
-app.get('/', function(req, res){
-    console.log('user enters..');
+app.get('/', function(req, res) {
+  console.log('user enters..');
   res.render('index');
 });
 
-  console.log("App is served on localhost: " + PORT);
+console.log("App is served on localhost: " + PORT);
 
 // **********************************************************
 // SOCKET COMMUNICATION ON SERVER SIDE
 
 // Declare variables
 var userCount = 0;
-var blowData = [[0, 0, 0, 0, 0,0,0,0,0],[0, 0, 0, 0, 0,0,0,0,0],[0, 0, 0, 0, 0,0,0,0,0],[0, 0, 0, 0, 0,0,0,0,0],[0, 0, 0, 0, 0,0,0,0,0],[0, 0, 0, 0, 0,0,0,0,0],[0, 0, 0, 0, 0,0,0,0,0],[0, 0, 0, 0, 0,0,0,0,0],[0, 0, 0, 0, 0,0,0,0,0],[0, 0, 0, 0, 0,0,0,0,0]]; // an array of recent microphone readings (for moving average)
 var colorSelectonString, inputValString, outputString;
 var colorSelection = 0;
-var smoothVal = 0;
-var buttonsStatus = [true, true, true, true, true, true, true, true, true, true]; //true means available
-
+var buttonsStatus = [true, true, true, true, true, true, true, true, true, true]; //a list to keep track of which buttons are currently available - true means available
+var userDict = []; //a list to keep track of the users and which buttons they are using
 // On connect to socket
 
 var io = require('socket.io')(http);
 
-io.on('connection', function(socket){
-  // On user connection
+// On user connection
+io.on('connection', function(socket) {
+
+  // Add the user to the userDict
+  userDict.push({
+    id: socket.id,
+    activeColors: buttonsStatus
+  });
+
+  // Add to the userCount
   userCount = userCount + 1;
-    console.log('a user connected');
-    console.log('number of connected users: ' + userCount);
-  io.emit('this', {will: 'be received by everyone'});
+  console.log('user ' + socket.id + ' has connected');
+  console.log('number of connected users: ' + userCount);
 
   // On disconnect to socket
-  socket.on('disconnect', function(){
+  socket.on('disconnect', function() {
+
+    // Check which user it was and free up their colors
+    for (user in userDict) { // loop through the userDict
+      if (userDict[user].id = socket.id) { // find the user that just disconnected
+        // console.log("their active colors were: " + userDict[user].activeColors);
+        for (color in userDict[user].activeColors) { // loop through the colors that they had active
+          if (userDict[user].activeColors[color] == false) { // if they were using a color
+            buttonsStatus[color] = true; // release the color/button on the app side
+            socket.broadcast.emit('colorStatusUpdate', color, true); // announce that update
+          }
+        }
+        //Remove the user from userDict
+        console.log("removing user " + userDict[user].id + " from the user dictionary");
+        delete userDict[user];
+      }
+    }
+
+    //Remove from the userCount
     userCount = userCount - 1;
-      console.log('user disconnected');
-      console.log('number of connected users: ' + userCount);
+    console.log('user ' + socket.id + ' has disconnected');
+    console.log('number of connected users: ' + userCount);
     io.sockets.emit('userCount', userCount); // call userCount function on js side
   });
 
 
-  // BUTTON CHECK
+  // BUTTON PRESS EVENT
 
   // STEP 1 //
 
-  // Responding to client request, checking the color buttons for availability
+  // Responding to client request which runs onLoad, checking the color buttons for availability
   socket.on('getColorAvail', colorButtonCheck);
 
-  
-  // Once checked, send the button color statuses to the client
-  function colorButtonCheck(thisDevice){
-      console.log('got a color check request from ' + thisDevice + " sending them the array I have: ");
-    for (var i = 0; i < buttonsStatus.length ;i++) {
-      console.log("button " +i + ": " +buttonsStatus[i]);
-  }
+  // Send the button/color statuses to the client
+  function colorButtonCheck(thisDevice) {
+    console.log('got a color check request from ' + thisDevice + " sending them the array I have: ");
+    for (var i = 0; i < buttonsStatus.length; i++) {
+      console.log("button " + i + ": " + buttonsStatus[i]);
+    }
     socket.emit(thisDevice, buttonsStatus);
   }
-  
+
   // STEP 2 //
 
-  // Color has been claimed
+  // When a color is tapped or timed out on the client side
   socket.on('usingColor', broadcastColStatus);
 
   // Broadcast color claim to all users
-  function broadcastColStatus(colorNum, colorStatus){
+  function broadcastColStatus(colorNum, colorStatus) {
     buttonsStatus[colorNum] = colorStatus;
-      console.log('got a request to reserve (or release) color ' + colorNum + " now broadcasting this reservation/release to all others");
+    // console.log(buttonsStatus);
+    console.log('got a request to reserve (or release) color ' + colorNum + " now broadcasting this reservation/release to all others");
     socket.broadcast.emit('colorStatusUpdate', colorNum, colorStatus);
   }
 
@@ -87,88 +110,48 @@ io.on('connection', function(socket){
   // STEP 3 //
 
   // Send live data of mic and color button values to local.js (serialport)
-  socket.on('liveData',sendLiveDataToLocal);
+  socket.on('liveData', sendLiveDataToLocal);
 
-  function sendLiveDataToLocal(micInput, colorNum){
-    // updateArray(micInput, colorNum);
-    // smoothVal = average(blowData[colorNum]); // prepare the value to send
-    // console.log('preparing emission with a avg micVal of: ' + smoothVal);
+  function sendLiveDataToLocal(micInput, colorNum) {
     inputValString = micInput.toString();
     colorSelectonString = colorNum.toString();
-    // console.log('...and a color selection of ' + colorSelection);
-    // LED testing workaround
-    // if (smoothVal > 50) {
-    //     smoothVal = 2;
-    //     inputValString = smoothVal.toString();
-    // } else {
-    //   smoothVal = 1;
-    //   inputValString = smoothVal.toString();
-    // }
-
     outputString = inputValString + colorSelectonString; //mash together the intended strip (0 -4) and the value
-      console.log('emitting ' + outputString + ' to local');
+    console.log('emitting ' + outputString + ' to local');
     io.sockets.emit('toLocal', outputString);
   }
 
   // STEP 4 //
-  
+
   // Send kill data message to local.js (serialport) to reset values/ clear the data after no activity
-  socket.on('killData',sendKillMesageToLocal);
-  
+  socket.on('killData', sendKillMesageToLocal);
+
   function sendKillMesageToLocal(colorNum) {
-        //reset the array of blow values for that tube
-        blowData[colorNum] = [0,0,0,0,0,0,0,0,0,0];
-        var colorNumString = colorNum.toString();
-        var killMessage = "1" + colorNumString;
-        killForTime(colorNum, 1500);
+    //reset the array of blow values for that tube
+    var colorNumString = colorNum.toString();
+    var killMessage = "1" + colorNumString;
+    killForTime(colorNum, 1500);
   }
-    
+
   function killForTime(colorNum, time) {
-      var colorNumString = colorNum.toString();
-      var killMessage = "1" + colorNumString;
-      var interval = setInterval(function(){
+    var colorNumString = colorNum.toString();
+    var killMessage = "1" + colorNumString;
+    var interval = setInterval(function() {
       console.log("emitting " + killMessage + " to Locals");
       io.sockets.emit('toLocal', killMessage);
-    },500);
-    var timeout = setTimeout(function(){
-        console.log("done killing tube " + colorNum);
+    }, 500);
+    var timeout = setTimeout(function() {
+      console.log("done killing tube " + colorNum);
       clearInterval(interval);
-    },time);
+    }, time);
   }
 
-
-  // socket.on('countedTen', sendFullHouse);
-  
-  // function sendFullHouse (){
-  //   socket.broadcast.emit('fullHouse', alert);
-  // }
-
-
-  function restart (){
+  function restart() {
     final = 0;
-      console.log('restarting...');
+    console.log('restarting...');
   }
 
 
 });
-
-
-// Data smoothing function
-function updateArray(newReading,tube) {
-  blowData[tube].shift();
-  blowData[tube].push(newReading);
-  // maybe use math.floor and do more elegant control on the arduino side
-}
-
-// Getting average of array
-function average(array) {
-    var total = 0;
-  for (var i = 0; i < array.length; i++) {
-    total += array[i];
-  }
-  var avg = total / array.length;
-  return avg;
-}
 
 // Http listen on the port
 http.listen(PORT, () => console.log(`Listening on ${ PORT }`));
