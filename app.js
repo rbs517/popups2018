@@ -120,7 +120,7 @@ io.on('connection', function(socket) {
     //reset the array of blow values for that tube
     var colorNumString = colorNum.toString();
     var killMessage = "1" + colorNumString;
-    killForTime(colorNum, 1500);
+    killForTime(colorNum, 3000);
   }
 
   function killForTime(colorNum, time) {
