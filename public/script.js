@@ -102,7 +102,7 @@ function handleSuccess(stream) {
 
         vol = instantMeter.value;
         avgVol = slowMeter.value;
-        updateArray(micData, micAvg);
+        updateArray(micData, vol);
         micAvg = average(micData);
 
 
