@@ -103,7 +103,7 @@ function handleSuccess(stream) {
         vol = instantMeter.value;
         avgVol = slowMeter.value;
         updateArray(micData, vol);
-        micAvg = average(blowData);
+        micAvg = average(micData);
 
 
     }, 15);
