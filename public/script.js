@@ -201,7 +201,7 @@ function sendMicData(colorNum) {
   
 
       // Get mic input value 
-      var micMapped = constrain(map(avgVol, 0, 0.08, 1, 9), 4, 9);
+      var micMapped = constrain(map(avgVol, 0, 0.03, 1, 9), 4, 9);
       // var micMapped = constrain(map(vol, 0, 0.06, 1, 9), 4, 9); // inputVal is for arduino to control the fan
       micInput = Math.floor(micMapped);
 
