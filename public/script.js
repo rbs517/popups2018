@@ -179,7 +179,7 @@ function tapholdHandler(event) {
     $('#' + idString).addClass("tap");
       console.log("i touched the but");
     
-    sound[colorNum].setVolume(1.0);
+    // sound[colorNum].setVolume(1.0);
     sound[colorNum].start();
 
   } else {
