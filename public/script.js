@@ -110,7 +110,7 @@ function handleError(error) {
   console.log('navigator.getUserMedia error: ', error);
 }
 
-navigator.mediaDevices.getUserMedia(constraints).then(handleSuccess).catch(handleError);
+navigator.mediaDevices.getUserMedia({ audio: true }, constraints).then(handleSuccess).catch(handleError);
 
 
 
