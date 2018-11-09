@@ -19,6 +19,8 @@ var instantMeter;
 var slowMeter;
 var AudioContext;
 var SoundMeter;
+var micAvg;
+var micData = [0,0,0,0,0,0,0,0,0,0];
 
 
 // Sketch
@@ -100,6 +102,8 @@ function handleSuccess(stream) {
 
         vol = instantMeter.value;
         avgVol = slowMeter.value;
+        updateArray(micData, vol);
+        micAvg = average(blowData);
 
 
     }, 15);
@@ -202,7 +206,8 @@ function sendMicData(colorNum) {
   
 
       // Get mic input value 
-      var micMapped = constrain(map(avgVol, 0, 0.03, 1, 9), 4, 9);
+      var micMapped = constrain(map(micAvg, 0, 0.03, 1, 9), 4, 9);
+
       // var micMapped = constrain(map(vol, 0, 0.06, 1, 9), 4, 9); // inputVal is for arduino to control the fan
       micInput = Math.floor(micMapped);
 
@@ -296,6 +301,22 @@ function updateButtonElements(localButtonStatus){
   }
 }
 
+// Data smoothing function
+function updateArray(array, newReading) {
+  array.shift();
+  array.push(newReading);
+  // maybe use math.floor and do more elegant control on the arduino side
+}
+
+ // Getting average of array
+function average(array) {
+    var total = 0;
+  for (var i = 0; i < array.length; i++) {
+     total += array[i];
+   }
+   var avg = total / array.length;
+   return avg;
+ }
 
 // Window onload timeout and alert 
 function alertFunc(){
