@@ -102,7 +102,7 @@ function handleSuccess(stream) {
         avgVol = slowMeter.value;
 
 
-    }, 25);
+    }, 15);
   });
 }
 
@@ -201,7 +201,7 @@ function sendMicData(colorNum) {
   
 
       // Get mic input value 
-      var micMapped = constrain(map(vol, 0, 0.1, 1, 9), 4, 9); // inputVal is for arduino to control the fan
+      var micMapped = constrain(map(vol, 0, 0.06, 1, 9), 4, 9); // inputVal is for arduino to control the fan
       micInput = Math.floor(micMapped);
 
         console.log("gonna send micVal " + micInput + " and colorNum " + colorNum + " to the server");
