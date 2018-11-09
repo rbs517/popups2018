@@ -91,7 +91,7 @@ io.on('connection', function(socket) {
   function broadcastColStatus(colorNum, colorStatus) {
     buttonsStatus[colorNum] = colorStatus;
     userDict[socket.id][colorNum] = colorStatus;
-    console.log("updated " + socket.id + "dictionary listing to " + userDict[socket.id])
+    console.log("updated " + socket.id + "dictionary listing to " + userDict[socket.id]);
     // console.log(buttonsStatus);
     // console.log('got a request from ' + socket.id + ' to reserve (or release) color ' + colorNum + " now broadcasting this reservation/release to all others");
     socket.broadcast.emit('colorStatusUpdate', colorNum, colorStatus);

@@ -202,7 +202,7 @@ function sendMicData(colorNum) {
       // vol = mic.getLevel();
 
       console.log('volume :' + vol);
-      console.log('avg volume :' + avgVol);
+      // console.log('avg volume :' + avgVol);
       console.log('micAvg :' + micAvg);
   
 
@@ -211,6 +211,8 @@ function sendMicData(colorNum) {
 
       // var micMapped = constrain(map(vol, 0, 0.06, 1, 9), 4, 9); // inputVal is for arduino to control the fan
       micInput = Math.floor(micMapped);
+            console.log('micInput :' + micAvg);
+
 
         console.log("gonna send micVal " + micInput + " and colorNum " + colorNum + " to the server");
       socket.emit('liveData', micInput, colorNum);
