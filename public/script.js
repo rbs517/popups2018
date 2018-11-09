@@ -43,7 +43,7 @@ function setup() {
 
 }
 
-// Allow Chrome to access microphone
+// Allow Chrome to access microphone-- UPDATE- as of 11-8-2018 this does not enable the mic on chrome, only on Safari and Firefox.
 
   /*
    *  Copyright (c) 2015 The WebRTC project authors. All Rights Reserved.
@@ -57,19 +57,15 @@ function setup() {
 
 var instantMeter = document.querySelector('#instant meter');
 var slowMeter = document.querySelector('#slow meter');
-var clipMeter = document.querySelector('#clip meter');
 
 
 var instantValueDisplay = document.querySelector('#instant .value');
 var slowValueDisplay = document.querySelector('#slow .value');
-var clipValueDisplay = document.querySelector('#clip .value');
 
 instantMeter.style.display = "none";
 slowMeter.style.display = "none";
-clipMeter.style.display = "none";
 instantValueDisplay.style.display = "none";
 slowValueDisplay.style.display = "none";
-clipValueDisplay.style.display = "none";
 
 try {
   window.AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -100,8 +96,6 @@ function handleSuccess(stream) {
         soundMeter.instant.toFixed(2);
       slowMeter.value = slowValueDisplay.innerText =
         soundMeter.slow.toFixed(2);
-        clipMeter.value = clipValueDisplay.innerText =
-        soundMeter.clip;
 
         // console.log('instant :' + instantMeter.value );
         // console.log('slow :'+ slowMeter.value);
