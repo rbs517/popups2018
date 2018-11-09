@@ -102,7 +102,7 @@ function handleSuccess(stream) {
 
         vol = instantMeter.value;
         avgVol = slowMeter.value;
-        updateArray(micData, vol);
+        updateArray(micData, micAvg);
         micAvg = average(micData);
 
 
@@ -203,6 +203,7 @@ function sendMicData(colorNum) {
 
       console.log('volume :' + vol);
       console.log('avg volume :' + avgVol);
+      console.log('micAvg :' + micAvg);
   
 
       // Get mic input value 
