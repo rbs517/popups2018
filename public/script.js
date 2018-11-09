@@ -339,7 +339,7 @@ function alertFunc(){
 
 window.onload = function(){
   // set timeout and alert for after 5 minutes 
-  // setTimeout(function(){ alertFunc(); }, 300000);
+  setTimeout(function(){ alertFunc(); }, 300000);
 };
 
 
