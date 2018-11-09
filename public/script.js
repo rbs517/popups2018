@@ -102,7 +102,7 @@ function handleSuccess(stream) {
         avgVol = slowMeter.value;
 
 
-    }, 5);
+    }, 15);
   });
 }
 
