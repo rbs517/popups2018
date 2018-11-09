@@ -175,6 +175,7 @@ function tapholdHandler(event) {
     $('#' + idString).addClass("tap");
       console.log("i touched the but");
 
+    sound[colorNum].amp(1.0);  
     sound[colorNum].start();
 
   } else {
@@ -226,7 +227,7 @@ function sendMicData(colorNum) {
       // tell the server to send a kill message to the fans (via /local)
       socket.emit('killData',colorNum);
 
-  },30000);
+  },20000);
 
 }
 
