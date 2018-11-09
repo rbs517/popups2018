@@ -21,6 +21,7 @@ var AudioContext;
 var SoundMeter;
 var micAvg;
 var micData = [0,0,0,0,0,0,0,0,0,0];
+var constraints;
 
 
 // Sketch
@@ -75,9 +76,8 @@ try {
 }
 
 // Put variables in global scope to make them available to the browser console.
-var constraints = window.constraints = {
-  audio: true,
-  video: false
+constraints = window.constraints = {
+  audio: true
 };
 
 
@@ -114,7 +114,7 @@ function handleError(error) {
   console.log('navigator.getUserMedia error: ', error);
 }
 
-navigator.mediaDevices.getUserMedia({ audio: true }, constraints).then(handleSuccess).catch(handleError);
+navigator.mediaDevices.getUserMedia(constraints).then(handleSuccess).catch(handleError);
 
 
 
