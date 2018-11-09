@@ -12,7 +12,7 @@ var sound = [];
 var thisDevice;
 var buttonStatusList = [];
 var myActiveButtons = [false,false,false,false,false,false,false,false,false,false]; 
-var buttonColors = ['#ff0019', '#ed2157', '#ff5900', '#ffe500', '#b0f442', '#00ffcb','#00f6ff', '#639EFC', '#D053F1', '#8c00ff'];
+var buttonColors = ['#fc14ca', '#ff3f72', '#f9182f','#ff5323', '#ffeb38', '#bbff4f', '#00e598','#00fff2', '#3b98f7', '#ba4cff'];
 var circleNumber;
 var counter = 0;
 var instantMeter;
