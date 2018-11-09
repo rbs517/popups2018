@@ -235,7 +235,7 @@ function sendMicData(colorNum) {
       // tell the server to send a kill message to the fans (via /local)
       socket.emit('killData',colorNum);
 
-  },15000);
+  },12000);
 
 }
 
