@@ -1,0 +1,11 @@
+
+# Created by https://www.gitignore.io/api/macos
+
+### macOS ###
+*.DS_Store
+.AppleDouble
+.LSOverride
+
+### CF Additions ###
+node_modules
+**/screenshots
