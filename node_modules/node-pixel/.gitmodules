@@ -1,3 +1,0 @@
-[submodule "firmware/src/libs/firmata/arduino"]
-	path = firmware/src/libs/firmata/arduino
-	url = git@github.com:firmata/arduino.git
