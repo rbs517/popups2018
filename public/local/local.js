@@ -3,7 +3,7 @@
 
 // Declare Global Variables
 var serial; // variable to hold an instance of the serialport library
-var portName = '/dev/cu.usbmodem1421'; // Left window (warm side of rainbow)
+var portName = '/dev/cu.usbmodem1441'; // Left window (warm side of rainbow)
 var options = {
   baudrate: 9600 // change the data rate to whatever you wish -- MAKE ME MATCH!
 }; 
