@@ -1,9 +1,10 @@
+
 // ********************************************************** 
 // INIT THE SERIALPORT COMMUNICATION (OPEN SERIAL TO ARDUINO) 
 
 // Declare Global Variables
 var serial; // variable to hold an instance of the serialport library
-var portName2 = '/dev/cu.usbmodemFA131'; // Rebecca's port
+var portName2 = '/dev/cu.usbmodem1421'; // Rebecca's port
 var options = {
   baudrate: 9600 // change the data rate to whatever you wish -- MAKE ME MATCH!
 }; 
