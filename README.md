@@ -8,3 +8,5 @@ Created by: [Rebecca Skurnik](https://www.rebeccaskurnik.com/), Yu-Hao Ko, Meich
 Created with: Heroku, node.js, socket.io, and arduino
 
 Originally created for NYU ITP's [pop-up window displays](https://popupwindows.wordpress.com/) class, Fall 2018.
+
+For more information, visit [our website](https://flutopopup.com)
