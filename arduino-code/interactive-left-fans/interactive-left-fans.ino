@@ -1,6 +1,6 @@
 //Created for FLUTO - Popup Windows 2018
-//Designed to run on Arduino ZERO
-//FIRST SET CODE
+//Designed to run on Arduino MEGA
+//FIRST SET CODE (LEFT SIDE - RED/WARM COLORS)
 
 // Libraries
 #include <FastLED.h>
@@ -109,7 +109,7 @@ CRGBPalette16 darkBluePalettePassive = CRGBPalette16(darkBluePassive1, darkBlueP
 CRGBPalette16 lightpurplePalettePassive = CRGBPalette16(lightPurplePassive1, lightPurplePassive2, lightPurplePassive3, lightPurplePassive4, lightPurplePassive1, lightPurplePassive2, lightPurplePassive3, lightPurplePassive4, lightPurplePassive1, lightPurplePassive2, lightPurplePassive3, lightPurplePassive4, lightPurplePassive1, lightPurplePassive2, lightPurplePassive3, lightPurplePassive4);
 CRGBPalette16 darkPurplePalettePassive = CRGBPalette16(darkPurplePassive1, darkPurplePassive2, darkPurplePassive3, darkPurplePassive4, darkPurplePassive1, darkPurplePassive2, darkPurplePassive3, darkPurplePassive4, darkPurplePassive1, darkPurplePassive2, darkPurplePassive3, darkPurplePassive4, darkPurplePassive1, darkPurplePassive2, darkPurplePassive3, darkPurplePassive4);
 
-//CRGBPalette16 leftPassivePalettesArray[] = {pinkPalettePassive, redPalettePassive, orangePalettePassive, yellowPalettePassive, lightGreenPalettePassive};  //an array containing each warm palette
+CRGBPalette16 leftPassivePalettesArray[] = {pinkPalettePassive, redPalettePassive, orangePalettePassive, yellowPalettePassive, lightGreenPalettePassive};  //an array containing each warm palette
 CRGBPalette16 rightPassivePalettesArray[] = {darkGreenPalettePassive, lightBluePalettePassive, darkBluePalettePassive, lightpurplePalettePassive, darkPurplePalettePassive};  //an array containing each warm palette
 
 CRGBPalette16 currentPalette;
@@ -213,7 +213,7 @@ void animatePassive(uint8_t globalIndex) {
     } else {
       localBrightness = lowBrightness;
     }
-    currentPalette = rightPassivePalettesArray[tubeNumber];                   //update the palette to the one correspondent with the tube
+    currentPalette = leftPassivePalettesArray[tubeNumber];                   //update the palette to the one correspondent with the tube
 
     for ( int i = 0; i < lengthsArray[tubeNumber]; i++) {                     // loop through each pixel
       FastLED[tubeNumber][i] = ColorFromPalette(currentPalette, localIndex, localBrightness, currentBlending);
