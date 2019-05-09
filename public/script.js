@@ -1,4 +1,4 @@
-// ********************************************************** 
+// **********************************************************
 // STARTING JS FILE
 
 // Declaring variables
@@ -11,7 +11,7 @@ var idString;
 var sound = [];
 var thisDevice;
 var buttonStatusList = [];
-var myActiveButtons = [false,false,false,false,false,false,false,false,false,false]; 
+var myActiveButtons = [false,false,false,false,false,false,false,false,false,false];
 var buttonColors = ['#fc14ca', '#ff3f72', '#f9182f','#ff5323', '#ffeb38', '#90ff47', '#00e598','#00fff2', '#3b98f7', '#ba4cff'];
 var circleNumber;
 var counter = 0;
@@ -130,13 +130,13 @@ var type = 1, // circle type - 1 whole, 0.5 half, 0.25 quarter
     start = -162, // shift start from 0
     $elements = $('li'),
     numberOfElements = (type === 1) ?  $elements.length : $elements.length - 1, //adj for even distro of elements when not full circle
-    slice = 360 * type / numberOfElements;
+    slice = 180 * type / numberOfElements;
 
 $elements.each(function(i) {
     var $self = $(this),
         rotate = slice * i + start,
         rotateReverse = rotate * -1;
-    
+
     $self.css({
         'transform': 'rotate(' + rotate + 'deg) translate(' + radius + ') rotate(' + rotateReverse + 'deg)'
     });
@@ -178,7 +178,7 @@ function tapholdHandler(event) {
     myActiveButtons[colorNum] = true;
     $('#' + idString).addClass("tap");
       console.log("i touched the but");
-    
+
     // sound[colorNum].setVolume(1.0);
     sound[colorNum].start();
 
@@ -198,15 +198,15 @@ function sendMicData(colorNum) {
 
     // After button color is claimed, send data for x seconds
   var interval = setInterval(function(){
-      // Get mic volume level/ blow val 
+      // Get mic volume level/ blow val
       // vol = mic.getLevel();
 
       console.log('volume :' + vol);
       // console.log('avg volume :' + avgVol);
       console.log('micAvg :' + micAvg);
-  
 
-      // Get mic input value 
+
+      // Get mic input value
       var micMapped = constrain(map(micAvg, 0, 0.03, 1, 9), 4, 9);
 
       // var micMapped = constrain(map(vol, 0, 0.06, 1, 9), 4, 9); // inputVal is for arduino to control the fan
@@ -241,16 +241,16 @@ function sendMicData(colorNum) {
 
 // UPDATE FUNCTIONS //
 
-// Update button color statuses 
+// Update button color statuses
 function updateButtonsStatus(buttonsStatus){
-  // for the buttonsStatus array, 
+  // for the buttonsStatus array,
   for (var i=0; i<buttonsStatus.length; i++){
     // if "i" spot in the array is true,
     if (buttonsStatus[i] == true){
       // button is available
         console.log('button ' + i + ' is available, updating my local list');
       buttonStatusList[i] = true;
-    } 
+    }
 
     // if "i" spot in the array is false,
     else if (buttonsStatus[i] == false && myActiveButtons[i] == false){
@@ -263,7 +263,7 @@ function updateButtonsStatus(buttonsStatus){
 
 // After color has been claimed
 function updateButtonElements(localButtonStatus){
-  // for the buttonsStatus array, 
+  // for the buttonsStatus array,
   for (var i=0; i<localButtonStatus.length; i++){
     circleNumber = "circle" + i;
 
@@ -277,18 +277,18 @@ function updateButtonElements(localButtonStatus){
       // update the button css
       //update the button binding
       $('#' + circleNumber).bind("vmousedown", tapholdHandler);
-    } 
+    }
 
     // if "i" spot in the array is false,
     else if (localButtonStatus[i] == false){
       // button is not available
         console.log('setting button ' + i + ' as inactive');
-      
+
       //update the button css
       $('#' + circleNumber).css("background-color", "gray");
       $('#' + circleNumber).removeClass("tap");
       // update the button binding
-      $('#' + circleNumber).unbind("vmousedown", tapholdHandler); 
+      $('#' + circleNumber).unbind("vmousedown", tapholdHandler);
 
       // // set a variable counter
       // counter++;
@@ -299,7 +299,7 @@ function updateButtonElements(localButtonStatus){
       // } else{
 
       // }
-   
+
     }
   }
 }
@@ -321,7 +321,7 @@ function average(array) {
    return avg;
  }
 
-// Window onload timeout and alert 
+// Window onload timeout and alert
 function alertFunc(){
   // alert("You have timed out of Fluto. Please refresh page to begin again");
   for (var i = 0; i<myActiveButtons.length; i++){
@@ -332,25 +332,25 @@ function alertFunc(){
     }
   }
 
-    
+
 
 }
 
 
 window.onload = function(){
-  // set timeout and alert for after 5 minutes 
+  // set timeout and alert for after 5 minutes
   setTimeout(function(){ alertFunc(); }, 300000);
 };
 
 
-// ********************************************************** 
+// **********************************************************
 // SOCKET COMMUNICATION ON CLIENT SIDE
 
 var socket = io();
 
-// Telling server when new user is connected 
+// Telling server when new user is connected
 socket.emit('user', 'new user is connected');
-socket.on('userCount', function(userCount) { 
+socket.on('userCount', function(userCount) {
   console.log('total number of users online is: ' + userCount); // console number of users after one goes off;
 });
 
@@ -397,7 +397,7 @@ socket.on(thisDevice,function(buttonsStatus){
 // Broadcasted to all clients that the color number has been claimed, now update
 socket.on('colorStatusUpdate',function(colorNum, colorStatus){
     console.log("color: " + colorNum + " is now taken or released");
-  // update local button status to taken 
+  // update local button status to taken
   buttonStatusList[colorNum] = colorStatus;
   // update button status to the current button status
   updateButtonElements(buttonStatusList);
@@ -408,15 +408,15 @@ socket.on('colorStatusUpdate',function(colorNum, colorStatus){
 function getRandomIntInclusive(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive 
+  return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive
 }
 
-// ********************************************************** 
-// BOOTSTRAP 
+// **********************************************************
+// BOOTSTRAP
 // * Start Bootstrap - New Age v5.0.0 (https://startbootstrap.com/template-overviews/new-age)
 // * Copyright 2013-2018 Start Bootstrap
 // * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-new-age/blob/master/LICENSE)
- 
+
 // Scroll trigger
 !function(e){
   "use strict";e('a.js-scroll-trigger[href*="#"]:not([href="#"])').click(function(){
@@ -426,7 +426,7 @@ function getRandomIntInclusive(min, max) {
       }
     }),
   e(".js-scroll-trigger").click(function(){
-  
+
   }),
 
   a(),e(window).scroll(a);
