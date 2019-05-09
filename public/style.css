@@ -62,13 +62,13 @@ section h2{
   padding-bottom: 50;
   text-align: center;
   position: relative;
-    top: -150px; 
+    top: -150px;
   -webkit-user-select: none !important;
 }
 
 #buttonpage p{
   position: relative;
-    top: 110px; 
+    top: 110px;
   padding-bottom: 400;
   font-size: 64px;
   text-align: center;
@@ -77,14 +77,14 @@ section h2{
 
 #blowText{
   position: relative;
-    top: -45px; 
+    top: -45px;
   -webkit-user-select: none !important;
 }
 
-.container{   
+.container{
   display: flex;
   justify-content: center;
-  -webkit-user-select: none !important;    
+  -webkit-user-select: none !important;
 }
 
 .flex-center {
@@ -103,43 +103,43 @@ div.circleContainer {
 }
 
 #circle0 {
-  background-color: maroon;
+  background-color: #fc14ca;
 }
 
 #circle1 {
-  background-color: red;
+  background-color: #ff3f72;
 }
 
 #circle2 {
-  background-color: orange;
+  background-color: #f9182f;
 }
 
 #circle3 {
-  background-color: yellow;
+  background-color: #ff5323;
 }
 
 #circle4 {
-  background-color: green;
+  background-color: #ffeb38;
 }
 
 #circle5 {
-  background-color: lime;
+  background-color: #90ff47;
 }
 
 #circle6 {
-  background-color: teal;
+  background-color: #00e598;
 }
 
 #circle7 {
-  background-color: aqua;
+  background-color: #00fff2;
 }
 
 #circle8 {
-  background-color: blue;
+  background-color: #3b98f7;
 }
 
 #circle9 {
-  background-color: purple;
+  background-color: #ba4cff;
 }
 
 div.circleContainer.tap{
@@ -152,7 +152,7 @@ ul {
   justify-content: center;
   text-align: center;
   position: relative;
-    top: -480px; 
+    top: -480px;
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -162,7 +162,7 @@ ul {
 li {
   -webkit-backface-visibility: hidden;
   position: absolute;
-    right: 300px; 
+    right: 300px;
   -webkit-transition: all 2s linear;
   -moz-transition: all 2s linear;
   transition: all 2s linear;
@@ -180,7 +180,7 @@ li {
 
 .btn{
   position: relative;
-    top: -1150px; 
+    top: -1150px;
   border-radius: 380px;
   border: 6px solid white;
   font-family:"Avenir Next", sans-serif;letter-spacing:6px;
