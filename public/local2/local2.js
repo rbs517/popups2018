@@ -1,19 +1,19 @@
 
-// ********************************************************** 
-// INIT THE SERIALPORT COMMUNICATION (OPEN SERIAL TO ARDUINO) 
+// **********************************************************
+// INIT THE SERIALPORT COMMUNICATION (OPEN SERIAL TO ARDUINO)
 
 // Declare Global Variables
 var serial; // variable to hold an instance of the serialport library
-var portName2 = '/dev/cu.usbmodem1421'; // Rebecca's port
+var portName2 = '/dev/cu.usbmodemFA131'; // Rebecca's port
 var options = {
   baudrate: 9600 // change the data rate to whatever you wish -- MAKE ME MATCH!
-}; 
+};
 var outputString = 10;
 
 
 // p5.js function protocol
 function setup(){
-    // reset message to each tube 
+    // reset message to each tube
     setTimeout(function() {
       for (var j=0; j<5; j++){
           console.log("pinging a reset signal to tube number: " + j);
@@ -105,7 +105,7 @@ function portClose() {
     console.log('The serial port closed.');
 }
 
-// ********************************************************** 
+// **********************************************************
 // INIT SOCKET.IO
 
 let init = () => {
@@ -113,14 +113,14 @@ let init = () => {
 	var socket = io();
 
 	socket.emit('user', 'new user is connected');
-	socket.on('userCount', function(userCount) { 
+	socket.on('userCount', function(userCount) {
     console.log('total number of users online is: ' + userCount); //console number of users after one goes off;
 	});
-	
+
     console.log("init done");
 
-// ********************************************************** 
-// WHEN RECEIVE DATA FROM SOCKET.IO, SEND THE DATA TO SERIALPORT 
+// **********************************************************
+// WHEN RECEIVE DATA FROM SOCKET.IO, SEND THE DATA TO SERIALPORT
 
   socket.on('toLocal', sendToArduino);
 
